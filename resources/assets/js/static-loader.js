@@ -1,0 +1,8 @@
+import 'vuetify/dist/vuetify.min.css'
+import 'babel-polyfill'
+import '@/plugins/vuetify'
+import '@/plugins/vee-validate'
+import '@/plugins/axios'
+import '@/plugins/moment'
+import '@/plugins/vue2-google-map'
+import '@/plugins/numeral'

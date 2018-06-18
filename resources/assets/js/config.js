@@ -1,0 +1,1 @@
+export const imageUrl = 'https://www.dofuu.com'
