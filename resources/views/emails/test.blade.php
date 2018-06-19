@@ -1,1 +1,1 @@
-Xin chào {{ $username }}
+Xin chào Dofuu Family, {{ $username }}

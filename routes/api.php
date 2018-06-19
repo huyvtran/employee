@@ -18,7 +18,7 @@ use App\Mail\TestMail;
 Route::group(['middleware' => ['api']], function() {
 	//TEST MAIL
 	Route::get('/SendMail', function() {
-		Mail::to('trucnguyen.dofuu@gmail.com')->send(new TestMail());	
+		Mail::to('sp.dofuu@gmail.com')->send(new TestMail());	
 	});
 	//LOGIN
 	Route::post('/login', 'AuthController@login');
