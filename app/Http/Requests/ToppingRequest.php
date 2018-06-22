@@ -24,8 +24,8 @@ class ToppingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required|max:20',
-            '_name' => 'max:20',
+            'name'  => 'required|max:50',
+            '_name' => 'max:50',
             'price' => 'required|numeric',
         ];;
     }
