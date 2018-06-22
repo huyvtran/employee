@@ -27,21 +27,6 @@ class Store extends Model
         return false;
     }
 
-    public function getHaveSizeAttribute($value) {
-        dd($value);
-        if($value) {
-            return true;
-        } 
-        return false;
-    }
-
-    public function getHaveToppingAttribute($value) {
-        if($value) {
-            return true;
-        } 
-        return false;
-    }
-
     public function user() {
     	return $this->belongsTo('App\Models\User', 'user_id');
     }
@@ -64,10 +49,6 @@ class Store extends Model
 
     public function catalogues() {
         return $this->hasMany('App\Models\Catalogue', 'store_id');
-    }
-
-    public function sizes() {
-        return $this->hasMany('App\Models\Size', 'store_id');
     }
 
     public function toppings() {

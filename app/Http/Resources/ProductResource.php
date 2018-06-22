@@ -24,6 +24,10 @@ class ProductResource extends JsonResource
             'image'        => $this->image,
             'priority'     => $this->priority,
             'haveSize'     => $this->have_size,
+            'sizes'        => $this->have_size ? $this->sizes->map(function($query) {
+                $query->price = $query->pivot->price;
+                return $query;
+            }) : [],
             'haveTopping'  => $this->have_topping,
             'status_id'    => $this->status_id,
             'status'       => $this->status->product_status_name,

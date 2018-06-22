@@ -63509,9 +63509,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		}
 
 		var state = {
-			name: '',
-			index: 0,
 			alert: {
+				close: false,
+				name: '',
+				index: 0,
 				show: false,
 				type: 'success',
 				message: ''
@@ -63520,14 +63521,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		var mutations = {
 			SHOW_ALERT: function SHOW_ALERT(state, payload) {
-				state.name = payload.name;
-				state.index = payload.index;
-				state.alert = (0, _assign2.default)({}, { show: true, type: payload.alert.type, message: payload.alert.message });
+				state.alert = (0, _assign2.default)({}, payload);
 			},
 			CLOSE_ALERT: function CLOSE_ALERT(state) {
-				state.name = '';
-				state.name = 0;
-				state.alert = (0, _assign2.default)({}, { show: false, type: 'success', message: '' });
+				state.alert = (0, _assign2.default)({}, { name: '', index: 0, show: false, type: 'success', message: '' });
 			}
 		};
 		var actions = {
@@ -64759,7 +64756,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			products: [],
 			editedItem: null,
 			editedIndex: -1,
-			productDialog: false
+			productDialog: false,
+			status: []
 		};
 
 		var mutations = {
@@ -64784,6 +64782,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				} else {
 					state.products.unshift(payload.data);
 				}
+			},
+			FETCH_PRODUCT_STATUS: function FETCH_PRODUCT_STATUS(state, payload) {
+				state.status = payload.data;
 			}
 		};
 
@@ -64794,6 +64795,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					_axios2.default.get('/api/GetStore/' + id + '/Menu/Product').then(function (response) {
 						if (response.status === 200) {
 							commit('FETCH_PRODUCT', response.data);
+						}
+						resolve(response);
+					});
+				});
+			},
+			getProductStatus: function getProductStatus(_ref2) {
+				var commit = _ref2.commit;
+				return new _promise2.default(function (resolve, reject) {
+					_axios2.default.get('/api/GetProductStatus').then(function (response) {
+						if (response.status === 200) {
+							commit('FETCH_PRODUCT_STATUS', response.data);
 						}
 						resolve(response);
 					});
@@ -86110,13 +86122,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						text: '#',
 						align: 'center',
 						value: 'id'
-					}, { text: 'Hình ảnh', align: 'center', value: '_name', sortable: false }, { text: 'Tên món', align: 'left', value: 'name' }, { text: 'Giá', align: 'left', value: 'price' }, { text: 'Tùy chọn', align: 'left', sortable: false, width: '150' }, { text: 'Mức ưu tiên', value: 'priority', align: 'center' }, { text: 'Tác vụ', sortable: false, align: 'center' }],
+					}, { text: 'Hình ảnh', align: 'center', value: '_name', sortable: false }, { text: 'Tên món', align: 'left', value: 'name' }, { text: 'Giá', align: 'left', value: 'price', width: '150' }, { text: 'Tùy chọn', align: 'left', sortable: false, width: '150' }, { text: 'Ưu tiên', value: 'priority', align: 'center' }, { text: '', sortable: false, align: 'center' }],
 					search: {
 						text: '',
-						topping: null
+						topping: null,
+						size: null
 					},
 					loading: false,
-					filterTopping: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }]
+					filterTopping: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }],
+					filterSize: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }]
 				};
 			},
 
@@ -86160,6 +86174,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					this.$store.commit('EDIT_PRODUCT', item);
 				},
 				filterByTopping: function filterByTopping(list, value) {
+
 					var search = value;
 
 					if (search == null) {
@@ -86168,6 +86183,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 					return list.filter(function (item) {
 						return item.haveTopping === search;
+					});
+				},
+				filterBySize: function filterBySize(list, value) {
+
+					var search = value;
+
+					if (search == null) {
+						return list;
+					}
+
+					return list.filter(function (item) {
+						return item.haveSize === search;
 					});
 				}
 			},
@@ -86178,7 +86205,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			}), {
 				filterData: function filterData() {
 					if (this.items.length > 0) {
-						return this.filterByTopping(this.items, this.search.show);
+						return this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size);
 					}
 				}
 			}),
@@ -86256,9 +86283,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						'price': 0,
 						'haveSize': false,
 						'haveTopping': false,
+						'sizes': [],
 						'priority': 0,
 						'status_id': 1,
-						'description': null
+						'description': null,
+						'catalogue_id': null,
+						'image': null
 					},
 					default: {
 						'name': '',
@@ -86266,10 +86296,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						'price': 0,
 						'haveSize': false,
 						'haveTopping': false,
+						'sizes': [],
 						'priority': 0,
 						'status_id': 1,
-						'description': null
+						'description': null,
+						'catalogue_id': null,
+						'image': null
 					},
+					loading: false,
 					disabled: true,
 					process: false,
 					priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -86277,6 +86311,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			},
 
 			methods: {
+				//CLOSE DIALOG
 				close: function () {
 					var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
 						return _regenerator2.default.wrap(function _callee$(_context) {
@@ -86330,6 +86365,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 										data = vm.editedItem;
 
 										if (vm.index > -1) {
+
+											if (vm.editedItem.haveSize) {
+												data.price = 0;
+											}
+
 											// ACCEPT EDIT
 											vm.$validator.validateAll().then(function () {
 												var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(result) {
@@ -86348,6 +86388,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 																			vm.$store.commit('UPDATE_PRODUCT', response.data);
 																			vm.close();
 																		}
+																	}).catch(function (error) {
+																		if (error.response.status === 422) {
+																			vm.$store.dispatch('alert', { name: vm.$route.name, index: 1, show: true, message: error.response.data.message, type: 'error', close: true });
+																		}
 																	});
 
 																case 3:
@@ -86363,7 +86407,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 												};
 											}());
 										} else {
-											//ACCEPT SAVE
+
+											// ACCEPT SAVE
 											vm.$validator.validateAll().then(function () {
 												var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(result) {
 													return _regenerator2.default.wrap(function _callee3$(_context3) {
@@ -86380,6 +86425,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 																		if (response.status === 201) {
 																			vm.$store.commit('UPDATE_PRODUCT', response.data);
 																			vm.close();
+																		}
+																	}).catch(function (error) {
+																		if (error.response.status === 422) {
+																			vm.$store.dispatch('alert', { name: vm.$route.name, index: 1, show: true, message: error.response.data.message, type: 'error', close: true });
 																		}
 																	});
 
@@ -86412,11 +86461,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 					return save;
 				}(),
-				changePriority: function changePriority() {
-					this.disabled = false;
-				},
-				changeShow: function changeShow() {
-					this.disabled = false;
+				//CHANGE ATTRIBUTE TO DISABLE FALSE
+				changeAttribute: function changeAttribute(attr) {
+					var value = new String(attr).toLowerCase();
+					switch (value) {
+						case 'size':
+							return this.disabled = false;
+							break;
+						case 'topping':
+							return this.disabled = false;
+							break;
+						case 'status':
+							return this.disabled = false;
+							break;
+						case 'catalogue':
+							return this.disabled = false;
+							break;
+					}
 				}
 			},
 			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
@@ -86424,10 +86485,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					return state.productStore.productDialog;
 				},
 				item: function item(state) {
-					return state.productStore.editedItem;
+					return (0, _assign2.default)({}, state.productStore.editedItem);
 				},
 				index: function index(state) {
 					return state.productStore.editedIndex;
+				},
+				status: function status(state) {
+					return state.productStore.status;
+				},
+				catalogues: function catalogues(state) {
+					return state.catalogueStore.catalogues;
+				},
+				sizes: function sizes(state) {
+					return state.sizeStore.sizes;
+				},
+				alert: function alert(state) {
+					return state.alertStore.alert;
 				}
 			}), {
 				formTitle: function formTitle() {
@@ -86436,7 +86509,69 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			}),
 			watch: {
 				'item': function item(val) {
-					(0, _assign2.default)(this.editedItem, val);
+					if (val != null) {
+						(0, _assign2.default)(this.editedItem, val);
+						if (!val.haveSize) {
+							var sizes = [];
+							this.sizes.forEach(function (item) {
+								sizes.push({ id: item.id, 'name': item.name, '_name': item._name, 'price': 0 });
+							});
+							this.editedItem.sizes = sizes;
+						}
+					}
+				},
+				'dialog': function () {
+					var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(val) {
+						var _this = this;
+
+						return _regenerator2.default.wrap(function _callee5$(_context5) {
+							while (1) {
+								switch (_context5.prev = _context5.next) {
+									case 0:
+										if (!val) {
+											_context5.next = 10;
+											break;
+										}
+
+										_context5.next = 3;
+										return true;
+
+									case 3:
+										this.loading = _context5.sent;
+										_context5.next = 6;
+										return this.$store.dispatch('getCatalogue', this.$route.params.storeId);
+
+									case 6:
+										if (!(this.index === -1)) {
+											_context5.next = 9;
+											break;
+										}
+
+										_context5.next = 9;
+										return this.sizes.forEach(function (item) {
+											_this.editedItem.sizes.push({ id: item.id, 'name': item.name, '_name': item._name, 'price': 0 });
+										});
+
+									case 9:
+
+										this.loading = false;
+
+									case 10:
+									case 'end':
+										return _context5.stop();
+								}
+							}
+						}, _callee5, this);
+					}));
+
+					function dialog(_x3) {
+						return _ref5.apply(this, arguments);
+					}
+
+					return dialog;
+				}(),
+				'sizes': function sizes(val) {
+					if (val.length > 0) {}
 				},
 				'editedItem.name': function editedItemName(val, oldVal) {
 
@@ -86468,11 +86603,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				}
 			},
 			created: function created() {
+				this.$store.dispatch('getSize', this.$route.params.storeId);
+				this.$store.dispatch('getProductStatus');
+
 				var dictionary = {
 					vi: {
 						attributes: {
+							catalogue: 'Danh mục',
 							name: 'Tên món',
-							_name: 'Tên món tiếng Anh'
+							_name: 'Tên món tiếng Anh',
+							price: 'Giá',
+							description: 'Mô tả',
+							status: 'Trạng thái'
 						}
 					}
 				};
@@ -87281,6 +87423,13 @@ var render = function() {
           _c(
             "v-card",
             [
+              _vm.loading
+                ? _c("v-progress-linear", {
+                    staticClass: "my-0",
+                    attrs: { indeterminate: true }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
                   _vm._v(_vm._s(_vm.formTitle))
@@ -87290,160 +87439,483 @@ var render = function() {
               _c("v-divider"),
               _vm._v(" "),
               _c("v-card-text", [
-                _c(
-                  "form",
-                  [
-                    _c(
-                      "v-container",
-                      { attrs: { "grid-list-md": "" } },
+                !_vm.loading
+                  ? _c(
+                      "form",
                       [
                         _c(
-                          "v-layout",
-                          { attrs: { wrap: "" } },
+                          "v-container",
+                          { attrs: { "grid-list-md": "" } },
                           [
                             _c(
-                              "v-flex",
-                              { attrs: { xs12: "" } },
+                              "v-layout",
+                              { attrs: { wrap: "" } },
                               [
-                                _c("v-text-field", {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate",
-                                      value: "required|max:50",
-                                      expression: "'required|max:50'"
-                                    }
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        items: _vm.catalogues,
+                                        "item-text": "name",
+                                        "item-value": "id",
+                                        label: "Danh mục",
+                                        "prepend-icon": "category",
+                                        "persistent-hint": "",
+                                        hint: "Chọn danh mục cho món",
+                                        "data-vv-name": "catalogue",
+                                        "error-messages": _vm.errors.collect(
+                                          "catalogue"
+                                        ),
+                                        autocomplete: "",
+                                        required: ""
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          _vm.changeAttribute("catalogue")
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.editedItem.catalogue_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.editedItem,
+                                            "catalogue_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "editedItem.catalogue_id"
+                                      }
+                                    })
                                   ],
-                                  attrs: {
-                                    label: "Tên danh mục",
-                                    "prepend-icon": "title",
-                                    "persistent-hint": "",
-                                    hint: "Tên danh mục xác định nhóm sản phẩm",
-                                    required: "",
-                                    "error-messages": _vm.errors.collect(
-                                      "name"
-                                    ),
-                                    "data-vv-name": "name"
-                                  },
-                                  model: {
-                                    value: _vm.editedItem.name,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.editedItem, "name", $$v)
-                                    },
-                                    expression: "editedItem.name"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "" } },
-                              [
-                                _c("v-text-field", {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate",
-                                      value: "max:50",
-                                      expression: "'max:50'"
-                                    }
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c("v-text-field", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required|max:254",
+                                          expression: "'required|max:254'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        label: "Tên món",
+                                        "prepend-icon": "title",
+                                        "persistent-hint": "",
+                                        hint: "Tên món bắt buộc",
+                                        required: "",
+                                        "error-messages": _vm.errors.collect(
+                                          "name"
+                                        ),
+                                        "data-vv-name": "name"
+                                      },
+                                      model: {
+                                        value: _vm.editedItem.name,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.editedItem, "name", $$v)
+                                        },
+                                        expression: "editedItem.name"
+                                      }
+                                    })
                                   ],
-                                  attrs: {
-                                    label: "Tên danh mục tiếng Anh",
-                                    "prepend-icon": "language",
-                                    "persistent-hint": "",
-                                    hint:
-                                      "Tên danh mục tiếng Anh có thể để trống nếu không biết",
-                                    "error-messages": _vm.errors.collect(
-                                      "_name"
-                                    ),
-                                    "data-vv-name": "_name"
-                                  },
-                                  model: {
-                                    value: _vm.editedItem._name,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.editedItem, "_name", $$v)
-                                    },
-                                    expression: "editedItem._name"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "" } },
-                              [
-                                _c("v-select", {
-                                  attrs: {
-                                    items: _vm.priorities,
-                                    label: "Mức độ ưu tiên",
-                                    "prepend-icon": "swap_vert",
-                                    "persistent-hint": "",
-                                    hint:
-                                      "Mức độ ưu tiên cao nhất sẽ hiển thị đầu tiên",
-                                    required: ""
-                                  },
-                                  on: { change: _vm.changePriority },
-                                  model: {
-                                    value: _vm.editedItem.priority,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.editedItem, "priority", $$v)
-                                    },
-                                    expression: "editedItem.priority"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "" } },
-                              [
-                                _c("v-switch", {
-                                  attrs: {
-                                    "prepend-icon": _vm.editedItem.isShowed
-                                      ? "visibility"
-                                      : "visibility_off",
-                                    label: "Ẩn/Hiện",
-                                    color: "blue",
-                                    "persistent-hint": "",
-                                    hint:
-                                      "Cài đặt Ẩn/Hiện danh mục bên ngoài website khách hàng",
-                                    required: ""
-                                  },
-                                  on: { change: _vm.changeShow },
-                                  model: {
-                                    value: _vm.editedItem.isShowed,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.editedItem, "isShowed", $$v)
-                                    },
-                                    expression: "editedItem.isShowed"
-                                  }
-                                })
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c("v-text-field", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "max:254",
+                                          expression: "'max:254'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        label: "Tên món tiếng Anh",
+                                        "prepend-icon": "language",
+                                        "persistent-hint": "",
+                                        hint:
+                                          "Tên món tiếng Anh có thể để trống nếu không biết",
+                                        "error-messages": _vm.errors.collect(
+                                          "_name"
+                                        ),
+                                        "data-vv-name": "_name"
+                                      },
+                                      model: {
+                                        value: _vm.editedItem._name,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.editedItem, "_name", $$v)
+                                        },
+                                        expression: "editedItem._name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c(
+                                      "v-layout",
+                                      { attrs: { row: "", wrap: "" } },
+                                      [
+                                        _c(
+                                          "v-flex",
+                                          { attrs: { xs12: "" } },
+                                          [
+                                            _c(
+                                              "v-radio-group",
+                                              {
+                                                attrs: {
+                                                  row: "",
+                                                  label: "Size"
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.editedItem.haveSize,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.editedItem,
+                                                      "haveSize",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "editedItem.haveSize"
+                                                }
+                                              },
+                                              [
+                                                _c("v-radio", {
+                                                  attrs: {
+                                                    color: "primary",
+                                                    label: "Có",
+                                                    value: true
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      _vm.changeAttribute(
+                                                        "size"
+                                                      )
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-radio", {
+                                                  attrs: {
+                                                    color: "primary",
+                                                    label: "Không",
+                                                    value: false
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      _vm.changeAttribute(
+                                                        "size"
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-flex",
+                                          { attrs: { xs12: "" } },
+                                          [
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value: {
+                                                    required: !_vm.editedItem
+                                                      .haveSize,
+                                                    numeric: true,
+                                                    min: 1,
+                                                    max: 8
+                                                  },
+                                                  expression:
+                                                    "{required: !editedItem.haveSize, numeric:true, min:1, max:8}"
+                                                }
+                                              ],
+                                              attrs: {
+                                                label: "Giá",
+                                                "prepend-icon": "money",
+                                                "persistent-hint": "",
+                                                disabled:
+                                                  _vm.editedItem.haveSize,
+                                                hint:
+                                                  "Giá giành cho món không có size",
+                                                suffix: "vnđ",
+                                                "error-messages": _vm.errors.collect(
+                                                  "price"
+                                                ),
+                                                "data-vv-name": "price",
+                                                required: !_vm.editedItem
+                                                  .haveSize
+                                              },
+                                              model: {
+                                                value: _vm.editedItem.price,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "price",
+                                                    _vm._n($$v)
+                                                  )
+                                                },
+                                                expression: "editedItem.price"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.editedItem.sizes, function(
+                                          size
+                                        ) {
+                                          return _c(
+                                            "v-flex",
+                                            {
+                                              key: size.id,
+                                              attrs: { xs4: "" }
+                                            },
+                                            [
+                                              _c("v-text-field", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: {
+                                                      required: true,
+                                                      numeric: true,
+                                                      min: 1,
+                                                      max: 8
+                                                    },
+                                                    expression:
+                                                      "{required:true, numeric:true, min:1, max:8}"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  "prepend-icon": "money",
+                                                  disabled: !_vm.editedItem
+                                                    .haveSize,
+                                                  label:
+                                                    "Giá size " + size.name,
+                                                  suffix: "vnđ",
+                                                  hint:
+                                                    "Giá giành cho món có " +
+                                                    size.name,
+                                                  "persistent-hint": "",
+                                                  required:
+                                                    _vm.editedItem.haveSize,
+                                                  "error-messages": _vm.errors.collect(
+                                                    "size._name"
+                                                  ),
+                                                  "data-vv-name": size._name
+                                                },
+                                                model: {
+                                                  value: size.price,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      size,
+                                                      "price",
+                                                      _vm._n($$v)
+                                                    )
+                                                  },
+                                                  expression: "size.price"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c(
+                                      "v-radio-group",
+                                      {
+                                        attrs: {
+                                          row: "",
+                                          mandatory: "",
+                                          label: "Topping"
+                                        },
+                                        model: {
+                                          value: _vm.editedItem.haveTopping,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.editedItem,
+                                              "haveTopping",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "editedItem.haveTopping"
+                                        }
+                                      },
+                                      [
+                                        _c("v-radio", {
+                                          attrs: {
+                                            color: "primary",
+                                            label: "Có",
+                                            value: true
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              _vm.changeAttribute("topping")
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("v-radio", {
+                                          attrs: {
+                                            color: "primary",
+                                            label: "Không",
+                                            value: false
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              _vm.changeAttribute("topping")
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c("v-text-field", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "max:254",
+                                          expression: "'max:254'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        label: "Mô tả",
+                                        "error-messages": _vm.errors.collect(
+                                          "description"
+                                        ),
+                                        "data-vv-name": "description",
+                                        required: ""
+                                      },
+                                      model: {
+                                        value: _vm.editedItem.description,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.editedItem,
+                                            "description",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "editedItem.description"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs12: "" } },
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required|numeric",
+                                          expression: "'required|numeric'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        label: "Trạng thái",
+                                        items: _vm.status,
+                                        "error-messages": _vm.errors.collect(
+                                          "status"
+                                        ),
+                                        autocomplete: "",
+                                        "data-vv-name": "status",
+                                        "item-value": "id",
+                                        "item-text": "name",
+                                        required: ""
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          _vm.changeAttribute("status")
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.editedItem.status_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.editedItem,
+                                            "status_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "editedItem.status_id"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
                               ],
                               1
                             )
                           ],
                           1
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "red--text" }, [
+                          _vm._v("*trường bắt buộc")
+                        ])
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c("small", { staticClass: "red--text" }, [
-                      _vm._v("*trường bắt buộc")
-                    ])
-                  ],
-                  1
-                )
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
-              _c("v-divider", { staticClass: "mt-5" }),
+              _c("v-divider"),
               _vm._v(" "),
               _c(
                 "v-card-actions",
@@ -87505,12 +87977,25 @@ var render = function() {
             timeout: 0,
             color: "error",
             vertical: "",
-            value: _vm.errors.items.length > 0
+            value:
+              _vm.errors.items.length > 0 ||
+              (_vm.alert.show &&
+                _vm.alert.index == 1 &&
+                _vm.alert.name == _vm.$route.name)
           }
         },
-        _vm._l(_vm.errors.items, function(error) {
-          return _c("span", [_vm._v(" " + _vm._s(error.msg))])
-        })
+        [
+          _vm._l(_vm.errors.items, function(error) {
+            return !_vm.alert.show
+              ? _c("span", [_vm._v(" " + _vm._s(error.msg))])
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.alert.show
+            ? _c("span", [_vm._v(_vm._s(_vm.alert.message))])
+            : _vm._e()
+        ],
+        2
       )
     ],
     1
@@ -87548,7 +88033,7 @@ var render = function() {
               attrs: { color: "green darken-3", small: "", round: "" },
               nativeOn: {
                 click: function($event) {
-                  _vm.$store.commit("SHOW_CATALOGUE_DIALOG")
+                  _vm.$store.commit("SHOW_PRODUCT_DIALOG")
                 }
               }
             },
@@ -87563,14 +88048,14 @@ var render = function() {
             [
               _c(
                 "v-flex",
-                { key: 0, attrs: { xs4: "" } },
+                { key: 0, attrs: { xs2: "" } },
                 [
                   _c("v-select", {
                     attrs: {
                       items: _vm.filterTopping,
                       "item-text": "name",
                       "item-value": "value",
-                      label: "Ẩn/Hiện"
+                      label: "Topping"
                     },
                     model: {
                       value: _vm.search.topping,
@@ -87586,7 +88071,30 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { key: 1, attrs: { xs8: "" } },
+                { key: 1, attrs: { xs2: "" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.filterSize,
+                      "item-text": "name",
+                      "item-value": "value",
+                      label: "Size"
+                    },
+                    model: {
+                      value: _vm.search.size,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "size", $$v)
+                      },
+                      expression: "search.size"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { key: 2, attrs: { xs8: "" } },
                 [
                   _c("v-text-field", {
                     attrs: {
@@ -87673,11 +88181,29 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _c("h4", [
-                      _vm._v(_vm._s(_vm._f("formatPrice")(props.item.price)))
-                    ])
-                  ]),
+                  _c(
+                    "td",
+                    [
+                      !props.item.haveSize
+                        ? _c("h4", [
+                            _vm._v(
+                              _vm._s(_vm._f("formatPrice")(props.item.price))
+                            )
+                          ])
+                        : _vm._l(props.item.sizes, function(size) {
+                            return _c("h4", [
+                              _vm._v(
+                                "\n\t\t\t\t\t" +
+                                  _vm._s(size.name) +
+                                  ": " +
+                                  _vm._s(_vm._f("formatPrice")(size.price)) +
+                                  "\n\t\t\t\t"
+                              )
+                            ])
+                          })
+                    ],
+                    2
+                  ),
                   _vm._v(" "),
                   _c("td", [
                     _c("div", [
@@ -88521,7 +89047,7 @@ var render = function() {
                     _c("div", [
                       _c("h4", [
                         _vm._v(_vm._s(props.item.name) + " "),
-                        props.item._name != null
+                        props.item._name.length > 0
                           ? _c("span", { staticClass: "body-1" }, [
                               _vm._v("(" + _vm._s(props.item._name) + ")")
                             ])
@@ -89136,7 +89662,7 @@ var render = function() {
                                       "Kích thước tiếng Anh có thể để trống",
                                     suffix: "vnđ",
                                     "error-messages": _vm.errors.collect(
-                                      "_name"
+                                      "price"
                                     ),
                                     "data-vv-name": "_name"
                                   },
@@ -90707,10 +91233,6 @@ var render = function() {
           _vm._v(" "),
           _c("v-tab", { attrs: { to: { name: "Catalogue" } } }, [
             _vm._v("\n\t\t\tDanh mục\n\t\t")
-          ]),
-          _vm._v(" "),
-          _c("v-tab", { attrs: { to: { name: "Size" } } }, [
-            _vm._v("\n\t\t\tSize\n\t\t")
           ]),
           _vm._v(" "),
           _c("v-tab", { attrs: { to: { name: "Topping" } } }, [
@@ -92388,14 +92910,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				return {
 					editedItem: {
 						user: {
-							name: 'Nguyễn Văn E',
-							email: 'nguyenvane@gmail.com',
-							password: '12345678',
-							confirm_password: '12345678',
+							name: '',
+							email: '',
+							password: '',
+							confirm_password: '',
 							gender: 1,
-							birthday: '1993-07-12',
-							phone: '0912173813',
-							address: '160/18 đường 30 tháng 4 Ninh Kiều, Cần Thơ',
+							birthday: null,
+							phone: '',
+							address: '',
 							lat: '',
 							lng: '',
 							role_id: 4,
@@ -92403,12 +92925,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						},
 						store: {
 							type_id: null,
-							name: 'Milano Ngọc Thúy',
-							phone: '0912173813',
-							preparetime: '30',
+							name: '',
+							phone: '',
+							preparetime: '',
 							city_id: null,
 							district_id: null,
-							address: '160/18 đường 30 tháng 4 Ninh Kiều, Cần Thơ',
+							address: '',
 							lat: 10.0452,
 							lng: 105.7469,
 							avatar: null,
@@ -92448,6 +92970,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 							isVerified: false
 						}
 					},
+					process: false,
 					priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 					disabled: true,
 					menu: false,
@@ -92536,8 +93059,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 								switch (_context5.prev = _context5.next) {
 									case 0:
 										vm = this;
+										_context5.next = 3;
+										return true;
 
-										console.log(vm.$route.name);
+									case 3:
+										vm.process = _context5.sent;
+
 										if (vm.editedIndex > -1) {
 											//Accept Edit Store
 											vm.$validator.validateAll('store').then(function () {
@@ -92639,8 +93166,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 												};
 											}());
 										}
+										vm.process = false;
 
-									case 3:
+									case 6:
 									case 'end':
 										return _context5.stop();
 								}
@@ -93228,14 +93756,24 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { dark: "", flat: "", disabled: _vm.disabled },
+                      staticClass: "white--text",
+                      attrs: {
+                        color:
+                          _vm.index > -1 ? "blue darken-1" : "green darken-1",
+                        disabled: _vm.disabled,
+                        loading: _vm.process
+                      },
                       nativeOn: {
                         click: function($event) {
                           return _vm.save($event)
                         }
                       }
                     },
-                    [_vm._v("Save")]
+                    [
+                      _vm._v(
+                        _vm._s(_vm.index > -1 ? "Lưu thay đổi" : "Thêm") + " "
+                      )
+                    ]
                   )
                 ],
                 1

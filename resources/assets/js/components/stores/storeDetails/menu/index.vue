@@ -7,9 +7,9 @@
 			<v-tab :to="{name: 'Catalogue'}">
 				Danh mục
 			</v-tab>
-			<v-tab :to="{name: 'Size'}">
+			<!-- <v-tab :to="{name: 'Size'}">
 				Size
-			</v-tab>
+			</v-tab> -->
 			<v-tab :to="{name: 'Topping'}">
 				Topping
 			</v-tab>

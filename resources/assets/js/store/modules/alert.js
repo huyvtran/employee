@@ -1,7 +1,8 @@
 const state = {
-	name: '',
-	index: 0,
 	alert: {
+		close: false,
+		name: '',
+		index: 0,
 		show: false,
 		type: 'success',
 		message: ''
@@ -10,14 +11,10 @@ const state = {
 
 const mutations = {
 	SHOW_ALERT(state, payload) {
-		state.name  = payload.name
-		state.index = payload.index
-		state.alert = Object.assign({}, {show:true, type: payload.alert.type, message: payload.alert.message})
+		state.alert = Object.assign({}, payload)
 	},
 	CLOSE_ALERT(state) {
-		state.name  = ''
-		state.name  = 0
-		state.alert = Object.assign({}, {show:false, type: 'success', message: ''})
+		state.alert = Object.assign({}, {name: '', index: 0, show:false, type: 'success', message: ''})
 	}
 }
 const actions = {

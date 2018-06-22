@@ -19,7 +19,7 @@
 								</v-flex>
 
 								<v-flex xs12>
-									<v-text-field v-model="editedItem.price" label="Giá" prepend-icon="money" persistent-hint hint="Kích thước tiếng Anh có thể để trống" suffix="vnđ" v-validate="'max:20'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
+									<v-text-field v-model="editedItem.price" label="Giá" prepend-icon="money" persistent-hint hint="Kích thước tiếng Anh có thể để trống" suffix="vnđ" v-validate="'max:20'" :error-messages="errors.collect('price')" data-vv-name="_name"></v-text-field>
 								</v-flex>
 
 							</v-layout>

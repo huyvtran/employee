@@ -30,7 +30,7 @@
 		<template slot="items" slot-scope="props">
 			<td class="text-xs-center">{{props.item.id}}</td>
 			<td>
-				<div><h4>{{ props.item.name }} <span class="body-1" v-if="props.item._name != null">({{ props.item._name }})</span></h4> </div>				
+				<div><h4>{{ props.item.name }} <span class="body-1" v-if="props.item._name.length > 0 ">({{ props.item._name }})</span></h4> </div>
 			</td>			
 			<td class="text-xs-center">{{ props.item.price | formatPrice}}</td>
 			

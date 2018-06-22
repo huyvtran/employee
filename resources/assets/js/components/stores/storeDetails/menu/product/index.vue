@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-card-title primary-title>
-			<v-btn color="green darken-3" class="white--text" @click.native="$store.commit('SHOW_CATALOGUE_DIALOG')" small round>
+			<v-btn color="green darken-3" class="white--text" @click.native="$store.commit('SHOW_PRODUCT_DIALOG')" small round>
 				Thêm mới
 			</v-btn>
 
@@ -9,17 +9,27 @@
 
 			<v-layout row wrap  > <!-- Filter Start -->	
 
-				<v-flex xs4 :key="0">
+				<v-flex xs2 :key="0">
 					<v-select
 					:items="filterTopping"
 					item-text="name"
 					item-value="value"
 					v-model="search.topping"
-					label="Ẩn/Hiện"
+					label="Topping"
 					></v-select>
 				</v-flex>
 
-				<v-flex xs8 :key="1">
+				<v-flex xs2 :key="1">
+					<v-select
+					:items="filterSize"
+					item-text="name"
+					item-value="value"
+					v-model="search.size"
+					label="Size"
+					></v-select>
+				</v-flex>
+
+				<v-flex xs8 :key="2">
 					<v-text-field
 					v-model="search.text"
 					append-icon="search"
@@ -56,7 +66,12 @@
 				<h4 class="grey--text" v-if="props.item._name != null">{{props.item._name}}</h4>
 				<div>Đã bán <strong class="red--text">{{props.item.count}}</strong> lần</div>
 			</td>
-			<td><h4>{{ props.item.price | formatPrice}}</h4></td>		
+			<td>
+				<h4 v-if="!props.item.haveSize">{{ props.item.price | formatPrice}}</h4>
+				<h4 v-else v-for="size in props.item.sizes">
+					{{size.name}}: {{size.price | formatPrice}}
+				</h4>
+			</td>		
 			<td>
 				<div>Trạng thái: <strong>{{ props.item.status}}</strong></div>
 				<div>Size: <span :class="{'red--text': !props.item.haveSize, 'blue--text': props.item.haveSize}">{{ props.item.haveSize ? 'Có' : 'Không'}}</span></div>
@@ -106,17 +121,19 @@ export default {
 			},
 			{ text: 'Hình ảnh', align: 'center', value: '_name', sortable: false},
 			{ text: 'Tên món', align: 'left', value: 'name'},
-			{ text: 'Giá', align: 'left', value: 'price'},
+			{ text: 'Giá', align: 'left', value: 'price', width: '150'},
 			{ text: 'Tùy chọn', align: 'left', sortable: false, width: '150'},
-			{ text: 'Mức ưu tiên', value: 'priority', align: 'center' },
-			{ text: 'Tác vụ', sortable: false, align: 'center' },
+			{ text: 'Ưu tiên', value: 'priority', align: 'center' },
+			{ text: '', sortable: false, align: 'center' },
 			],
 			search: {
 				text: '',
 				topping: null,
+				size: null
 			},
 			loading: false,
 			filterTopping: [{name: 'Tất cả', value: null}, {name: 'Có', value: true}, {name: 'Không', value: false}],
+			filterSize: [{name: 'Tất cả', value: null}, {name: 'Có', value: true}, {name: 'Không', value: false}],
 		}
 	},
 	methods: {
@@ -132,6 +149,7 @@ export default {
 			this.$store.commit('EDIT_PRODUCT', item)
 		},
 		filterByTopping(list, value) {
+
 			const search = value
 
 			if(search == null) {
@@ -140,6 +158,16 @@ export default {
 
 			return list.filter(item => item.haveTopping === search)
 		},
+		filterBySize(list, value) {
+			
+			const search = value
+
+			if(search == null) {
+				return list
+			}
+
+			return list.filter(item => item.haveSize === search)
+		},
 	},
 	computed: {
 		...mapState({
@@ -147,7 +175,7 @@ export default {
 		}),
 		filterData() {
 			if(this.items.length>0) {
-				return this.filterByTopping(this.items, this.search.show)
+				return this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size)
 			}
 		}
 	},

@@ -5,6 +5,7 @@ const state = {
 	editedItem: null,
 	editedIndex: -1,
 	productDialog: false,
+	status: []
 }
 
 const mutations = {
@@ -30,6 +31,9 @@ const mutations = {
 		} else {
 			state.products.unshift(payload.data)
 		}
+	},
+	FETCH_PRODUCT_STATUS (state, payload) {
+		state.status = payload.data
 	}
 }
 
@@ -38,6 +42,14 @@ const actions = {
 		axios.get('/api/GetStore/'+id+'/Menu/Product').then(response => {
 			if(response.status === 200) {
 				commit('FETCH_PRODUCT', response.data)
+			}
+			resolve(response)
+		})
+	}),
+	getProductStatus: ({commit}) => new Promise((resolve, reject) => {
+		axios.get('/api/GetProductStatus').then(response => {
+			if(response.status === 200) {
+				commit('FETCH_PRODUCT_STATUS', response.data)
 			}
 			resolve(response)
 		})

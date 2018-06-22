@@ -8,7 +8,7 @@
 				<v-toolbar-title><span class="headline">{{ formTitle }}</span></v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
-					<v-btn dark flat @click.native="save" :disabled="disabled">Save</v-btn>
+					<v-btn :color=" index>-1 ? 'blue darken-1' : 'green darken-1'" :disabled="disabled" :loading="process" class="white--text" @click.native="save">{{index > -1 ? 'Lưu thay đổi' : 'Thêm'}} </v-btn>
 				</v-toolbar-items>
 			</v-toolbar>
 			<v-card-text>
@@ -288,31 +288,31 @@ export default {
 		return {
 			editedItem: {
 				user: {
-					name: 'Nguyễn Văn E',
-					email: 'nguyenvane@gmail.com',
-					password:'12345678',
-					confirm_password:'12345678',
+					name: '',
+					email: '',
+					password:'',
+					confirm_password:'',
 					gender: 1,
-					birthday: '1993-07-12',
-					phone:'0912173813',
-					address: '160/18 đường 30 tháng 4 Ninh Kiều, Cần Thơ',
+					birthday: null,
+					phone:'',
+					address: '',
 					lat:'',
 					lng:'',
-					role_id: 4,					
+					role_id: 4,
 					isActived: false,
 				},
 				store: {
 					type_id: null,
-					name: 'Milano Ngọc Thúy',
-					phone: '0912173813',
-					preparetime: '30',
+					name: '',
+					phone: '',
+					preparetime: '',
 					city_id: null,
 					district_id: null,
-					address: '160/18 đường 30 tháng 4 Ninh Kiều, Cần Thơ',
+					address: '',
 					lat: 10.0452,
 					lng: 105.7469,
 					avatar: null,		
-					priority:0,			
+					priority:0,
 					isShowed: false,
 					isVerified: false,
 				}
@@ -348,6 +348,7 @@ export default {
 					isVerified: false,		
 				}
 			},
+			process:false,
 			priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 			disabled: true,
 			menu:false,
@@ -397,7 +398,7 @@ export default {
 		//Accept Update Store
 		save: async function(request) {
 			var vm = this
-			console.log(vm.$route.name)
+			vm.process = await true
 			if (vm.editedIndex > -1) {
 				//Accept Edit Store
 				vm.$validator.validateAll('store').then(async function(result){
@@ -450,6 +451,7 @@ export default {
 					}
 				})				
 			}
+			vm.process = false
 		},
 		//Change city get district
 		changeCity: function(id) {

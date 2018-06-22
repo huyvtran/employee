@@ -50,26 +50,28 @@ Route::group(['middleware' => ['api']], function() {
 	Route::get('/GetStore/{sid}/Menu', 'MenuController@getMenu');
 	//GET CATALOGUE
 	Route::get('/GetStore/{sid}/Menu/Catalogue', 'MenuController@getCatalogue');
-	//GET ADD CATALOGUE
+	//ADD CATALOGUE
 	Route::post('/GetStore/{sid}/Menu/Catalogue/Add', 'MenuController@addCatalogue');
-	//GET EDIT CATALOGUE
+	//EDIT CATALOGUE
 	Route::post('/GetStore/{sid}/Menu/Catalogue/Edit', 'MenuController@editCatalogue');
 	//GET TOPPING
 	Route::get('/GetStore/{sid}/Menu/Topping', 'MenuController@getTopping');
-	//GET ADD TOPPING
+	//ADD TOPPING
 	Route::post('/GetStore/{sid}/Menu/Topping/Add', 'MenuController@addTopping');
-	//GET EDIT TOPPING
+	//EDIT TOPPING
 	Route::post('/GetStore/{sid}/Menu/Topping/Edit', 'MenuController@editTopping');
 	//GET SIZE
 	Route::get('/GetStore/{sid}/Menu/Size', 'MenuController@getSize');
-	//GET ADD SIZE
+	//ADD SIZE
 	Route::post('/GetStore/{sid}/Menu/Size/Add', 'MenuController@addSize');
-	//GET EDIT SIZE
+	//EDIT SIZE
 	Route::post('/GetStore/{sid}/Menu/Size/Edit', 'MenuController@editSize');
 	//GET PRODUCT
 	Route::get('/GetStore/{sid}/Menu/Product', 'MenuController@getProduct');
-	//GET ADD PRODUCT
+	//ADD PRODUCT
 	Route::post('/GetStore/{sid}/Menu/Product/Add', 'MenuController@addProduct');
-	//GET EDIT PRODUCT
+	//EDIT PRODUCT
 	Route::post('/GetStore/{sid}/Menu/Product/Edit', 'MenuController@editProduct');
+	//GET PRODUCT STATUS
+	Route::get('/GetProductStatus', 'MenuController@getProductStatus');
 });

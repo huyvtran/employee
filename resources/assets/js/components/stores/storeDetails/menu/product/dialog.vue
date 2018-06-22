@@ -2,54 +2,103 @@
 	<div>
 		<v-dialog :value="dialog" persistent scrollable max-width="500px">
 			<v-card>
+				<v-progress-linear :indeterminate="true" class="my-0" v-if="loading"></v-progress-linear>
 				<v-card-title>
 					<span class="headline">{{formTitle}}</span>
 				</v-card-title>
 				<v-divider></v-divider>
+
 				<v-card-text>
-					<form>
+					<form v-if="!loading">
 						<v-container grid-list-md>
-							<v-layout wrap>			
-
-								<v-flex xs12>
-									<v-text-field v-model="editedItem.name" label="Tên danh mục" prepend-icon="title" persistent-hint hint="Tên danh mục xác định nhóm sản phẩm" required v-validate="'required|max:50'" :error-messages="errors.collect('name')" data-vv-name="name"></v-text-field>
-								</v-flex>
-
-								<v-flex xs12>
-									<v-text-field v-model="editedItem._name" label="Tên danh mục tiếng Anh" prepend-icon="language" persistent-hint hint="Tên danh mục tiếng Anh có thể để trống nếu không biết" v-validate="'max:50'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
-								</v-flex>
+							<v-layout wrap>							
 
 								<v-flex xs12>
 									<v-select
-									:items="priorities"
-									v-model="editedItem.priority"
-									label="Mức độ ưu tiên"
-									prepend-icon="swap_vert"
+									:items="catalogues"
+									v-model="editedItem.catalogue_id"
+									item-text="name"
+									item-value="id"
+									label="Danh mục"
+									prepend-icon="category"
 									persistent-hint 
-									hint="Mức độ ưu tiên cao nhất sẽ hiển thị đầu tiên"
-									@change="changePriority"
+									hint="Chọn danh mục cho món"
+									v-validate="'required'"
+									data-vv-name="catalogue"
+									:error-messages="errors.collect('catalogue')"
+									@change="changeAttribute('catalogue')"
+									autocomplete
 									required></v-select>
 								</v-flex>
 
 								<v-flex xs12>
-									<v-switch
-									:prepend-icon="editedItem.isShowed ? 'visibility' : 'visibility_off'"
-									label="Ẩn/Hiện"
-									color="blue"
-									@change="changeShow"
-									v-model="editedItem.isShowed"
-									persistent-hint
-									hint="Cài đặt Ẩn/Hiện danh mục bên ngoài website khách hàng"
-									required
-									></v-switch>
+									<v-text-field v-model="editedItem.name" label="Tên món" prepend-icon="title" persistent-hint hint="Tên món bắt buộc" required v-validate="'required|max:254'" :error-messages="errors.collect('name')" data-vv-name="name"></v-text-field>
 								</v-flex>
 
+								<v-flex xs12>
+									<v-text-field v-model="editedItem._name" label="Tên món tiếng Anh" prepend-icon="language" persistent-hint hint="Tên món tiếng Anh có thể để trống nếu không biết" v-validate="'max:254'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
+								</v-flex>
+
+								
+
+								<v-flex xs12>
+									<v-layout row wrap>
+										<v-flex xs12>
+											<v-radio-group v-model="editedItem.haveSize" row label="Size">
+												<v-radio color="primary" label="Có" :value="true" @change="changeAttribute('size')"></v-radio>
+												<v-radio color="primary" label="Không" :value="false" @change="changeAttribute('size')"></v-radio>
+											</v-radio-group>									
+										</v-flex>
+
+										<v-flex xs12>
+											<v-text-field v-model.number="editedItem.price" label="Giá" prepend-icon="money" persistent-hint :disabled="editedItem.haveSize" hint="Giá giành cho món không có size" suffix="vnđ" v-validate="{required: !editedItem.haveSize, numeric:true, min:1, max:8}" :error-messages="errors.collect('price')" data-vv-name="price" :required="!editedItem.haveSize"></v-text-field>
+										</v-flex>
+
+										<v-flex xs4  v-for="size in editedItem.sizes" :key="size.id">
+											<v-text-field prepend-icon="money" :disabled="!editedItem.haveSize" :label="`Giá size ${size.name}`" v-model.number="size.price" suffix="vnđ" :hint="`Giá giành cho món có ${size.name}`" persistent-hint :required="editedItem.haveSize" v-validate="{required:true, numeric:true, min:1, max:8}" :error-messages="errors.collect('size._name')" :data-vv-name="size._name"></v-text-field> 
+										</v-flex>
+									</v-layout>
+								</v-flex>
+
+								<v-flex xs12>
+									<v-radio-group v-model="editedItem.haveTopping" row mandatory label="Topping">
+										<v-radio color="primary" label="Có" :value="true" @change="changeAttribute('topping')" ></v-radio>
+										<v-radio color="primary" label="Không" :value="false" @change="changeAttribute('topping')"></v-radio>
+									</v-radio-group>									
+								</v-flex>
+
+								<v-flex xs12>
+									<v-text-field 
+									label="Mô tả" 
+									v-model="editedItem.description"
+									:error-messages="errors.collect('description')"
+									v-validate="'max:254'"
+									data-vv-name="description"
+									required
+									></v-text-field>
+								</v-flex>
+								
+								<v-flex xs12>
+									<v-select
+									label="Trạng thái"
+									:items="status"
+									v-model="editedItem.status_id"
+									@change="changeAttribute('status')"
+									:error-messages="errors.collect('status')"
+									autocomplete
+									v-validate="'required|numeric'"
+									data-vv-name="status"
+									item-value="id"
+									item-text="name"
+									required
+									></v-select>
+								</v-flex>
 							</v-layout>
 						</v-container>
 						<small class="red--text">*trường bắt buộc</small>
 					</form>
 				</v-card-text>
-				<v-divider class="mt-5"></v-divider>
+				<v-divider></v-divider>
 				<v-card-actions>
 					<v-btn color="red" flat @click.native="close">Hủy</v-btn>
 					<v-spacer></v-spacer>
@@ -57,8 +106,9 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-		<v-snackbar auto-height top right :timeout="0" color="error" vertical :value="errors.items.length>0" >
-			<span v-for="error in errors.items"> {{error.msg}}</span>
+		<v-snackbar auto-height top right :timeout="0" color="error" vertical :value="errors.items.length>0 || alert.show && alert.index == 1 && alert.name == $route.name " >
+			<span v-for="error in errors.items" v-if="!alert.show"> {{error.msg}}</span>
+			<span v-if="alert.show">{{alert.message}}</span>
 		</v-snackbar>
 	</div>
 </template>
@@ -76,9 +126,12 @@ export default {
 				'price': 0,
 				'haveSize': false,
 				'haveTopping': false,
+				'sizes': [],
 				'priority': 0,
 				'status_id': 1,
-				'description': null
+				'description': null,
+				'catalogue_id': null,
+				'image': null
 			},
 			default: {
 				'name': '',
@@ -86,16 +139,21 @@ export default {
 				'price': 0,
 				'haveSize': false,
 				'haveTopping': false,
+				'sizes': [],
 				'priority': 0,
 				'status_id': 1,
-				'description': null
+				'description': null,
+				'catalogue_id': null,
+				'image': null
 			},
+			loading: false,
 			disabled: true,
 			process: false,
 			priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 		}
 	},
 	methods: {
+		//CLOSE DIALOG
 		close: async function() {
 			this.disabled   = await true
 			await this.$store.commit('CLOSE_PRODUCT_DIALOG')
@@ -107,6 +165,11 @@ export default {
 			vm.process = await true
 			var data   = vm.editedItem
 			if(vm.index > -1) {
+				
+				if(vm.editedItem.haveSize) {
+					data.price = 0
+				}
+				
 				// ACCEPT EDIT
 				vm.$validator.validateAll().then(async function(result){
 					if(result) {
@@ -115,11 +178,16 @@ export default {
 								vm.$store.commit('UPDATE_PRODUCT', response.data)
 								vm.close()
 							}
+						}).catch(error => {
+							if(error.response.status === 422) {
+								vm.$store.dispatch('alert', {name: vm.$route.name, index:1, show:true, message: error.response.data.message, type: 'error', close:true})
+							}							
 						})
 					}					
 				})
-			}else {
-				//ACCEPT SAVE
+			} else {
+
+				// ACCEPT SAVE
 				vm.$validator.validateAll().then(async function(result){
 					if(result) {
 						await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Add', data).then(response => {
@@ -127,24 +195,44 @@ export default {
 								vm.$store.commit('UPDATE_PRODUCT', response.data)
 								vm.close()
 							}
+						}).catch(error => {
+							if(error.response.status === 422) {
+								vm.$store.dispatch('alert', {name: vm.$route.name, index:1, show:true, message: error.response.data.message, type: 'error', close:true})
+							}							
 						})
 					}					
 				})
 			}
 			vm.process = false 
 		},
-		changePriority: function() {
-			this.disabled = false			
+		//CHANGE ATTRIBUTE TO DISABLE FALSE
+		changeAttribute: function(attr) {
+			var value = new String(attr).toLowerCase()
+			switch(value) {
+				case 'size':
+				return this.disabled = false
+				break
+				case 'topping':
+				return this.disabled = false
+				break
+				case 'status':
+				return this.disabled = false
+				break
+				case 'catalogue':
+				return this.disabled = false
+				break
+			}
 		},
-		changeShow: function() {
-			this.disabled = false
-		}
 	},
 	computed: {
 		...mapState({
-			dialog: state => state.productStore.productDialog,
-			item: state   => state.productStore.editedItem,
-			index: state  => state.productStore.editedIndex
+			dialog: state     => state.productStore.productDialog,
+			item: state       => Object.assign({}, state.productStore.editedItem),
+			index: state      => state.productStore.editedIndex,
+			status: state     => state.productStore.status,
+			catalogues: state => state.catalogueStore.catalogues,
+			sizes: state      => state.sizeStore.sizes,
+			alert: state 	  => state.alertStore.alert
 		}),
 		formTitle: function() {
 			return this.index > -1 ? 'Chỉnh sửa món' : 'Thêm món' 
@@ -152,10 +240,38 @@ export default {
 	},
 	watch: {
 		'item': function(val) {
-			Object.assign(this.editedItem, val)	
+			if(val != null) {
+				Object.assign(this.editedItem, val)	
+				if(!val.haveSize) {
+					var sizes = []
+					this.sizes.forEach(item => {
+						sizes.push({id: item.id, 'name': item.name, '_name': item._name, 'price': 0})
+					})
+					this.editedItem.sizes = sizes
+				}
+			}
+		},
+		'dialog': async function(val) {
+			if(val) {
+				this.loading = await true
+				await this.$store.dispatch('getCatalogue', this.$route.params.storeId)
+				
+				if(this.index === -1) {
+					await this.sizes.forEach(item => {
+						this.editedItem.sizes.push({id: item.id, 'name': item.name, '_name': item._name, 'price': 0})
+					})
+				} 
+
+				this.loading = false
+			}
+		},
+		'sizes': function(val) {
+			if(val.length > 0) {
+
+			}
 		},
 		'editedItem.name': function(val, oldVal) {
-			
+
 			if(this.index > -1) {
 				if(oldVal.length > 0) {
 					if(val.length > 0) {						
@@ -185,11 +301,18 @@ export default {
 		},
 	},
 	created() {
+		this.$store.dispatch('getSize', this.$route.params.storeId)
+		this.$store.dispatch('getProductStatus')
+
 		const dictionary = {
 			vi: {
 				attributes: {
+					catalogue: 'Danh mục',
 					name: 'Tên món',
-					_name: 'Tên món tiếng Anh'
+					_name: 'Tên món tiếng Anh',
+					price: 'Giá',
+					description: 'Mô tả',
+					status: 'Trạng thái'
 				}
 			}
 		};
