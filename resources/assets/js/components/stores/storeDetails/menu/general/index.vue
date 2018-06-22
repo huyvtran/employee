@@ -36,7 +36,20 @@
 							<v-flex xs8>
 								<v-card color="transparent">
 									<v-card-title primary-title>
-									
+										<v-layout row wrap>
+											<v-flex xs12>
+												<v-flex xs4 v-for="(size, i) in item.sizes" :key="i">
+													{{size.name}}
+												</v-flex>
+											</v-flex>
+
+											<v-flex xs12>
+												<v-radio-group>
+													<v-radio  v-for="(size, i) in item.sizes"  :label="`${size.name} (${size._name})`" :key="i">{{size.price}}</v-radio>
+												</v-radio-group>
+											</v-flex>
+										</v-layout>				
+										
 									</v-card-title>
 								</v-card>
 							</v-flex>

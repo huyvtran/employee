@@ -88776,8 +88776,8 @@ var render = function() {
                                     {
                                       name: "validate",
                                       rawName: "v-validate",
-                                      value: "required|max:20",
-                                      expression: "'required|max:20'"
+                                      value: "required|max:50",
+                                      expression: "'required|max:50'"
                                     }
                                   ],
                                   attrs: {
@@ -88812,8 +88812,8 @@ var render = function() {
                                     {
                                       name: "validate",
                                       rawName: "v-validate",
-                                      value: "max:20",
-                                      expression: "'max:20'"
+                                      value: "max:50",
+                                      expression: "'max:50'"
                                     }
                                   ],
                                   attrs: {
@@ -91110,9 +91110,70 @@ var render = function() {
                                 "v-card",
                                 { attrs: { color: "transparent" } },
                                 [
-                                  _c("v-card-title", {
-                                    attrs: { "primary-title": "" }
-                                  })
+                                  _c(
+                                    "v-card-title",
+                                    { attrs: { "primary-title": "" } },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        { attrs: { row: "", wrap: "" } },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            _vm._l(item.sizes, function(
+                                              size,
+                                              i
+                                            ) {
+                                              return _c(
+                                                "v-flex",
+                                                { key: i, attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                      _vm._s(size.name) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              )
+                                            })
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
+                                              _c(
+                                                "v-radio-group",
+                                                _vm._l(item.sizes, function(
+                                                  size,
+                                                  i
+                                                ) {
+                                                  return _c(
+                                                    "v-radio",
+                                                    {
+                                                      key: i,
+                                                      attrs: {
+                                                        label:
+                                                          size.name +
+                                                          " (" +
+                                                          size._name +
+                                                          ")"
+                                                      }
+                                                    },
+                                                    [_vm._v(_vm._s(size.price))]
+                                                  )
+                                                })
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )

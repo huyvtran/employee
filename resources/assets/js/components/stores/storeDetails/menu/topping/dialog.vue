@@ -11,11 +11,11 @@
 						<v-container grid-list-md>
 							<v-layout wrap>							
 								<v-flex xs12>
-									<v-text-field v-model="editedItem.name" label="Tên topping" prepend-icon="title" persistent-hint hint="Tên topping là bắt buộc" required v-validate="'required|max:20'" :error-messages="errors.collect('name')" data-vv-name="name"></v-text-field>
+									<v-text-field v-model="editedItem.name" label="Tên topping" prepend-icon="title" persistent-hint hint="Tên topping là bắt buộc" required v-validate="'required|max:50'" :error-messages="errors.collect('name')" data-vv-name="name"></v-text-field>
 								</v-flex>
 
 								<v-flex xs12>
-									<v-text-field v-model="editedItem._name" label="Tên topping tiếng Anh" prepend-icon="language" persistent-hint hint="Tên topping tiếng Anh có thể để trống" v-validate="'max:20'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
+									<v-text-field v-model="editedItem._name" label="Tên topping tiếng Anh" prepend-icon="language" persistent-hint hint="Tên topping tiếng Anh có thể để trống" v-validate="'max:50'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
 								</v-flex>
 
 								<v-flex xs12>
