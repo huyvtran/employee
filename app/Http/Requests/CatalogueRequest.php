@@ -26,7 +26,7 @@ class CatalogueRequest extends FormRequest
         return [
             'name'     => 'required|max:50',
             '_name'    => 'max:50',
-            'priority' => 'required|numeric|max:2',
+            'priority' => 'required|numeric',
             'isShowed' => 'required|boolean'
         ];
     }

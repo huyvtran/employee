@@ -26,7 +26,7 @@ class SizeRequest extends FormRequest
         return [
             'name'  => 'required|max:20',
             '_name' => 'max:20',
-            'price' => 'required|numeric|max:7',
+            'price' => 'required|numeric',
         ];
     }
 }
