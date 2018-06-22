@@ -90983,215 +90983,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-content",
+    "v-layout",
+    { attrs: { row: "" } },
     [
       _c(
-        "v-layout",
-        { attrs: { column: "" } },
-        _vm._l(_vm.catalogues, function(data, i) {
-          return _c(
-            "v-flex",
-            { key: i, attrs: { xs4: "" } },
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
+        [
+          _c(
+            "v-card",
             [
-              _c("v-subheader", [_vm._v(_vm._s(data.name))]),
-              _vm._v(" "),
               _c(
-                "v-expansion-panel",
-                { attrs: { popout: "", focusable: "" } },
-                _vm._l(data.products, function(item, i) {
-                  return _c(
-                    "v-expansion-panel-content",
-                    { key: i, attrs: { "expand-icon": "md-menu-down" } },
-                    [
-                      _c(
-                        "v-list",
-                        {
-                          staticClass: "transparent",
-                          attrs: { slot: "header", dense: "", "two-line": "" },
-                          slot: "header"
-                        },
-                        [
-                          _c(
-                            "v-list-tile",
-                            { attrs: { avatar: "" } },
-                            [
-                              _c("v-list-tile-avatar", [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.image(item.image),
-                                    alt: "avatar"
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-content",
-                                [
-                                  _c("v-list-tile-title", [
-                                    _c("h3", [_vm._v(_vm._s(item.name))])
-                                  ]),
-                                  _vm._v(" "),
-                                  item._name != null
-                                    ? _c("v-list-tile-sub-title", [
-                                        _vm._v(_vm._s(item._name))
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  item.description != null
-                                    ? _c("v-list-tile-sub-title", [
-                                        _vm._v(
-                                          "Mô tả: " + _vm._s(item.description)
-                                        )
-                                      ])
-                                    : _vm._e()
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-content",
-                                [_c("v-list-tile-title")],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile-action",
-                                [
-                                  _c("v-list-tile-action-text", [
-                                    _vm._v("Đã được đặt "),
-                                    _c("strong", [_vm._v(_vm._s(item.count))]),
-                                    _vm._v(" lần")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("h3", [
-                                    _vm._v(
-                                      _vm._s(_vm._f("formatPrice")(item.price))
-                                    )
-                                  ])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
+                "v-list",
+                { attrs: { "two-line": "" } },
+                [
+                  _vm._l(_vm.catalogues, function(data, i) {
+                    return [
+                      _c("v-subheader", [_vm._v(_vm._s(data.name))]),
                       _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { row: "", wrap: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs4: "" } },
-                            [
-                              _c(
-                                "v-card",
-                                [
-                                  _c("v-card-media", {
-                                    attrs: {
-                                      height: "180",
-                                      src: _vm.image(item.image)
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c(
-                                "v-card",
-                                { attrs: { color: "transparent" } },
-                                [
-                                  _c(
-                                    "v-card-title",
-                                    { attrs: { "primary-title": "" } },
-                                    [
-                                      _c(
-                                        "v-layout",
-                                        { attrs: { row: "", wrap: "" } },
-                                        [
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs12: "" } },
-                                            _vm._l(item.sizes, function(
-                                              size,
-                                              i
-                                            ) {
-                                              return _c(
-                                                "v-flex",
-                                                { key: i, attrs: { xs4: "" } },
-                                                [
-                                                  _vm._v(
-                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                      _vm._s(size.name) +
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t"
-                                                  )
-                                                ]
-                                              )
-                                            })
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            { attrs: { xs12: "" } },
-                                            [
-                                              _c(
-                                                "v-radio-group",
-                                                _vm._l(item.sizes, function(
-                                                  size,
-                                                  i
-                                                ) {
-                                                  return _c(
-                                                    "v-radio",
-                                                    {
-                                                      key: i,
-                                                      attrs: {
-                                                        label:
-                                                          size.name +
-                                                          " (" +
-                                                          size._name +
-                                                          ")"
-                                                      }
-                                                    },
-                                                    [_vm._v(_vm._s(size.price))]
-                                                  )
-                                                })
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                })
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _vm._l(data.products, function(item, i) {
+                        return _c(
+                          "v-list-tile",
+                          {
+                            key: i,
+                            attrs: { avatar: "" },
+                            on: { click: function($event) {} }
+                          },
+                          [
+                            _c("v-list-tile-avatar", [
+                              _c("img", {
+                                attrs: { src: _vm.image(item.image) }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-list-tile-content",
+                              [
+                                _c("v-list-tile-title", {
+                                  domProps: { innerHTML: _vm._s(item.name) }
+                                }),
+                                _vm._v(" "),
+                                _c("v-list-tile-sub-title", {
+                                  domProps: { innerHTML: _vm._s(item._name) }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      })
+                    ]
+                  })
+                ],
+                2
               )
             ],
             1
           )
-        })
+        ],
+        1
       )
     ],
     1

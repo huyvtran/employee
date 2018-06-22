@@ -1,11 +1,47 @@
 <template>
-	<v-content>
+	<v-layout row>
+		<v-flex xs12 sm6 offset-sm3>
+			<v-card>
+				<v-list two-line>
+					<template v-for="(data, i) in catalogues">
+						<v-subheader>{{ data.name }}</v-subheader>
+						<v-divider></v-divider>
+						<v-list-tile v-for="(item,i) in data.products" :key="i" avatar @click="">
+							<v-list-tile-avatar>
+								<img :src="image(item.image)">
+							</v-list-tile-avatar>
+							<v-list-tile-content>
+								<v-list-tile-title v-html="item.name"></v-list-tile-title>
+								<v-list-tile-sub-title v-html="item._name"></v-list-tile-sub-title>
+							</v-list-tile-content>
+						</v-list-tile>
+					</template>
+				</v-list>
+			</v-card>
+		</v-flex>
+	</v-layout>
+	<!-- <v-content>
 		<v-layout column>
-			<v-flex xs4 v-for="(data, i) in catalogues" :key="i">
-				<v-subheader>{{data.name}}</v-subheader>
-				<v-expansion-panel popout focusable>
+			<v-list three-line>
+				<template v-for="(data, i) in catalogues">
+					<v-subheader>{{ data.name }}</v-subheader>
+
+					<v-list-tile v-for="(item,i) in data.products" :key="i" avatar @click="">
+						<v-list-tile-avatar>
+							<img :src="image(item.image)">
+						</v-list-tile-avatar>
+						<v-list-tile-content>
+							<v-list-tile-title v-html="item.name"></v-list-tile-title>
+							<v-list-tile-sub-title v-html="item._name"></v-list-tile-sub-title>
+						</v-list-tile-content>
+					</v-list-tile>
+				</template>
+			</v-list> -->
+	<!-- 		<v-flex xs4 v-for="(data, i) in catalogues" :key="i">
+		<v-subheader>{{data.name}}</v-subheader> -->
+				<!-- <v-expansion-panel popout focusable>
 					<v-expansion-panel-content v-for="(item,i) in data.products" :key="i" expand-icon="md-menu-down">
-						<v-list slot="header" dense two-line class="transparent">
+						<v-list slot="header" dense three-line class="transparent">
 							<v-list-tile avatar>
 								<v-list-tile-avatar>
 									<img :src="image(item.image)" alt="avatar">
@@ -16,11 +52,17 @@
 									<v-list-tile-sub-title v-if="item.description != null">Mô tả: {{ item.description }}</v-list-tile-sub-title>
 								</v-list-tile-content>
 								<v-list-tile-content>
-									<v-list-tile-title></v-list-tile-title>
+									<v-list-tile-title>										
+										Topping: <strong>{{item.haveTopping ? "Có" :  "Không"}}</strong>
+									</v-list-tile-title>
+									<v-list-tile-title>
+										Size: <strong>{{item.haveSize ? "Có" :  "Không"}}</strong>
+									</v-list-tile-title>
 								</v-list-tile-content>
 								<v-list-tile-action>
-									<v-list-tile-action-text>Đã được đặt <strong>{{item.count}}</strong> lần</v-list-tile-action-text>
-									<h3>{{item.price | formatPrice}}</h3>
+									<h3 v-if="!item.haveSize">{{item.price | formatPrice}}</h3>
+									<h3 v-else v-for="(size, i) in item.sizes">{{size.name}}: {{size.price | formatPrice}}</h3>
+									<v-list-tile-action-text>Đã được đặt <strong>{{item.count}}</strong> lần</v-list-tile-action-text>									
 								</v-list-tile-action>
 							</v-list-tile>
 						</v-list>
@@ -55,10 +97,10 @@
 							</v-flex>
 						</v-layout>
 					</v-expansion-panel-content>
-				</v-expansion-panel>
-			</v-flex>
-		</v-layout>
-	</v-content>
+				</v-expansion-panel> -->
+				<!-- </v-flex> -->
+	<!-- 	</v-layout>
+	</v-content> -->
 </template>
 
 <script>
