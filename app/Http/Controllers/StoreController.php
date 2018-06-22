@@ -86,6 +86,7 @@ class StoreController extends Controller
             $store->lat           = $storeForm['lat'];
             $store->lng           = $storeForm['lng'];
             $store->priority      = $storeForm['priority'];
+            $store->discount      = $storeForm['discount'];
             $store->user_id       = $user->id;
             $store->district_id   = (int)$storeForm['district_id'];
             $store->type_id       = (int)$storeForm['type_id'];
@@ -173,6 +174,7 @@ class StoreController extends Controller
         $store->type_id       = (int)$request->type_id;
         $store->status_id     = $this->store_status->id;
         $store->priority      = $request->priority;
+        $store->discount      = $request->discount;
         $store->store_show    = $request->isShowed;
         $store->verified      = $request->isVerified;
         $store->updated_at    = new DateTime;

@@ -16,6 +16,7 @@
 			</div>
 			<v-spacer></v-spacer>
 			<div>
+				   <v-icon>fas fa-lock</v-icon>
 				<v-btn color="red accent-3" :outline="filter" dark small @click="filterAction" round><v-icon left>search</v-icon>{{filter ? 'Tắt bộ lọc' : 'Bật bộ lọc'}}</v-btn>
 			</div>
 		</v-card-title>		

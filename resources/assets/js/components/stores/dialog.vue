@@ -1,6 +1,7 @@
 <template>
-	<v-dialog persistent v-model="dialog" fullscreen transition="scale-transition" origin="center center" :overlay="false">
+	<v-dialog persistent v-model="dialog" scrollable fullscreen transition="scale-transition" origin="center center" :overlay="false">
 		<v-card color="grey lighten-2">
+			<v-progress-linear :indeterminate="true" class="my-0" v-if="loading"></v-progress-linear>
 			<v-toolbar dark color="primary">
 				<v-btn icon @click.native="close" dark>
 					<v-icon>close</v-icon>
@@ -8,7 +9,7 @@
 				<v-toolbar-title><span class="headline">{{ formTitle }}</span></v-toolbar-title>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
-					<v-btn :color=" index>-1 ? 'blue darken-1' : 'green darken-1'" :disabled="disabled" :loading="process" class="white--text" @click.native="save">{{index > -1 ? 'Lưu thay đổi' : 'Thêm'}} </v-btn>
+					<v-btn  :disabled="disabled" :loading="process" @click.native="save" flat dark>{{editedIndex > -1 ? 'Lưu thay đổi' : 'Hoàn thành'}}</v-btn>
 				</v-toolbar-items>
 			</v-toolbar>
 			<v-card-text>
@@ -18,7 +19,7 @@
 							<v-card>
 								<v-card-title primary class="title">Thông tin chủ sở hữu/quản lý</v-card-title>
 								<v-card-text>
-									<v-form>										
+									<form>										
 										<v-subheader>
 											Thông tin người dùng
 										</v-subheader>
@@ -66,8 +67,8 @@
 											:error-messages="errors.collect('gender')"
 											data-vv-name="gender" 
 											data-vv-scope="user">
-											<v-radio label="Nam" :value='1' color="primary" ></v-radio>
-											<v-radio label="Nữ" :value='0' color="primary"></v-radio>	</v-radio-group>
+											<v-radio label="Nam" :value='1' color="primary" @change="changeAttribute"></v-radio>
+											<v-radio label="Nữ" :value='0' color="primary" @change="changeAttribute"></v-radio>	</v-radio-group>
 
 											<v-menu
 											ref="menu"
@@ -130,9 +131,9 @@
 									<v-subheader>Cài đặt</v-subheader>
 
 									<v-container>
-										<v-switch label="Kích hoạt tài khoản" v-model="editedItem.user.isActived" color="primary"></v-switch>
+										<v-switch label="Kích hoạt tài khoản" v-model="editedItem.user.isActived" color="primary" @change="changeAttribute"></v-switch>
 									</v-container>
-								</v-form>
+								</form>
 							</v-card-text>
 						</v-card>
 					</v-flex>
@@ -146,7 +147,7 @@
 										<vue-image :image="editedItem.store.avatar" @IMAGE="getImage"></vue-image>		
 									</v-flex>
 								</v-layout>
-								<v-form>
+								<form>
 									<v-subheader>Thông tin cửa hàng</v-subheader>
 									<v-container>
 										<v-select
@@ -160,6 +161,7 @@
 										:error-messages="errors.collect('type')"
 										data-vv-name="type"
 										data-vv-scope="store"
+										@change="changeAttribute"
 										></v-select>
 
 										<v-text-field
@@ -215,6 +217,7 @@
 										:error-messages="errors.collect('district')"
 										data-vv-name="district"
 										data-vv-scope="store"
+										@change="changeAttribute"
 										></v-select>
 
 										<v-text-field
@@ -246,22 +249,37 @@
 											label="Mức độ ưu tiên"
 											prepend-icon="swap_vert"
 											v-validate="'required'"
+											@change="changeAttribute"
 											></v-select>
 										</v-flex>		
 
 										<v-flex xs12>
-											<v-switch label="Ẩn/Hiện" v-model="editedItem.store.isShowed" color="primary"></v-switch>
+											<v-switch label="Ẩn/Hiện" v-model="editedItem.store.isShowed" color="primary" @change="changeAttribute"></v-switch>
 										</v-flex>
-
+										
 										<v-flex xs12>
 											<v-checkbox
 											label="Xác nhận hợp tác"
 											color="primary"
 											v-model="editedItem.store.isVerified"
+											@change="changeAttribute"
 											></v-checkbox>
-										</v-flex>										
+										</v-flex>	
+
+										<v-flex xs12>
+											<v-text-field
+											prepend-icon="attach_money" 
+											label="Chiết khấu hoa hồng" 
+											v-model="editedItem.store.discount"
+											v-validate="{required: editedItem.store.isVerified, numeric:true, max: 2}"
+											:error-messages="errors.collect('discount')"
+											data-vv-name="discount"
+											data-vv-scope="store"
+											suffix="%"></v-text-field>
+										</v-flex>								
+
 									</v-container>
-								</v-form>
+								</form>
 							</v-card-text>
 						</v-card>
 					</v-flex>
@@ -311,6 +329,7 @@ export default {
 					address: '',
 					lat: 10.0452,
 					lng: 105.7469,
+					discount:0,
 					avatar: null,		
 					priority:0,
 					isShowed: false,
@@ -342,6 +361,7 @@ export default {
 					address: '',
 					lat: 10.0452,
 					lng: 105.7469,
+					discount:0,
 					avatar: null,		
 					priority:0,
 					isShowed: false,
@@ -349,6 +369,7 @@ export default {
 				}
 			},
 			process:false,
+			loading: false,
 			priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 			disabled: true,
 			menu:false,
@@ -465,7 +486,11 @@ export default {
 		updateCenter(center) {
 			this.editedItem.store.lat = center.latLng.lat()
 			this.editedItem.store.lng = center.latLng.lng()
-		}
+		},
+		//CHANGE ATTRIBUTE TO DISABLE FALSE
+		changeAttribute: function(attr) {
+			this.disabled = false
+		},
 	},
 	computed: {
 		...mapState({
@@ -489,10 +514,12 @@ export default {
 		item (val) {
 			Object.assign(this.editedItem.store, val)	
 		},
-		dialog: function(val, oldVal) {
+		dialog: async function(val, oldVal) {
+			this.loading = await true
 			if(val) {				
-				this.autoComplete()
+				await this.autoComplete()
 			}
+			this.loading = false
 		},
 		'editedItem.store.avatar': function(val, oldVal) {
 			if(this.editedIndex >-1 && oldVal != null && val != null) {
@@ -501,13 +528,6 @@ export default {
 				this.disabled = false
 			}
 		}, 
-		'editedItem.store.type_id': function(val, oldVal) {
-			if(this.editedIndex > -1 && oldVal != null) {
-				this.disabled = false
-			} else if(this.editedIndex == -1 && val != null) {
-				this.disabled = false
-			}
-		},
 		'editedItem.store.name': function(val, oldVal) {
 			if(this.editedIndex > -1 && oldVal != '') {
 				this.disabled = false
@@ -556,13 +576,6 @@ export default {
 				this.disabled = false
 			}
 		}, 
-		'editedItem.store.isShowed': function(val, oldVal) {
-			if(this.editedIndex > -1 && oldVal != false) {
-				this.disabled = false
-			} else if(this.editedIndex == -1 && val != false) {
-				this.disabled = false
-			}
-		},
 		'editedItem.user.name': function(val, oldVal) {
 			if(this.editedIndex > -1 && oldVal != '') {
 				this.disabled = false
@@ -616,13 +629,6 @@ export default {
 			if(this.editedIndex > -1 && oldVal != '') {
 				this.disabled = false
 			} else if(this.editedIndex == -1 && val != '') {
-				this.disabled = false
-			}
-		},
-		'editedItem.user.isActived': function(val, oldVal) {
-			if(this.editedIndex > -1 && oldVal != false) {
-				this.disabled = false
-			} else if(this.editedIndex == -1 && val != false) {
 				this.disabled = false
 			}
 		},

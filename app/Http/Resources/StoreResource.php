@@ -37,6 +37,7 @@ class StoreResource extends JsonResource
             'type_icon'         => $this->type->type_icon,
             'isShowed'          => $this->store_show,
             'isVerified'        => $this->verified,
+            'discount'          => $this->discount,
             'priority'          => $this->priority,
             'user'              => $this->whenLoaded('user', function() {
                 return new UserResource($this->user);   

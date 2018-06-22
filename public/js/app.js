@@ -90901,23 +90901,23 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(137), __webpack_require__(11), __webpack_require__(9), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('@/mixins/index'), require('axios'));
+		factory(exports, require('babel-runtime/core-js/array/from'), require('babel-runtime/helpers/extends'), require('vuex'), require('@/mixins/index'), require('axios'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.index, global.axios);
+		factory(mod.exports, global.from, global._extends, global.vuex, global.index, global.axios);
 		global.index = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(137), __webpack_require__(11), __webpack_require__(9), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -90927,15 +90927,19 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.index, global.axios);
+			factory(mod.exports, global.from, global._extends, global.vuex, global.index, global.axios);
 			global.index = mod.exports;
 		}
-	})(this, function (exports, _index, _axios) {
+	})(this, function (exports, _from, _extends2, _vuex, _index, _axios) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
 			value: true
 		});
+
+		var _from2 = _interopRequireDefault(_from);
+
+		var _extends3 = _interopRequireDefault(_extends2);
 
 		var _index2 = _interopRequireDefault(_index);
 
@@ -90951,7 +90955,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			mixins: [_index2.default],
 			data: function data() {
 				return {
-					catalogues: []
+					menu: [],
+					search: {
+						text: '',
+						catalogue: null
+					},
+					filterCatalogue: [{ name: 'Tất cả', id: null }]
 				};
 			},
 
@@ -90961,14 +90970,51 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 					_axios2.default.get('/api/GetStore/' + id + '/Menu').then(function (response) {
 						if (response.status == 200) {
-							_this.catalogues = response.data.data;
+							_this.menu = response.data.data;
 						}
+					});
+				},
+				filterByCatalogue: function filterByCatalogue(list, id) {
+					var search = id;
+
+					if (search == null) {
+						return list;
+					}
+
+					return list.filter(function (item) {
+						return item.id === search;
 					});
 				}
 			},
-			computed: {},
+			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+				toppings: function toppings(state) {
+					return state.toppingStore.toppings;
+				},
+				catalogues: function catalogues(state) {
+					return (0, _from2.default)(state.catalogueStore.catalogues);
+				}
+			}), {
+				filterData: function filterData() {
+					if (this.menu.length > 0) {
+						return this.filterByCatalogue(this.menu, this.search.catalogue);
+					}
+				}
+			}),
+			watch: {
+				'catalogues': function catalogues(val) {
+					var _this2 = this;
+
+					if (val.length > 0) {
+						val.forEach(function (item) {
+							_this2.filterCatalogue.push({ name: item.name, id: item.id });
+						});
+					}
+				}
+			},
 			created: function created() {
 				this.getMenu(this.$route.params.storeId);
+				this.$store.dispatch('getTopping', this.$route.params.storeId);
+				this.$store.dispatch('getCatalogue', this.$route.params.storeId);
 			}
 		};
 	});
@@ -90983,68 +91029,264 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { attrs: { row: "" } },
+    "v-content",
     [
       _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
+        "v-layout",
+        { attrs: { column: "" } },
         [
           _c(
-            "v-card",
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
             [
               _c(
-                "v-list",
-                { attrs: { "two-line": "" } },
+                "v-flex",
+                { key: 0, attrs: { xs4: "" } },
                 [
-                  _vm._l(_vm.catalogues, function(data, i) {
-                    return [
-                      _c("v-subheader", [_vm._v(_vm._s(data.name))]),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _vm._l(data.products, function(item, i) {
-                        return _c(
-                          "v-list-tile",
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.filterCatalogue,
+                      "item-text": "name",
+                      "item-value": "id",
+                      label: "Danh mục"
+                    },
+                    model: {
+                      value: _vm.search.catalogue,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "catalogue", $$v)
+                      },
+                      expression: "search.catalogue"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { key: 2, attrs: { xs8: "" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      "append-icon": "search",
+                      label: "Tìm kiếm món",
+                      "hide-details": ""
+                    },
+                    model: {
+                      value: _vm.search.text,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "text", $$v)
+                      },
+                      expression: "search.text"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.filterData, function(data, i) {
+            return _c(
+              "v-flex",
+              { key: i, attrs: { xs4: "" } },
+              [
+                _c("v-subheader", [_vm._v(_vm._s(data.name))]),
+                _vm._v(" "),
+                _c(
+                  "v-expansion-panel",
+                  { attrs: { popout: "", focusable: "" } },
+                  _vm._l(data.products, function(item, i) {
+                    return _c(
+                      "v-expansion-panel-content",
+                      { key: i, attrs: { "expand-icon": "md-menu-down" } },
+                      [
+                        _c(
+                          "v-list",
                           {
-                            key: i,
-                            attrs: { avatar: "" },
-                            on: { click: function($event) {} }
+                            staticClass: "transparent",
+                            attrs: {
+                              slot: "header",
+                              dense: "",
+                              "two-line": ""
+                            },
+                            slot: "header"
                           },
                           [
-                            _c("v-list-tile-avatar", [
-                              _c("img", {
-                                attrs: { src: _vm.image(item.image) }
-                              })
-                            ]),
-                            _vm._v(" "),
                             _c(
-                              "v-list-tile-content",
+                              "v-list-tile",
+                              { attrs: { avatar: "" } },
                               [
-                                _c("v-list-tile-title", {
-                                  domProps: { innerHTML: _vm._s(item.name) }
-                                }),
+                                _c("v-list-tile-avatar", [
+                                  _c("img", {
+                                    attrs: {
+                                      src: _vm.image(item.image),
+                                      alt: "avatar"
+                                    }
+                                  })
+                                ]),
                                 _vm._v(" "),
-                                _c("v-list-tile-sub-title", {
-                                  domProps: { innerHTML: _vm._s(item._name) }
-                                })
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _c("h3", [_vm._v(_vm._s(item.name))])
+                                    ]),
+                                    _vm._v(" "),
+                                    item._name != null
+                                      ? _c("v-list-tile-sub-title", [
+                                          _vm._v(_vm._s(item._name))
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    item.description != null
+                                      ? _c("v-list-tile-sub-title", [
+                                          _vm._v(
+                                            "Mô tả: " + _vm._s(item.description)
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-tile-content",
+                                  [
+                                    _c("v-list-tile-title", [
+                                      _vm._v(
+                                        "\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tTopping: "
+                                      ),
+                                      _c("strong", [
+                                        _vm._v(
+                                          _vm._s(
+                                            item.haveTopping ? "Có" : "Không"
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-title", [
+                                      _vm._v("\n\t\t\t\t\t\t\t\t\tSize: "),
+                                      _c("strong", [
+                                        _vm._v(
+                                          _vm._s(item.haveSize ? "Có" : "Không")
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-list-tile-action-text", [
+                                      _vm._v("Đã được đặt "),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(item.count))
+                                      ]),
+                                      _vm._v(" lần")
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-tile-action",
+                                  [
+                                    !item.haveSize
+                                      ? _c("h4", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPrice")(item.price)
+                                            )
+                                          )
+                                        ])
+                                      : _vm._l(item.sizes, function(size, i) {
+                                          return _c("h4", [
+                                            _vm._v(
+                                              _vm._s(size.name) +
+                                                ": " +
+                                                _vm._s(
+                                                  _vm._f("formatPrice")(
+                                                    size.price
+                                                  )
+                                                )
+                                            )
+                                          ])
+                                        })
+                                  ],
+                                  2
+                                )
                               ],
                               1
                             )
                           ],
                           1
-                        )
-                      })
-                    ]
+                        ),
+                        _vm._v(" "),
+                        item.haveTopping
+                          ? _c(
+                              "v-card",
+                              [
+                                _c(
+                                  "v-card-text",
+                                  { staticClass: "grey lighten-3" },
+                                  [
+                                    _c(
+                                      "v-layout",
+                                      { attrs: { row: "", wrap: "" } },
+                                      _vm._l(_vm.toppings, function(
+                                        topping,
+                                        i
+                                      ) {
+                                        return _c(
+                                          "v-flex",
+                                          { key: i, attrs: { xs3: "" } },
+                                          [
+                                            _c("div", [
+                                              _vm._v(_vm._s(topping.name))
+                                            ]),
+                                            _vm._v(" "),
+                                            topping._name.length > 0
+                                              ? _c(
+                                                  "div",
+                                                  { staticClass: "subheader" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(topping._name)
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _c("h4", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm._f("formatPrice")(
+                                                    topping.price
+                                                  )
+                                                )
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
                   })
-                ],
-                2
-              )
-            ],
-            1
-          )
+                )
+              ],
+              1
+            )
+          })
         ],
-        1
+        2
       )
     ],
     1
@@ -92847,6 +93089,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 							address: '',
 							lat: 10.0452,
 							lng: 105.7469,
+							discount: 0,
 							avatar: null,
 							priority: 0,
 							isShowed: false,
@@ -92878,6 +93121,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 							address: '',
 							lat: 10.0452,
 							lng: 105.7469,
+							discount: 0,
 							avatar: null,
 							priority: 0,
 							isShowed: false,
@@ -92885,6 +93129,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						}
 					},
 					process: false,
+					loading: false,
 					priorities: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 					disabled: true,
 					menu: false,
@@ -93108,6 +93353,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				updateCenter: function updateCenter(center) {
 					this.editedItem.store.lat = center.latLng.lat();
 					this.editedItem.store.lng = center.latLng.lng();
+				},
+
+				//CHANGE ATTRIBUTE TO DISABLE FALSE
+				changeAttribute: function changeAttribute(attr) {
+					this.disabled = false;
 				}
 			},
 			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
@@ -93152,20 +93402,45 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					(0, _assign2.default)(this.editedItem.store, val);
 				},
 
-				dialog: function dialog(val, oldVal) {
-					if (val) {
-						this.autoComplete();
+				dialog: function () {
+					var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(val, oldVal) {
+						return _regenerator2.default.wrap(function _callee6$(_context6) {
+							while (1) {
+								switch (_context6.prev = _context6.next) {
+									case 0:
+										_context6.next = 2;
+										return true;
+
+									case 2:
+										this.loading = _context6.sent;
+
+										if (!val) {
+											_context6.next = 6;
+											break;
+										}
+
+										_context6.next = 6;
+										return this.autoComplete();
+
+									case 6:
+										this.loading = false;
+
+									case 7:
+									case 'end':
+										return _context6.stop();
+								}
+							}
+						}, _callee6, this);
+					}));
+
+					function dialog(_x5, _x6) {
+						return _ref6.apply(this, arguments);
 					}
-				},
+
+					return dialog;
+				}(),
 				'editedItem.store.avatar': function editedItemStoreAvatar(val, oldVal) {
 					if (this.editedIndex > -1 && oldVal != null && val != null) {
-						this.disabled = false;
-					} else if (this.editedIndex == -1 && val != null) {
-						this.disabled = false;
-					}
-				},
-				'editedItem.store.type_id': function editedItemStoreType_id(val, oldVal) {
-					if (this.editedIndex > -1 && oldVal != null) {
 						this.disabled = false;
 					} else if (this.editedIndex == -1 && val != null) {
 						this.disabled = false;
@@ -93216,13 +93491,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					if (this.editedIndex > -1 && oldVal != '') {
 						this.disabled = false;
 					} else if (this.editedIndex == -1 && val != '') {
-						this.disabled = false;
-					}
-				},
-				'editedItem.store.isShowed': function editedItemStoreIsShowed(val, oldVal) {
-					if (this.editedIndex > -1 && oldVal != false) {
-						this.disabled = false;
-					} else if (this.editedIndex == -1 && val != false) {
 						this.disabled = false;
 					}
 				},
@@ -93279,13 +93547,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					if (this.editedIndex > -1 && oldVal != '') {
 						this.disabled = false;
 					} else if (this.editedIndex == -1 && val != '') {
-						this.disabled = false;
-					}
-				},
-				'editedItem.user.isActived': function editedItemUserIsActived(val, oldVal) {
-					if (this.editedIndex > -1 && oldVal != false) {
-						this.disabled = false;
-					} else if (this.editedIndex == -1 && val != false) {
 						this.disabled = false;
 					}
 				}
@@ -93620,6 +93881,7 @@ var render = function() {
     {
       attrs: {
         persistent: "",
+        scrollable: "",
         fullscreen: "",
         transition: "scale-transition",
         origin: "center center",
@@ -93638,6 +93900,13 @@ var render = function() {
         "v-card",
         { attrs: { color: "grey lighten-2" } },
         [
+          _vm.loading
+            ? _c("v-progress-linear", {
+                staticClass: "my-0",
+                attrs: { indeterminate: true }
+              })
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "v-toolbar",
             { attrs: { dark: "", color: "primary" } },
@@ -93670,12 +93939,11 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      staticClass: "white--text",
                       attrs: {
-                        color:
-                          _vm.index > -1 ? "blue darken-1" : "green darken-1",
                         disabled: _vm.disabled,
-                        loading: _vm.process
+                        loading: _vm.process,
+                        flat: "",
+                        dark: ""
                       },
                       nativeOn: {
                         click: function($event) {
@@ -93685,7 +93953,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.index > -1 ? "Lưu thay đổi" : "Thêm") + " "
+                        _vm._s(
+                          _vm.editedIndex > -1 ? "Lưu thay đổi" : "Hoàn thành"
+                        )
                       )
                     ]
                   )
@@ -93734,434 +94004,428 @@ var render = function() {
                                     [_vm._v("Thông tin chủ sở hữu/quản lý")]
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "v-card-text",
-                                    [
-                                      _c(
-                                        "v-form",
-                                        [
-                                          _c("v-subheader", [
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\tThông tin người dùng\n\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-container",
-                                            [
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
-                                                    value: "required",
-                                                    expression: "'required'"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "person",
-                                                  label:
-                                                    "Tên chủ sở hữu/Quản lý",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "name"
-                                                  ),
-                                                  "data-vv-name": "name",
-                                                  "data-vv-scope": "user"
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user.name,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "name",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editedItem.user.name"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
-                                                    value: "required|email",
-                                                    expression:
-                                                      "'required|email'"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "email",
-                                                  label: "Email",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "email"
-                                                  ),
-                                                  "data-vv-name": "email",
-                                                  "data-vv-scope": "user"
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user.email,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "email",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editedItem.user.email"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
-                                                    value:
-                                                      "required|min:8|max:36",
-                                                    expression:
-                                                      "'required|min:8|max:36'"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "lock",
-                                                  label: "Mật khẩu",
-                                                  type: "password",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "password"
-                                                  ),
-                                                  "data-vv-name": "password",
-                                                  "data-vv-scope": "user"
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user
-                                                      .password,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "password",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editedItem.user.password"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
-                                                    value: {
-                                                      required: true,
-                                                      is:
-                                                        _vm.editedItem.user
-                                                          .password
-                                                    },
-                                                    expression:
-                                                      "{required:true, is:editedItem.user.password}"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "lock",
-                                                  label: "Xác nhận mật khẩu",
-                                                  type: "password",
-                                                  "data-vv-name":
-                                                    "confirmPassword",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "confirmPassword"
-                                                  ),
-                                                  "data-vv-scope": "user"
-                                                },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user
-                                                      .confirm_password,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "confirm_password",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editedItem.user.confirm_password"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-radio-group",
+                                  _c("v-card-text", [
+                                    _c(
+                                      "form",
+                                      [
+                                        _c("v-subheader", [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t\t\t\tThông tin người dùng\n\t\t\t\t\t\t\t\t\t\t"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-container",
+                                          [
+                                            _c("v-text-field", {
+                                              directives: [
                                                 {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value: "required",
+                                                  expression: "'required'"
+                                                }
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "person",
+                                                label: "Tên chủ sở hữu/Quản lý",
+                                                "error-messages": _vm.errors.collect(
+                                                  "name"
+                                                ),
+                                                "data-vv-name": "name",
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value: _vm.editedItem.user.name,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "name",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.user.name"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value: "required|email",
+                                                  expression: "'required|email'"
+                                                }
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "email",
+                                                label: "Email",
+                                                "error-messages": _vm.errors.collect(
+                                                  "email"
+                                                ),
+                                                "data-vv-name": "email",
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user.email,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "email",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.user.email"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value:
+                                                    "required|min:8|max:36",
+                                                  expression:
+                                                    "'required|min:8|max:36'"
+                                                }
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "lock",
+                                                label: "Mật khẩu",
+                                                type: "password",
+                                                "error-messages": _vm.errors.collect(
+                                                  "password"
+                                                ),
+                                                "data-vv-name": "password",
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user.password,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "password",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.user.password"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value: {
+                                                    required: true,
+                                                    is:
+                                                      _vm.editedItem.user
+                                                        .password
+                                                  },
+                                                  expression:
+                                                    "{required:true, is:editedItem.user.password}"
+                                                }
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "lock",
+                                                label: "Xác nhận mật khẩu",
+                                                type: "password",
+                                                "data-vv-name":
+                                                  "confirmPassword",
+                                                "error-messages": _vm.errors.collect(
+                                                  "confirmPassword"
+                                                ),
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user
+                                                    .confirm_password,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "confirm_password",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.user.confirm_password"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-radio-group",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: "required|numeric",
+                                                    expression:
+                                                      "'required|numeric'"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  row: "",
+                                                  "error-messages": _vm.errors.collect(
+                                                    "gender"
+                                                  ),
+                                                  "data-vv-name": "gender",
+                                                  "data-vv-scope": "user"
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.editedItem.user.gender,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.editedItem.user,
+                                                      "gender",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "editedItem.user.gender"
+                                                }
+                                              },
+                                              [
+                                                _c("v-radio", {
+                                                  attrs: {
+                                                    label: "Nam",
+                                                    value: 1,
+                                                    color: "primary"
+                                                  },
+                                                  on: {
+                                                    change: _vm.changeAttribute
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-radio", {
+                                                  attrs: {
+                                                    label: "Nữ",
+                                                    value: 0,
+                                                    color: "primary"
+                                                  },
+                                                  on: {
+                                                    change: _vm.changeAttribute
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-menu",
+                                              {
+                                                ref: "menu",
+                                                attrs: {
+                                                  lazy: "",
+                                                  "close-on-content-click": false,
+                                                  transition:
+                                                    "scale-transition",
+                                                  "offset-y": "",
+                                                  "full-width": "",
+                                                  "nudge-right": 40,
+                                                  "min-width": "290px"
+                                                },
+                                                model: {
+                                                  value: _vm.menu,
+                                                  callback: function($$v) {
+                                                    _vm.menu = $$v
+                                                  },
+                                                  expression: "menu"
+                                                }
+                                              },
+                                              [
+                                                _c("v-text-field", {
                                                   directives: [
                                                     {
                                                       name: "validate",
                                                       rawName: "v-validate",
-                                                      value: "required|numeric",
-                                                      expression:
-                                                        "'required|numeric'"
+                                                      value: "required",
+                                                      expression: "'required'"
                                                     }
                                                   ],
                                                   attrs: {
-                                                    row: "",
+                                                    slot: "activator",
+                                                    label: "Ngày sinh",
+                                                    "prepend-icon": "event",
                                                     "error-messages": _vm.errors.collect(
-                                                      "gender"
+                                                      "birthday"
                                                     ),
-                                                    "data-vv-name": "gender",
-                                                    "data-vv-scope": "user"
+                                                    "data-vv-name": "birthday",
+                                                    "data-vv-scope": "user",
+                                                    readonly: ""
                                                   },
+                                                  slot: "activator",
                                                   model: {
                                                     value:
                                                       _vm.editedItem.user
-                                                        .gender,
+                                                        .birthday,
                                                     callback: function($$v) {
                                                       _vm.$set(
                                                         _vm.editedItem.user,
-                                                        "gender",
+                                                        "birthday",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "editedItem.user.gender"
+                                                      "editedItem.user.birthday"
                                                   }
-                                                },
-                                                [
-                                                  _c("v-radio", {
-                                                    attrs: {
-                                                      label: "Nam",
-                                                      value: 1,
-                                                      color: "primary"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("v-radio", {
-                                                    attrs: {
-                                                      label: "Nữ",
-                                                      value: 0,
-                                                      color: "primary"
-                                                    }
-                                                  })
-                                                ],
-                                                1
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-menu",
-                                                {
-                                                  ref: "menu",
+                                                }),
+                                                _vm._v(" "),
+                                                _c("v-date-picker", {
+                                                  ref: "picker",
                                                   attrs: {
-                                                    lazy: "",
-                                                    "close-on-content-click": false,
-                                                    transition:
-                                                      "scale-transition",
-                                                    "offset-y": "",
-                                                    "full-width": "",
-                                                    "nudge-right": 40,
-                                                    "min-width": "290px"
+                                                    locale: "vi-vn",
+                                                    min: "1950-01-01",
+                                                    max: new Date()
+                                                      .toISOString()
+                                                      .substr(0, 10)
                                                   },
                                                   model: {
-                                                    value: _vm.menu,
-                                                    callback: function($$v) {
-                                                      _vm.menu = $$v
-                                                    },
-                                                    expression: "menu"
-                                                  }
-                                                },
-                                                [
-                                                  _c("v-text-field", {
-                                                    directives: [
-                                                      {
-                                                        name: "validate",
-                                                        rawName: "v-validate",
-                                                        value: "required",
-                                                        expression: "'required'"
-                                                      }
-                                                    ],
-                                                    attrs: {
-                                                      slot: "activator",
-                                                      label: "Ngày sinh",
-                                                      "prepend-icon": "event",
-                                                      "error-messages": _vm.errors.collect(
-                                                        "birthday"
-                                                      ),
-                                                      "data-vv-name":
-                                                        "birthday",
-                                                      "data-vv-scope": "user",
-                                                      readonly: ""
-                                                    },
-                                                    slot: "activator",
-                                                    model: {
-                                                      value:
-                                                        _vm.editedItem.user
-                                                          .birthday,
-                                                      callback: function($$v) {
-                                                        _vm.$set(
-                                                          _vm.editedItem.user,
-                                                          "birthday",
-                                                          $$v
-                                                        )
-                                                      },
-                                                      expression:
-                                                        "editedItem.user.birthday"
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c("v-date-picker", {
-                                                    ref: "picker",
-                                                    attrs: {
-                                                      locale: "vi-vn",
-                                                      min: "1950-01-01",
-                                                      max: new Date()
-                                                        .toISOString()
-                                                        .substr(0, 10)
-                                                    },
-                                                    model: {
-                                                      value:
-                                                        _vm.editedItem.user
-                                                          .birthday,
-                                                      callback: function($$v) {
-                                                        _vm.$set(
-                                                          _vm.editedItem.user,
-                                                          "birthday",
-                                                          $$v
-                                                        )
-                                                      },
-                                                      expression:
-                                                        "editedItem.user.birthday"
-                                                    }
-                                                  })
-                                                ],
-                                                1
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c("v-divider"),
-                                          _vm._v(" "),
-                                          _c("v-subheader", [
-                                            _vm._v("Liên hệ")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-container",
-                                            [
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
                                                     value:
-                                                      "required|numeric|min:10|max:12",
+                                                      _vm.editedItem.user
+                                                        .birthday,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.editedItem.user,
+                                                        "birthday",
+                                                        $$v
+                                                      )
+                                                    },
                                                     expression:
-                                                      "'required|numeric|min:10|max:12'"
+                                                      "editedItem.user.birthday"
                                                   }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "phone",
-                                                  label: "Số điện thoại",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "phone"
-                                                  ),
-                                                  "data-vv-name": "phone",
-                                                  "data-vv-scope": "user"
-                                                },
-                                                model: {
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("v-divider"),
+                                        _vm._v(" "),
+                                        _c("v-subheader", [_vm._v("Liên hệ")]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-container",
+                                          [
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
                                                   value:
-                                                    _vm.editedItem.user.phone,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "phone",
-                                                      $$v
-                                                    )
-                                                  },
+                                                    "required|numeric|min:10|max:12",
                                                   expression:
-                                                    "editedItem.user.phone"
+                                                    "'required|numeric|min:10|max:12'"
                                                 }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("v-text-field", {
-                                                directives: [
-                                                  {
-                                                    name: "validate",
-                                                    rawName: "v-validate",
-                                                    value: "required|max:255",
-                                                    expression:
-                                                      "'required|max:255'"
-                                                  }
-                                                ],
-                                                attrs: {
-                                                  "prepend-icon": "place",
-                                                  label: "Địa chỉ",
-                                                  "error-messages": _vm.errors.collect(
-                                                    "address"
-                                                  ),
-                                                  "data-vv-name": "address",
-                                                  "data-vv-scope": "user"
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "phone",
+                                                label: "Số điện thoại",
+                                                "error-messages": _vm.errors.collect(
+                                                  "phone"
+                                                ),
+                                                "data-vv-name": "phone",
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user.phone,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "phone",
+                                                    $$v
+                                                  )
                                                 },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user.address,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "address",
-                                                      $$v
-                                                    )
-                                                  },
+                                                expression:
+                                                  "editedItem.user.phone"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("v-text-field", {
+                                              directives: [
+                                                {
+                                                  name: "validate",
+                                                  rawName: "v-validate",
+                                                  value: "required|max:255",
                                                   expression:
-                                                    "editedItem.user.address"
+                                                    "'required|max:255'"
                                                 }
-                                              })
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c("v-divider"),
-                                          _vm._v(" "),
-                                          _c("v-subheader", [
-                                            _vm._v("Cài đặt")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-container",
-                                            [
-                                              _c("v-switch", {
-                                                attrs: {
-                                                  label: "Kích hoạt tài khoản",
-                                                  color: "primary"
+                                              ],
+                                              attrs: {
+                                                "prepend-icon": "place",
+                                                label: "Địa chỉ",
+                                                "error-messages": _vm.errors.collect(
+                                                  "address"
+                                                ),
+                                                "data-vv-name": "address",
+                                                "data-vv-scope": "user"
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user.address,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "address",
+                                                    $$v
+                                                  )
                                                 },
-                                                model: {
-                                                  value:
-                                                    _vm.editedItem.user
-                                                      .isActived,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      _vm.editedItem.user,
-                                                      "isActived",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "editedItem.user.isActived"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
+                                                expression:
+                                                  "editedItem.user.address"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("v-divider"),
+                                        _vm._v(" "),
+                                        _c("v-subheader", [_vm._v("Cài đặt")]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-container",
+                                          [
+                                            _c("v-switch", {
+                                              attrs: {
+                                                label: "Kích hoạt tài khoản",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                change: _vm.changeAttribute
+                                              },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.user.isActived,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem.user,
+                                                    "isActived",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.user.isActived"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ])
                                 ],
                                 1
                               )
@@ -94215,7 +94479,7 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-form",
+                                    "form",
                                     [
                                       _c("v-subheader", [
                                         _vm._v("Thông tin cửa hàng")
@@ -94245,6 +94509,7 @@ var render = function() {
                                               "data-vv-name": "type",
                                               "data-vv-scope": "store"
                                             },
+                                            on: { change: _vm.changeAttribute },
                                             model: {
                                               value:
                                                 _vm.editedItem.store.type_id,
@@ -94421,6 +94686,9 @@ var render = function() {
                                                   "data-vv-name": "district",
                                                   "data-vv-scope": "store"
                                                 },
+                                                on: {
+                                                  change: _vm.changeAttribute
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.editedItem.store
@@ -94544,6 +94812,9 @@ var render = function() {
                                                   label: "Mức độ ưu tiên",
                                                   "prepend-icon": "swap_vert"
                                                 },
+                                                on: {
+                                                  change: _vm.changeAttribute
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.editedItem.store
@@ -94571,6 +94842,9 @@ var render = function() {
                                                 attrs: {
                                                   label: "Ẩn/Hiện",
                                                   color: "primary"
+                                                },
+                                                on: {
+                                                  change: _vm.changeAttribute
                                                 },
                                                 model: {
                                                   value:
@@ -94600,6 +94874,9 @@ var render = function() {
                                                   label: "Xác nhận hợp tác",
                                                   color: "primary"
                                                 },
+                                                on: {
+                                                  change: _vm.changeAttribute
+                                                },
                                                 model: {
                                                   value:
                                                     _vm.editedItem.store
@@ -94613,6 +94890,56 @@ var render = function() {
                                                   },
                                                   expression:
                                                     "editedItem.store.isVerified"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            { attrs: { xs12: "" } },
+                                            [
+                                              _c("v-text-field", {
+                                                directives: [
+                                                  {
+                                                    name: "validate",
+                                                    rawName: "v-validate",
+                                                    value: {
+                                                      required:
+                                                        _vm.editedItem.store
+                                                          .isVerified,
+                                                      numeric: true,
+                                                      max: 2
+                                                    },
+                                                    expression:
+                                                      "{required: editedItem.store.isVerified, numeric:true, max: 2}"
+                                                  }
+                                                ],
+                                                attrs: {
+                                                  "prepend-icon":
+                                                    "attach_money",
+                                                  label: "Chiết khấu hoa hồng",
+                                                  "error-messages": _vm.errors.collect(
+                                                    "discount"
+                                                  ),
+                                                  "data-vv-name": "discount",
+                                                  "data-vv-scope": "store",
+                                                  suffix: "%"
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.editedItem.store
+                                                      .discount,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      _vm.editedItem.store,
+                                                      "discount",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "editedItem.store.discount"
                                                 }
                                               })
                                             ],
@@ -94729,6 +95056,8 @@ var render = function() {
           _c(
             "div",
             [
+              _c("v-icon", [_vm._v("fas fa-lock")]),
+              _vm._v(" "),
               _c(
                 "v-btn",
                 {

@@ -18,6 +18,7 @@
 			<v-layout row wrap>
 				<!-- Navigation start -->
 				<v-flex xs3 >
+
 					<v-card>
 						<v-system-bar status color="red darken-3" height="35px">
 							<v-btn icon :to="{name: 'Store'}" exact small>
