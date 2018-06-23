@@ -64704,23 +64704,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(14), __webpack_require__(13), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('babel-runtime/core-js/promise'), require('babel-runtime/core-js/object/assign'), require('axios'));
+		factory(exports, require('babel-runtime/core-js/promise'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/object/assign'), require('axios'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.promise, global.assign, global.axios);
+		factory(mod.exports, global.promise, global.regenerator, global.asyncToGenerator, global.assign, global.axios);
 		global.product = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(14), __webpack_require__(13), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -64730,10 +64730,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.promise, global.assign, global.axios);
+			factory(mod.exports, global.promise, global.regenerator, global.asyncToGenerator, global.assign, global.axios);
 			global.product = mod.exports;
 		}
-	})(this, function (exports, _promise, _assign, _axios) {
+	})(this, function (exports, _promise, _regenerator, _asyncToGenerator2, _assign, _axios) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
@@ -64741,6 +64741,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		});
 
 		var _promise2 = _interopRequireDefault(_promise);
+
+		var _regenerator2 = _interopRequireDefault(_regenerator);
+
+		var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 		var _assign2 = _interopRequireDefault(_assign);
 
@@ -64773,8 +64777,32 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				state.productDialog = true;
 			},
 			CLOSE_PRODUCT_DIALOG: function CLOSE_PRODUCT_DIALOG(state) {
-				state.editedIndex = -1;
-				state.editedItem = null, state.productDialog = false;
+				var _this = this;
+
+				return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+					return _regenerator2.default.wrap(function _callee$(_context) {
+						while (1) {
+							switch (_context.prev = _context.next) {
+								case 0:
+									_context.next = 2;
+									return -1;
+
+								case 2:
+									state.editedIndex = _context.sent;
+									_context.next = 5;
+									return null;
+
+								case 5:
+									state.editedItem = _context.sent;
+									state.productDialog = false;
+
+								case 7:
+								case 'end':
+									return _context.stop();
+							}
+						}
+					}, _callee, _this);
+				}))();
 			},
 			UPDATE_PRODUCT: function UPDATE_PRODUCT(state, payload) {
 				if (state.editedIndex > -1) {

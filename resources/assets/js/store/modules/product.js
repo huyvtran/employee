@@ -20,9 +20,9 @@ const mutations = {
 	SHOW_PRODUCT_DIALOG(state) {
 		state.productDialog = true
 	},
-	CLOSE_PRODUCT_DIALOG(state) {
-		state.editedIndex   = -1
-		state.editedItem    = null,
+	async CLOSE_PRODUCT_DIALOG(state) {
+		state.editedIndex   = await -1
+		state.editedItem    = await null,
 		state.productDialog = false
 	},
 	UPDATE_PRODUCT(state, payload) {
