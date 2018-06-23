@@ -64783,7 +64783,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					state.products.unshift(payload.data);
 				}
 			},
-			REMOVE_PRODUCT: function REMOVE_PRODUCT(state, payload) {
+			DESTROY_PRODUCT: function DESTROY_PRODUCT(state, payload) {
 				var products = state.products;
 				products.splice(products.indexOf(payload), 1);
 			},

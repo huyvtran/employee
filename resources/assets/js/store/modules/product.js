@@ -32,7 +32,7 @@ const mutations = {
 			state.products.unshift(payload.data)
 		}
 	},
-	REMOVE_PRODUCT(state, payload) {
+	DESTROY_PRODUCT(state, payload) {
 		var products = state.products
 		products.splice(products.indexOf(payload), 1)
 	},
