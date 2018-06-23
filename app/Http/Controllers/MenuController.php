@@ -335,9 +335,10 @@ class MenuController extends Controller
 			$product = Product::where('id', '=', $request->id)->first();
 
 			if(!is_null($product->image)) {
-				$path = '/var/www/dofuu.com/public';
-				$url  = $product->image;
-				unlink($path.$url);
+				$url = $product->image;
+                $oldPath = '/var/www/dofuu.com/public';
+
+                unlink($oldPath.$url);
 			}
 
 			Product::destroy($product->id);
