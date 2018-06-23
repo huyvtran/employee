@@ -332,12 +332,10 @@ class MenuController extends Controller
 		
 		try{
 			
-			$store   = Store::where('id', '=', $id)->first();
-			$user    = $store->user()->first();
 			$product = Product::where('id', '=', $request->id)->first();
 
 			if(!is_null($product->image)) {
-				$path = '/var/www/dofuu.com/public/storage/'.$user->id.'/stores/products/';
+				$path = '/var/www/dofuu.com/public/';
 				$url  = $product->image;
 				unlink($path.$url);
 			}
