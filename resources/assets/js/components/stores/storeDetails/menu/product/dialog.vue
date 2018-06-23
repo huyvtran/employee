@@ -173,10 +173,10 @@ export default {
 				// ACCEPT EDIT
 				vm.$validator.validateAll().then(async function(result){
 					if(result) {
-						await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Edit', data).then(response => {
+						await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Edit', data).then(async (response) => {
 							if(response.status === 200) {
-								vm.$store.commit('UPDATE_PRODUCT', response.data)
-								vm.close()
+								await vm.$store.commit('UPDATE_PRODUCT', response.data)
+								await vm.close()
 							}
 						}).catch(error => {
 							if(error.response.status === 422) {
@@ -190,10 +190,10 @@ export default {
 				// ACCEPT SAVE
 				vm.$validator.validateAll().then(async function(result){
 					if(result) {
-						await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Add', data).then(response => {
+						await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Add', data).then(async (response) => {
 							if(response.status === 201) {
-								vm.$store.commit('UPDATE_PRODUCT', response.data)
-								vm.close()
+								await vm.$store.commit('UPDATE_PRODUCT', response.data)
+								await vm.close()
 							}
 						}).catch(error => {
 							if(error.response.status === 422) {

@@ -86411,18 +86411,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					return close;
 				}(),
 				save: function () {
-					var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+					var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6() {
 						var vm, data;
-						return _regenerator2.default.wrap(function _callee4$(_context4) {
+						return _regenerator2.default.wrap(function _callee6$(_context6) {
 							while (1) {
-								switch (_context4.prev = _context4.next) {
+								switch (_context6.prev = _context6.next) {
 									case 0:
 										vm = this;
-										_context4.next = 3;
+										_context6.next = 3;
 										return true;
 
 									case 3:
-										vm.process = _context4.sent;
+										vm.process = _context6.sent;
 										data = vm.editedItem;
 
 										if (vm.index > -1) {
@@ -86433,45 +86433,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 											// ACCEPT EDIT
 											vm.$validator.validateAll().then(function () {
-												var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(result) {
-													return _regenerator2.default.wrap(function _callee2$(_context2) {
-														while (1) {
-															switch (_context2.prev = _context2.next) {
-																case 0:
-																	if (!result) {
-																		_context2.next = 3;
-																		break;
-																	}
+												var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(result) {
+													var _this = this;
 
-																	_context2.next = 3;
-																	return _axios2.default.post('/api/GetStore/' + vm.$route.params.storeId + '/Menu/Product/Edit', data).then(function (response) {
-																		if (response.status === 200) {
-																			vm.$store.commit('UPDATE_PRODUCT', response.data);
-																			vm.close();
-																		}
-																	}).catch(function (error) {
-																		if (error.response.status === 422) {
-																			vm.$store.dispatch('alert', { name: vm.$route.name, index: 1, show: true, message: error.response.data.message, type: 'error', close: true });
-																		}
-																	});
-
-																case 3:
-																case 'end':
-																	return _context2.stop();
-															}
-														}
-													}, _callee2, this);
-												}));
-
-												return function (_x) {
-													return _ref3.apply(this, arguments);
-												};
-											}());
-										} else {
-
-											// ACCEPT SAVE
-											vm.$validator.validateAll().then(function () {
-												var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(result) {
 													return _regenerator2.default.wrap(function _callee3$(_context3) {
 														while (1) {
 															switch (_context3.prev = _context3.next) {
@@ -86482,12 +86446,36 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 																	}
 
 																	_context3.next = 3;
-																	return _axios2.default.post('/api/GetStore/' + vm.$route.params.storeId + '/Menu/Product/Add', data).then(function (response) {
-																		if (response.status === 201) {
-																			vm.$store.commit('UPDATE_PRODUCT', response.data);
-																			vm.close();
-																		}
-																	}).catch(function (error) {
+																	return _axios2.default.post('/api/GetStore/' + vm.$route.params.storeId + '/Menu/Product/Edit', data).then(function () {
+																		var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(response) {
+																			return _regenerator2.default.wrap(function _callee2$(_context2) {
+																				while (1) {
+																					switch (_context2.prev = _context2.next) {
+																						case 0:
+																							if (!(response.status === 200)) {
+																								_context2.next = 5;
+																								break;
+																							}
+
+																							_context2.next = 3;
+																							return vm.$store.commit('UPDATE_PRODUCT', response.data);
+
+																						case 3:
+																							_context2.next = 5;
+																							return vm.close();
+
+																						case 5:
+																						case 'end':
+																							return _context2.stop();
+																					}
+																				}
+																			}, _callee2, _this);
+																		}));
+
+																		return function (_x2) {
+																			return _ref4.apply(this, arguments);
+																		};
+																	}()).catch(function (error) {
 																		if (error.response.status === 422) {
 																			vm.$store.dispatch('alert', { name: vm.$route.name, index: 1, show: true, message: error.response.data.message, type: 'error', close: true });
 																		}
@@ -86501,8 +86489,72 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 													}, _callee3, this);
 												}));
 
-												return function (_x2) {
-													return _ref4.apply(this, arguments);
+												return function (_x) {
+													return _ref3.apply(this, arguments);
+												};
+											}());
+										} else {
+
+											// ACCEPT SAVE
+											vm.$validator.validateAll().then(function () {
+												var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(result) {
+													var _this2 = this;
+
+													return _regenerator2.default.wrap(function _callee5$(_context5) {
+														while (1) {
+															switch (_context5.prev = _context5.next) {
+																case 0:
+																	if (!result) {
+																		_context5.next = 3;
+																		break;
+																	}
+
+																	_context5.next = 3;
+																	return _axios2.default.post('/api/GetStore/' + vm.$route.params.storeId + '/Menu/Product/Add', data).then(function () {
+																		var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(response) {
+																			return _regenerator2.default.wrap(function _callee4$(_context4) {
+																				while (1) {
+																					switch (_context4.prev = _context4.next) {
+																						case 0:
+																							if (!(response.status === 201)) {
+																								_context4.next = 5;
+																								break;
+																							}
+
+																							_context4.next = 3;
+																							return vm.$store.commit('UPDATE_PRODUCT', response.data);
+
+																						case 3:
+																							_context4.next = 5;
+																							return vm.close();
+
+																						case 5:
+																						case 'end':
+																							return _context4.stop();
+																					}
+																				}
+																			}, _callee4, _this2);
+																		}));
+
+																		return function (_x4) {
+																			return _ref6.apply(this, arguments);
+																		};
+																	}()).catch(function (error) {
+																		if (error.response.status === 422) {
+																			vm.$store.dispatch('alert', { name: vm.$route.name, index: 1, show: true, message: error.response.data.message, type: 'error', close: true });
+																		}
+																	});
+
+																case 3:
+																case 'end':
+																	return _context5.stop();
+															}
+														}
+													}, _callee5, this);
+												}));
+
+												return function (_x3) {
+													return _ref5.apply(this, arguments);
 												};
 											}());
 										}
@@ -86510,10 +86562,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 									case 7:
 									case 'end':
-										return _context4.stop();
+										return _context6.stop();
 								}
 							}
-						}, _callee4, this);
+						}, _callee6, this);
 					}));
 
 					function save() {
@@ -86582,35 +86634,35 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					}
 				},
 				'dialog': function () {
-					var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(val) {
-						var _this = this;
+					var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7(val) {
+						var _this3 = this;
 
-						return _regenerator2.default.wrap(function _callee5$(_context5) {
+						return _regenerator2.default.wrap(function _callee7$(_context7) {
 							while (1) {
-								switch (_context5.prev = _context5.next) {
+								switch (_context7.prev = _context7.next) {
 									case 0:
 										if (!val) {
-											_context5.next = 10;
+											_context7.next = 10;
 											break;
 										}
 
-										_context5.next = 3;
+										_context7.next = 3;
 										return true;
 
 									case 3:
-										this.loading = _context5.sent;
-										_context5.next = 6;
+										this.loading = _context7.sent;
+										_context7.next = 6;
 										return this.$store.dispatch('getCatalogue', this.$route.params.storeId);
 
 									case 6:
 										if (!(this.index === -1)) {
-											_context5.next = 9;
+											_context7.next = 9;
 											break;
 										}
 
-										_context5.next = 9;
+										_context7.next = 9;
 										return this.sizes.forEach(function (item) {
-											_this.editedItem.sizes.push({ id: item.id, 'name': item.name, '_name': item._name, 'price': 0 });
+											_this3.editedItem.sizes.push({ id: item.id, 'name': item.name, '_name': item._name, 'price': 0 });
 										});
 
 									case 9:
@@ -86619,14 +86671,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 									case 10:
 									case 'end':
-										return _context5.stop();
+										return _context7.stop();
 								}
 							}
-						}, _callee5, this);
+						}, _callee7, this);
 					}));
 
-					function dialog(_x3) {
-						return _ref5.apply(this, arguments);
+					function dialog(_x5) {
+						return _ref7.apply(this, arguments);
 					}
 
 					return dialog;
