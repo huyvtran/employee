@@ -328,13 +328,13 @@ class MenuController extends Controller
 		return response($res, 200);
 	}
 	//DESTROY PRODUCT
-	public function destroyProduct(ProductRequest $request, $id) {
+	public function destroyProduct(Request $request, $id) {
 		
 		try{
 			
 			$store   = Store::where('id', '=', $id)->first();
 			$user    = $store->user()->first();
-			$product = Product::findorFail($request->id);
+			$product = Product::where('id', '=', $request->id)->first();
 
 			if(!is_null($product->image)) {
 				$path = '/var/www/dofuu.com/public/storage/'.$user->id.'/stores/products/';
@@ -342,14 +342,14 @@ class MenuController extends Controller
 				unlink($path.$url);
 			}
 
-			Product::destroy($request->id);
+			Product::destroy($product->id);
 
 			return response('Sản phẩm đã được xóa', 204);
-		
+
 		} catch(Exception $e) {
 			
 			return response('Có lỗi trong xóa sản phẩm', 500);
-		
+
 		}
 	}
 
