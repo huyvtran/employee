@@ -11,6 +11,7 @@ use App\Http\Resources\ToppingResource;
 use App\Http\Resources\SizeResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductStatusResource;
+use App\Models\User;
 use App\Models\Store;
 use App\Models\Catalogue;
 use App\Models\Size;
@@ -325,6 +326,31 @@ class MenuController extends Controller
 		];
 
 		return response($res, 200);
+	}
+	//DESTROY PRODUCT
+	public function destroyProduct(ProductRequest $request, $id) {
+		
+		try{
+			
+			$store   = Store::where('id', '=', $id)->first();
+			$user    = $store->user()->first();
+			$product = Product::findorFail($request->id);
+
+			if(!is_null($product->image)) {
+				$path = '/var/www/dofuu.com/public/storage/'.$user->id.'/stores/products/';
+				$url  = $product->image;
+				unlink($path.$url);
+			}
+
+			Product::destroy($request->id);
+
+			return response('Sản phẩm đã được xóa', 204);
+		
+		} catch(Exception $e) {
+			
+			return response('Có lỗi trong xóa sản phẩm', 500);
+		
+		}
 	}
 
 	public function getProductStatus() {

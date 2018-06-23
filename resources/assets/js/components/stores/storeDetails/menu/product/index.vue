@@ -89,7 +89,16 @@
 								<v-icon class="teal white--text">edit</v-icon>
 							</v-list-tile-avatar>
 							<v-list-tile-content>
-								<v-list-tile-title>Chỉnh sửa danh mục</v-list-tile-title>
+								<v-list-tile-title>Chỉnh sửa món</v-list-tile-title>
+							</v-list-tile-content>
+						</v-list-tile>
+
+						<v-list-tile @click="removeItem(props.item)" avatar>
+							<v-list-tile-avatar>
+								<v-icon class="red white--text">delete</v-icon>
+							</v-list-tile-avatar>
+							<v-list-tile-content>
+								<v-list-tile-title>Xóa món</v-list-tile-title>
 							</v-list-tile-content>
 						</v-list-tile>
 					</v-list>					
@@ -147,6 +156,45 @@ export default {
 		},
 		editItem: function(item) {
 			this.$store.commit('EDIT_PRODUCT', item)
+		},
+		removeItem: function(item) {
+			var vm = this
+			vm.$swal({
+				title: 'Bạn có chắc xóa?',
+				text: "Bạn sẽ không thể khôi phục lại!",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Đồng ý!',
+				cancelButtonText: 'Không, Hủy',
+				confirmButtonClass: 'btn error',
+				cancelButtonClass: 'btn',
+				buttonsStyling: false,
+				reverseButtons: true
+			}).then((result) => {
+				if (result.value) {
+					vm.$swal(
+						'Deleted!',
+						item.name+' đã được xóa.',
+						'success'
+						).then(() => {
+							axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Delete', item).then(response => {
+								if(response.status == 204) {
+									vm.$store.commit('DESTROY_PRODUCT', item)
+								}
+							})
+						})
+					} else{
+						vm.$swal(
+							'Cancelled',
+							'',
+							'error'
+							)
+					}
+				})
+			
+			
 		},
 		filterByTopping(list, value) {
 

@@ -32,6 +32,10 @@ const mutations = {
 			state.products.unshift(payload.data)
 		}
 	},
+	REMOVE_PRODUCT(state, payload) {
+		var products = state.products
+		products.splice(products.indexOf(payload), 1)
+	},
 	FETCH_PRODUCT_STATUS (state, payload) {
 		state.status = payload.data
 	}

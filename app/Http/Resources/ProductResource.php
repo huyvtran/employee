@@ -31,7 +31,8 @@ class ProductResource extends JsonResource
             'haveTopping'  => $this->have_topping,
             'status_id'    => $this->status_id,
             'status'       => $this->status->product_status_name,
-            'catalogue_id' => $this->catalogue_id
+            'catalogue_id' => $this->catalogue_id,
+            'catalogue'    => $this->catalogue->catalogue
         ];
     }
 }

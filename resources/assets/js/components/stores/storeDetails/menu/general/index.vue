@@ -26,10 +26,10 @@
 			<v-flex xs4 v-for="(data, i) in filterData" :key="i">
 				<v-subheader>{{data.name}}</v-subheader>
 				<v-expansion-panel popout focusable>
-					<v-expansion-panel-content v-for="(item,i) in data.products" :key="i" expand-icon="md-menu-down">
+					<v-expansion-panel-content v-for="(item,i) in data.products" :key="i" mb-3 >
 						<v-list slot="header" dense two-line class="transparent">
 							<v-list-tile avatar>
-								<v-list-tile-avatar>
+								<v-list-tile-avatar size="80" class="pr-2">
 									<img :src="image(item.image)" alt="avatar">
 								</v-list-tile-avatar>
 								

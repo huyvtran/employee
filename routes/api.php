@@ -72,6 +72,8 @@ Route::group(['middleware' => ['api']], function() {
 	Route::post('/GetStore/{sid}/Menu/Product/Add', 'MenuController@addProduct');
 	//EDIT PRODUCT
 	Route::post('/GetStore/{sid}/Menu/Product/Edit', 'MenuController@editProduct');
+	//DELETE PRODUCT
+	Route::post('/GetStore/{sid}/Menu/Product/Delete', 'MenuController@destroyProduct');
 	//GET PRODUCT STATUS
 	Route::get('/GetProductStatus', 'MenuController@getProductStatus');
 });
