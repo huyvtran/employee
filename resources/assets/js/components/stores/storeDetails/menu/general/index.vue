@@ -55,6 +55,7 @@
 								</v-list-tile-action>
 							</v-list-tile>
 						</v-list>
+						
 						<v-card v-if="item.haveTopping">
 							<v-card-text class="grey lighten-3">
 								<v-layout row wrap>

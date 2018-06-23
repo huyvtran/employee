@@ -335,7 +335,7 @@ class MenuController extends Controller
 			$product = Product::where('id', '=', $request->id)->first();
 
 			if(!is_null($product->image)) {
-				$path = '/var/www/dofuu.com/public/';
+				$path = '/var/www/dofuu.com/public';
 				$url  = $product->image;
 				unlink($path.$url);
 			}
@@ -352,6 +352,7 @@ class MenuController extends Controller
 	}
 
 	public function getProductStatus() {
+
 		$status = ProductStatus::get();
 
 		$res                       = [
@@ -361,5 +362,6 @@ class MenuController extends Controller
 		];
 
 		return response($res, 200);
+
 	}
 }
