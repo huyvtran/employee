@@ -37,9 +37,7 @@
 
 								<v-flex xs12>
 									<v-text-field v-model="editedItem._name" label="Tên món tiếng Anh" prepend-icon="language" persistent-hint hint="Tên món tiếng Anh có thể để trống nếu không biết" v-validate="'max:254'" :error-messages="errors.collect('_name')" data-vv-name="_name"></v-text-field>
-								</v-flex>
-
-								
+								</v-flex>							
 
 								<v-flex xs12>
 									<v-layout row wrap>
@@ -70,6 +68,7 @@
 								<v-flex xs12>
 									<v-text-field 
 									label="Mô tả" 
+									prepend-icon="description"
 									v-model="editedItem.description"
 									:error-messages="errors.collect('description')"
 									v-validate="'max:254'"
@@ -77,11 +76,24 @@
 									required
 									></v-text-field>
 								</v-flex>
-								
+
+								<v-flex xs12>
+									<v-select
+									:items="priorities"
+									v-model="editedItem.priority"
+									label="Mức độ ưu tiên"
+									prepend-icon="swap_vert"
+									persistent-hint 
+									hint="Mức độ ưu tiên cao nhất sẽ hiển thị đầu tiên"
+									@change="changeAttribute('priority')"
+									required></v-select>
+								</v-flex>
+
 								<v-flex xs12>
 									<v-select
 									label="Trạng thái"
 									:items="status"
+									prepend-icon="lens"
 									v-model="editedItem.status_id"
 									@change="changeAttribute('status')"
 									:error-messages="errors.collect('status')"
@@ -156,8 +168,8 @@ export default {
 		//CLOSE DIALOG
 		close: async function() {
 			this.disabled   = await true
+			this.editedItem = await Object.assign({}, this.default)	
 			await this.$store.commit('CLOSE_PRODUCT_DIALOG')
-			this.editedItem = await Object.assign({}, this.default)
 			this.$validator.reset()
 		},
 		save: async function() {
@@ -221,13 +233,16 @@ export default {
 				case 'catalogue':
 				return this.disabled = false
 				break
+				case 'priority':
+				return this.disabled = false
+				break
 			}
 		},
 	},
 	computed: {
 		...mapState({
 			dialog: state     => state.productStore.productDialog,
-			item: state       => Object.assign({}, state.productStore.editedItem),
+			item: state       => state.productStore.editedItem,
 			index: state      => state.productStore.editedIndex,
 			status: state     => state.productStore.status,
 			catalogues: state => state.catalogueStore.catalogues,
@@ -241,7 +256,7 @@ export default {
 	watch: {
 		'item': function(val) {
 			if(val != null) {
-				Object.assign(this.editedItem, val)	
+				this.editedItem = Object.assign(this.editedItem, val)
 				if(!val.haveSize) {
 					var sizes = []
 					this.sizes.forEach(item => {
@@ -271,25 +286,11 @@ export default {
 			}
 		},
 		'editedItem.name': function(val, oldVal) {
-
-			if(this.index > -1) {
-				if(oldVal.length > 0) {
-					if(val.length > 0) {						
-						this.disabled = false
-					} else {
-						this.disabled = true
-					}
-				} else {
-					this.disabled = true
-				}
-			} else if(this.index === -1) {
-				if(val.length > 0) {
-					this.disabled = false
-				} else {
-					this.disabled = true
-				}
+			if(this.editedIndex > -1 && oldVal != '') {
+				this.disabled = false
+			} else if(this.editedIndex == -1 && val != '') {
+				this.disabled = false
 			}
-
 		},
 		'editedItem._name': function(val, oldVal) {
 			//not required

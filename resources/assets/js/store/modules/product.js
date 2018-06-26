@@ -21,8 +21,8 @@ const mutations = {
 		state.productDialog = true
 	},
 	async CLOSE_PRODUCT_DIALOG(state) {
-		state.editedIndex   = await -1
-		state.editedItem    = await null,
+		state.editedIndex   = -1
+		state.editedItem    = null,
 		state.productDialog = false
 	},
 	UPDATE_PRODUCT(state, payload) {
