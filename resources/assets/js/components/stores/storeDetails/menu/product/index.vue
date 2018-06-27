@@ -8,6 +8,16 @@
 			<v-spacer></v-spacer>
 
 			<v-layout row wrap  > <!-- Filter Start -->	
+				
+				<v-flex xs2 :key="0">
+					<v-select
+					:items="filterCatalogue"
+					item-text="name"
+					item-value="id"
+					v-model="search.catalogue"
+					label="Danh mục"
+					></v-select>
+				</v-flex>	
 
 				<v-flex xs2 :key="0">
 					<v-select
@@ -29,7 +39,7 @@
 					></v-select>
 				</v-flex>
 
-				<v-flex xs8 :key="2">
+				<v-flex xs6 :key="2">
 					<v-text-field
 					v-model="search.text"
 					append-icon="search"
@@ -138,11 +148,13 @@ export default {
 			search: {
 				text: '',
 				topping: null,
-				size: null
+				size: null,
+				catalogue: null,
 			},
 			loading: false,
 			filterTopping: [{name: 'Tất cả', value: null}, {name: 'Có', value: true}, {name: 'Không', value: false}],
 			filterSize: [{name: 'Tất cả', value: null}, {name: 'Có', value: true}, {name: 'Không', value: false}],
+			filterCatalogue: [{name: 'Tất cả', id: null}]
 		}
 	},
 	methods: {
@@ -216,19 +228,41 @@ export default {
 
 			return list.filter(item => item.haveSize === search)
 		},
+		filterByCatalogue(list, id) {
+			const search = id
+
+			if(search == null) {
+				return list
+			}
+
+			return list.filter(item => item.catalogue_id === search)
+
+		},
 	},
 	computed: {
 		...mapState({
-			items: state => state.productStore.products
+			items: state => state.productStore.products,
+			catalogues: state => Array.from(state.catalogueStore.catalogues)
 		}),
 		filterData() {
 			if(this.items.length>0) {
-				return this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size)
+				return this.filterByCatalogue(this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size), this.search.catalogue)
+			}
+		}
+	},
+	watch: {
+		'catalogues': function(val) {
+			if(val.length > 0) {	
+			console.log(val)	
+				val.forEach(item => {
+					this.filterCatalogue.push({name: item.name, id: item.id})
+				})
 			}
 		}
 	},
 	created() {
 		this.getProduct(this.$route.params.storeId)
+		this.$store.dispatch('getCatalogue', this.$route.params.storeId)
 	}
 }
 </script>

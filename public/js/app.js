@@ -90470,23 +90470,23 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(88), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('babel-runtime/helpers/extends'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/promise'), require('./dialog'), require('axios'), require('vuex'), require('@/mixins/index'));
+		factory(exports, require('babel-runtime/core-js/array/from'), require('babel-runtime/helpers/extends'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/promise'), require('./dialog'), require('axios'), require('vuex'), require('@/mixins/index'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.promise, global.dialog, global.axios, global.vuex, global.index);
+		factory(mod.exports, global.from, global._extends, global.regenerator, global.asyncToGenerator, global.promise, global.dialog, global.axios, global.vuex, global.index);
 		global.index = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(88), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -90496,15 +90496,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.promise, global.dialog, global.axios, global.vuex, global.index);
+			factory(mod.exports, global.from, global._extends, global.regenerator, global.asyncToGenerator, global.promise, global.dialog, global.axios, global.vuex, global.index);
 			global.index = mod.exports;
 		}
-	})(this, function (exports, _extends2, _regenerator, _asyncToGenerator2, _promise, _dialog, _axios, _vuex, _index) {
+	})(this, function (exports, _from, _extends2, _regenerator, _asyncToGenerator2, _promise, _dialog, _axios, _vuex, _index) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
 			value: true
 		});
+
+		var _from2 = _interopRequireDefault(_from);
 
 		var _extends3 = _interopRequireDefault(_extends2);
 
@@ -90541,11 +90543,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					search: {
 						text: '',
 						topping: null,
-						size: null
+						size: null,
+						catalogue: null
 					},
 					loading: false,
 					filterTopping: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }],
-					filterSize: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }]
+					filterSize: [{ name: 'Tất cả', value: null }, { name: 'Có', value: true }, { name: 'Không', value: false }],
+					filterCatalogue: [{ name: 'Tất cả', id: null }]
 				};
 			},
 
@@ -90640,21 +90644,48 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					return list.filter(function (item) {
 						return item.haveSize === search;
 					});
+				},
+				filterByCatalogue: function filterByCatalogue(list, id) {
+					var search = id;
+
+					if (search == null) {
+						return list;
+					}
+
+					return list.filter(function (item) {
+						return item.catalogue_id === search;
+					});
 				}
 			},
 			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
 				items: function items(state) {
 					return state.productStore.products;
+				},
+				catalogues: function catalogues(state) {
+					return (0, _from2.default)(state.catalogueStore.catalogues);
 				}
 			}), {
 				filterData: function filterData() {
 					if (this.items.length > 0) {
-						return this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size);
+						return this.filterByCatalogue(this.filterBySize(this.filterByTopping(this.items, this.search.topping), this.search.size), this.search.catalogue);
 					}
 				}
 			}),
+			watch: {
+				'catalogues': function catalogues(val) {
+					var _this2 = this;
+
+					if (val.length > 0) {
+						console.log(val);
+						val.forEach(function (item) {
+							_this2.filterCatalogue.push({ name: item.name, id: item.id });
+						});
+					}
+				}
+			},
 			created: function created() {
 				this.getProduct(this.$route.params.storeId);
+				this.$store.dispatch('getCatalogue', this.$route.params.storeId);
 			}
 		};
 	});
@@ -91800,6 +91831,29 @@ var render = function() {
                 [
                   _c("v-select", {
                     attrs: {
+                      items: _vm.filterCatalogue,
+                      "item-text": "name",
+                      "item-value": "id",
+                      label: "Danh mục"
+                    },
+                    model: {
+                      value: _vm.search.catalogue,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "catalogue", $$v)
+                      },
+                      expression: "search.catalogue"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { key: 0, attrs: { xs2: "" } },
+                [
+                  _c("v-select", {
+                    attrs: {
                       items: _vm.filterTopping,
                       "item-text": "name",
                       "item-value": "value",
@@ -91842,7 +91896,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { key: 2, attrs: { xs8: "" } },
+                { key: 2, attrs: { xs6: "" } },
                 [
                   _c("v-text-field", {
                     attrs: {
