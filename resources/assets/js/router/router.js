@@ -7,6 +7,7 @@ import Index from '@/components/index'
 import Login from '@/components/credentials/login'
 import Dashboard from '@/components/dashboard/index'
 import Order from '@/components/orders/index'
+import OrderDetail from '@/components/orders/details/index'
 import Store from '@/components/stores/index'
 import StoreDetails from '@/components/stores/storeDetails/index'
 import About from '@/components/stores/storeDetails/about/index'
@@ -38,6 +39,7 @@ const router = new Router({
 		children: [
 		{ path: '/dashboard', component: Dashboard, name: 'Dashboard', meta:{auth:true}},
 		{ path: '/orders', component: Order, name: 'Order', meta:{auth:true}},
+		{ path: '/orders/:orderId/details', component: OrderDetail, name: 'OrderDetail', meta: {auth:true}},
 		{ path: '/stores', component: Store, name: 'Store', meta:{auth:true}},
 		{
 			path: '/stores/store-details/:storeId',

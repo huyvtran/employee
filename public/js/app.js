@@ -5636,6 +5636,35 @@ module.exports = function (it) {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _assign = __webpack_require__(4);
+
+var _assign2 = _interopRequireDefault(_assign);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _assign2.default || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -5742,35 +5771,6 @@ module.exports = function normalizeComponent (
   }
 }
 
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _assign = __webpack_require__(4);
-
-var _assign2 = _interopRequireDefault(_assign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _assign2.default || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
 
 /***/ }),
 /* 12 */
@@ -26786,23 +26786,23 @@ module.exports = function (COLLECTION) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(7), __webpack_require__(443), __webpack_require__(444), __webpack_require__(424), __webpack_require__(446), __webpack_require__(447), __webpack_require__(448), __webpack_require__(450), __webpack_require__(451), __webpack_require__(452), __webpack_require__(445), __webpack_require__(453)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(7), __webpack_require__(443), __webpack_require__(444), __webpack_require__(424), __webpack_require__(446), __webpack_require__(447), __webpack_require__(448), __webpack_require__(450), __webpack_require__(451), __webpack_require__(452), __webpack_require__(445), __webpack_require__(453), __webpack_require__(977)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('vue'), require('vuex'), require('./modules/alert'), require('./modules/auth'), require('./modules/city'), require('./modules/district'), require('./modules/type'), require('./modules/store'), require('./modules/activity'), require('./modules/catalogue'), require('./modules/topping'), require('./modules/size'), require('./modules/product'));
+		factory(exports, require('vue'), require('vuex'), require('./modules/alert'), require('./modules/auth'), require('./modules/city'), require('./modules/district'), require('./modules/type'), require('./modules/store'), require('./modules/activity'), require('./modules/catalogue'), require('./modules/topping'), require('./modules/size'), require('./modules/product'), require('./modules/orderStatus'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.vue, global.vuex, global.alert, global.auth, global.city, global.district, global.type, global.store, global.activity, global.catalogue, global.topping, global.size, global.product);
+		factory(mod.exports, global.vue, global.vuex, global.alert, global.auth, global.city, global.district, global.type, global.store, global.activity, global.catalogue, global.topping, global.size, global.product, global.orderStatus);
 		global.store = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(7), __webpack_require__(443), __webpack_require__(444), __webpack_require__(424), __webpack_require__(446), __webpack_require__(447), __webpack_require__(448), __webpack_require__(450), __webpack_require__(451), __webpack_require__(452), __webpack_require__(445), __webpack_require__(453)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(7), __webpack_require__(443), __webpack_require__(444), __webpack_require__(424), __webpack_require__(446), __webpack_require__(447), __webpack_require__(448), __webpack_require__(450), __webpack_require__(451), __webpack_require__(452), __webpack_require__(445), __webpack_require__(453), __webpack_require__(977)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -26812,10 +26812,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.vue, global.vuex, global.alert, global.auth, global.city, global.district, global.type, global.store, global.activity, global.catalogue, global.topping, global.size, global.product);
+			factory(mod.exports, global.vue, global.vuex, global.alert, global.auth, global.city, global.district, global.type, global.store, global.activity, global.catalogue, global.topping, global.size, global.product, global.orderStatus);
 			global.store = mod.exports;
 		}
-	})(this, function (exports, _vue, _vuex, _alert, _auth, _city, _district, _type, _store, _activity, _catalogue, _topping, _size, _product) {
+	})(this, function (exports, _vue, _vuex, _alert, _auth, _city, _district, _type, _store, _activity, _catalogue, _topping, _size, _product, _orderStatus) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
@@ -26848,6 +26848,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		var _product2 = _interopRequireDefault(_product);
 
+		var _orderStatus2 = _interopRequireDefault(_orderStatus);
+
 		function _interopRequireDefault(obj) {
 			return obj && obj.__esModule ? obj : {
 				default: obj
@@ -26871,7 +26873,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				catalogueStore: _catalogue2.default,
 				toppingStore: _topping2.default,
 				sizeStore: _size2.default,
-				productStore: _product2.default
+				productStore: _product2.default,
+				orderStatusStore: _orderStatus2.default
 			},
 			strict: debug
 		});
@@ -27056,7 +27059,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(952)
 /* template */
@@ -65294,23 +65297,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(482), __webpack_require__(7), __webpack_require__(129), __webpack_require__(481), __webpack_require__(479), __webpack_require__(478), __webpack_require__(477), __webpack_require__(470), __webpack_require__(469), __webpack_require__(468), __webpack_require__(467), __webpack_require__(466), __webpack_require__(464), __webpack_require__(462), __webpack_require__(460), __webpack_require__(458), __webpack_require__(457), __webpack_require__(456), __webpack_require__(133)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(482), __webpack_require__(7), __webpack_require__(129), __webpack_require__(481), __webpack_require__(479), __webpack_require__(478), __webpack_require__(477), __webpack_require__(978), __webpack_require__(470), __webpack_require__(469), __webpack_require__(468), __webpack_require__(467), __webpack_require__(466), __webpack_require__(464), __webpack_require__(462), __webpack_require__(460), __webpack_require__(458), __webpack_require__(457), __webpack_require__(456), __webpack_require__(133)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('vue'), require('vue-router'), require('vuex'), require('@/store/store'), require('@/components/index'), require('@/components/credentials/login'), require('@/components/dashboard/index'), require('@/components/orders/index'), require('@/components/stores/index'), require('@/components/stores/storeDetails/index'), require('@/components/stores/storeDetails/about/index'), require('@/components/stores/storeDetails/menu/index'), require('@/components/stores/storeDetails/menu/general/index'), require('@/components/stores/storeDetails/menu/catalogue/index'), require('@/components/stores/storeDetails/menu/size/index'), require('@/components/stores/storeDetails/menu/topping/index'), require('@/components/stores/storeDetails/menu/product/index'), require('@/components/services/index'), require('@/components/services/deliveries/index'), require('@/utils/auth.js'));
+		factory(exports, require('vue'), require('vue-router'), require('vuex'), require('@/store/store'), require('@/components/index'), require('@/components/credentials/login'), require('@/components/dashboard/index'), require('@/components/orders/index'), require('@/components/orders/details/index'), require('@/components/stores/index'), require('@/components/stores/storeDetails/index'), require('@/components/stores/storeDetails/about/index'), require('@/components/stores/storeDetails/menu/index'), require('@/components/stores/storeDetails/menu/general/index'), require('@/components/stores/storeDetails/menu/catalogue/index'), require('@/components/stores/storeDetails/menu/size/index'), require('@/components/stores/storeDetails/menu/topping/index'), require('@/components/stores/storeDetails/menu/product/index'), require('@/components/services/index'), require('@/components/services/deliveries/index'), require('@/utils/auth.js'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.vue, global.vueRouter, global.vuex, global.store, global.index, global.login, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.auth);
+		factory(mod.exports, global.vue, global.vueRouter, global.vuex, global.store, global.index, global.login, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.auth);
 		global.router = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(482), __webpack_require__(7), __webpack_require__(129), __webpack_require__(481), __webpack_require__(479), __webpack_require__(478), __webpack_require__(477), __webpack_require__(470), __webpack_require__(469), __webpack_require__(468), __webpack_require__(467), __webpack_require__(466), __webpack_require__(464), __webpack_require__(462), __webpack_require__(460), __webpack_require__(458), __webpack_require__(457), __webpack_require__(456), __webpack_require__(133)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(15), __webpack_require__(482), __webpack_require__(7), __webpack_require__(129), __webpack_require__(481), __webpack_require__(479), __webpack_require__(478), __webpack_require__(477), __webpack_require__(978), __webpack_require__(470), __webpack_require__(469), __webpack_require__(468), __webpack_require__(467), __webpack_require__(466), __webpack_require__(464), __webpack_require__(462), __webpack_require__(460), __webpack_require__(458), __webpack_require__(457), __webpack_require__(456), __webpack_require__(133)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -65320,10 +65323,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.vue, global.vueRouter, global.vuex, global.store, global.index, global.login, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.auth);
+			factory(mod.exports, global.vue, global.vueRouter, global.vuex, global.store, global.index, global.login, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.index, global.auth);
 			global.router = mod.exports;
 		}
-	})(this, function (exports, _vue, _vueRouter, _vuex, _store, _index, _login, _index3, _index5, _index7, _index9, _index11, _index13, _index15, _index17, _index19, _index21, _index23, _index25, _index27, _auth) {
+	})(this, function (exports, _vue, _vueRouter, _vuex, _store, _index, _login, _index3, _index5, _index7, _index9, _index11, _index13, _index15, _index17, _index19, _index21, _index23, _index25, _index27, _index29, _auth) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
@@ -65368,6 +65371,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		var _index28 = _interopRequireDefault(_index27);
 
+		var _index30 = _interopRequireDefault(_index29);
+
 		var _auth2 = _interopRequireDefault(_auth);
 
 		function _interopRequireDefault(obj) {
@@ -65388,15 +65393,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				redirect: {
 					name: 'Dashboard'
 				},
-				children: [{ path: '/dashboard', component: _index4.default, name: 'Dashboard', meta: { auth: true } }, { path: '/orders', component: _index6.default, name: 'Order', meta: { auth: true } }, { path: '/stores', component: _index8.default, name: 'Store', meta: { auth: true } }, {
+				children: [{ path: '/dashboard', component: _index4.default, name: 'Dashboard', meta: { auth: true } }, { path: '/orders', component: _index6.default, name: 'Order', meta: { auth: true } }, { path: '/orders/:orderId/details', component: _index8.default, name: 'OrderDetail', meta: { auth: true } }, { path: '/stores', component: _index10.default, name: 'Store', meta: { auth: true } }, {
 					path: '/stores/store-details/:storeId',
-					component: _index10.default,
+					component: _index12.default,
 					redirect: { name: 'About' },
-					children: [{ path: 'about', component: _index12.default, name: 'About', meta: { auth: true } }, { path: 'menu', component: _index14.default, name: 'Menu', redirect: { name: 'General' }, children: [{ path: 'general', component: _index16.default, name: 'General' }, { path: 'catalogues', component: _index18.default, name: 'Catalogue' }, { path: 'sizes', component: _index20.default, name: 'Size' }, { path: 'toppings', component: _index22.default, name: 'Topping' }, { path: 'products', component: _index24.default, name: 'Product' }], meta: { auth: true } }]
+					children: [{ path: 'about', component: _index14.default, name: 'About', meta: { auth: true } }, { path: 'menu', component: _index16.default, name: 'Menu', redirect: { name: 'General' }, children: [{ path: 'general', component: _index18.default, name: 'General' }, { path: 'catalogues', component: _index20.default, name: 'Catalogue' }, { path: 'sizes', component: _index22.default, name: 'Size' }, { path: 'toppings', component: _index24.default, name: 'Topping' }, { path: 'products', component: _index26.default, name: 'Product' }], meta: { auth: true } }]
 				},
 				// { path: '/stores/store-details/:storeId', component: StoreDetails, name: 'StoreDetails', meta: {auth:true}},
 				// { path: '/stores/store-details/:storeId/menu', component: Menu, name: 'Menu', meta: {auth:true}},
-				{ path: '/services', component: _index26.default, name: 'Service', meta: { auth: true } }, { path: '/deliveries', component: _index28.default, name: 'Delivery', meta: { auth: true } }]
+				{ path: '/services', component: _index28.default, name: 'Service', meta: { auth: true } }, { path: '/deliveries', component: _index30.default, name: 'Delivery', meta: { auth: true } }]
 			}, { path: '/login', component: _login2.default, name: 'Login' }]
 		});
 
@@ -65427,7 +65432,7 @@ module.exports = { "default": __webpack_require__(921), __esModule: true };
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(924)
 /* template */
@@ -65474,7 +65479,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(926)
 /* template */
@@ -65521,7 +65526,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(928)
 /* template */
@@ -65568,7 +65573,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(929)
 /* template */
@@ -65615,7 +65620,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(935)
 /* template */
@@ -65662,7 +65667,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(936)
 /* template */
@@ -65709,7 +65714,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(939)
 /* template */
@@ -65756,7 +65761,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(940)
 /* template */
@@ -65803,7 +65808,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(943)
 /* template */
@@ -65850,7 +65855,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(944)
 /* template */
@@ -65897,7 +65902,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(947)
 /* template */
@@ -65944,7 +65949,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(949)
 /* template */
@@ -65991,7 +65996,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(951)
 /* template */
@@ -66038,7 +66043,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(955)
 /* template */
@@ -66085,7 +66090,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(957)
 /* template */
@@ -66132,7 +66137,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(958)
 /* template */
@@ -66463,7 +66468,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(959)
 }
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(961)
 /* template */
@@ -66510,7 +66515,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(965)
 /* template */
@@ -66557,7 +66562,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(967)
 /* template */
@@ -66604,7 +66609,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(969)
 /* template */
@@ -66708,7 +66713,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(971)
 /* template */
@@ -69962,7 +69967,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(973)
 }
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(975)
 /* template */
@@ -79827,7 +79832,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(608)
 /* template */
@@ -80030,7 +80035,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(611)
 }
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(614)
 /* template */
@@ -81321,7 +81326,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(651)
 }
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(653)
 /* template */
@@ -81636,7 +81641,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(656)
 /* template */
@@ -81829,7 +81834,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(10)
+var normalizeComponent = __webpack_require__(11)
 /* script */
 var __vue_script__ = __webpack_require__(659)
 /* template */
@@ -90470,7 +90475,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -90486,7 +90491,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(459), __webpack_require__(2), __webpack_require__(7), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -90676,7 +90681,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					var _this2 = this;
 
 					if (val.length > 0) {
-						console.log(val);
 						val.forEach(function (item) {
 							_this2.filterCatalogue.push({ name: item.name, id: item.id });
 						});
@@ -90697,7 +90701,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -90713,7 +90717,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -91113,9 +91117,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					//not required
 					if (this.index > -1) {
 						if (oldVal != null) {
-							if (val.length == 0) {
-								this.editedItem._name = null;
-							}
 							this.disabled = false;
 						}
 					}
@@ -91440,14 +91441,12 @@ var render = function() {
                                         ),
                                         _vm._v(" "),
                                         _vm._l(_vm.editedItem.sizes, function(
-                                          size
+                                          size,
+                                          i
                                         ) {
                                           return _c(
                                             "v-flex",
-                                            {
-                                              key: size.id,
-                                              attrs: { xs4: "" }
-                                            },
+                                            { key: i, attrs: { xs4: "" } },
                                             [
                                               _c("v-text-field", {
                                                 directives: [
@@ -91767,9 +91766,9 @@ var render = function() {
           }
         },
         [
-          _vm._l(_vm.errors.items, function(error) {
+          _vm._l(_vm.errors.items, function(error, i) {
             return !_vm.alert.show
-              ? _c("span", [_vm._v(" " + _vm._s(error.msg))])
+              ? _c("span", { key: i }, [_vm._v(" " + _vm._s(error.msg))])
               : _vm._e()
           }),
           _vm._v(" "),
@@ -91898,7 +91897,7 @@ var render = function() {
             [
               _c(
                 "v-flex",
-                { key: 0, attrs: { xs2: "" } },
+                { key: 0, attrs: { xs4: "" } },
                 [
                   _c("v-select", {
                     attrs: {
@@ -91921,7 +91920,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { key: 0, attrs: { xs2: "" } },
+                { key: 1, attrs: { xs2: "" } },
                 [
                   _c("v-select", {
                     attrs: {
@@ -91944,7 +91943,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { key: 1, attrs: { xs2: "" } },
+                { key: 2, attrs: { xs2: "" } },
                 [
                   _c("v-select", {
                     attrs: {
@@ -91967,12 +91966,12 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { key: 2, attrs: { xs6: "" } },
+                { key: 3, attrs: { xs4: "" } },
                 [
                   _c("v-text-field", {
                     attrs: {
                       "append-icon": "search",
-                      label: "Tìm kiếm danh mục",
+                      label: "Tìm kiếm món",
                       "single-line": "",
                       "hide-details": ""
                     },
@@ -92064,13 +92063,13 @@ var render = function() {
                     "td",
                     [
                       !props.item.haveSize
-                        ? _c("h4", [
+                        ? _c("h5", [
                             _vm._v(
                               _vm._s(_vm._f("formatPrice")(props.item.price))
                             )
                           ])
-                        : _vm._l(props.item.sizes, function(size) {
-                            return _c("h4", [
+                        : _vm._l(props.item.sizes, function(size, i) {
+                            return _c("h5", { key: i }, [
                               _vm._v(
                                 "\n\t\t\t\t\t" +
                                   _vm._s(size.name) +
@@ -92264,7 +92263,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(461), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(461), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -92280,7 +92279,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(461), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(461), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -92398,7 +92397,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -92414,7 +92413,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93076,7 +93075,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(463), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(463), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93092,7 +93091,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(463), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(463), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93210,7 +93209,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93226,7 +93225,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93878,7 +93877,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(465), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(465), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -93894,7 +93893,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(465), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(5), __webpack_require__(465), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -94031,7 +94030,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -94047,7 +94046,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(4), __webpack_require__(12), __webpack_require__(25), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -94816,7 +94815,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -94832,7 +94831,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(60), __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -95345,7 +95344,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -95361,7 +95360,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -95426,7 +95425,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(134), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(7), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(134), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(7), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -95442,7 +95441,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(134), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(7), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(134), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(7), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96249,7 +96248,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96265,7 +96264,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(137), __webpack_require__(136), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96685,7 +96684,7 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(471)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(471)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96701,7 +96700,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(11), __webpack_require__(7), __webpack_require__(32), __webpack_require__(471)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(10), __webpack_require__(7), __webpack_require__(32), __webpack_require__(471)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96926,7 +96925,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(60), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(476), __webpack_require__(7), __webpack_require__(25), __webpack_require__(472)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(60), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(476), __webpack_require__(7), __webpack_require__(25), __webpack_require__(472)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -96942,7 +96941,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(60), __webpack_require__(11), __webpack_require__(13), __webpack_require__(12), __webpack_require__(476), __webpack_require__(7), __webpack_require__(25), __webpack_require__(472)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4), __webpack_require__(60), __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(476), __webpack_require__(7), __webpack_require__(25), __webpack_require__(472)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -100071,23 +100070,23 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(2), __webpack_require__(7), __webpack_require__(1), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports);
+		factory(exports, require('babel-runtime/helpers/extends'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('axios'), require('vuex'), require('moment'), require('@/mixins/index'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports);
+		factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.axios, global.vuex, global.moment, global.index);
 		global.index = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(2), __webpack_require__(7), __webpack_require__(1), __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -100097,16 +100096,361 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports);
+			factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.axios, global.vuex, global.moment, global.index);
 			global.index = mod.exports;
 		}
-	})(this, function (exports) {
-		"use strict";
+	})(this, function (exports, _extends2, _regenerator, _asyncToGenerator2, _axios, _vuex, _moment, _index) {
+		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
 			value: true
 		});
-		exports.default = {};
+
+		var _extends3 = _interopRequireDefault(_extends2);
+
+		var _regenerator2 = _interopRequireDefault(_regenerator);
+
+		var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+		var _axios2 = _interopRequireDefault(_axios);
+
+		var _moment2 = _interopRequireDefault(_moment);
+
+		var _index2 = _interopRequireDefault(_index);
+
+		function _interopRequireDefault(obj) {
+			return obj && obj.__esModule ? obj : {
+				default: obj
+			};
+		}
+
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+
+
+		function formatDate(str) {
+			if (str != null) {
+				return str.substring(8, 10) + '/' + str.substring(5, 7) + '/' + str.substring(0, 4);
+			}
+			return null;
+		}
+
+		exports.default = {
+			mixins: [_index2.default],
+			data: function data() {
+				return {
+					title: "Danh sách đơn đặt hàng",
+					breadcrumbs: [{
+						text: 'Dashboard',
+						name: 'Dashboard',
+						disabled: false
+					}, {
+						text: 'Đơn đặt hàng',
+						disabled: true
+					}],
+					headers: [{
+						text: 'No.',
+						align: 'left',
+						sortable: false,
+						value: 'name'
+					}, { text: 'Mã đặt hàng', sortable: false }, { text: 'Nơi đặt', sortable: false }, { text: 'Ngày đặt', sortable: false }, { text: 'CSKH/ Người giao', sortable: false }, { text: 'Tổng tiền', sortable: false }, { text: 'Trạng thái', sortable: false }, { text: 'Chi tiết', sortable: false }],
+					editedItem: {
+						fromDate: new Date((0, _moment2.default)().subtract(7, 'days')).toISOString().substr(0, 10),
+						toDate: new Date().toISOString().substr(0, 10),
+						statusId: 0
+					},
+					statusFilters: [],
+					orders: [],
+					order: null,
+					fromModal: false,
+					fromDateString: formatDate(new Date((0, _moment2.default)().subtract(7, 'days')).toISOString().substr(0, 10)),
+					toModal: false,
+					toDateString: formatDate(new Date().toISOString().substr(0, 10)),
+					loading: false,
+					dialog: false,
+					filter: false,
+					cancelData: {},
+					notes: []
+				};
+			},
+
+			methods: {
+				filterAction: function filterAction() {
+					if (this.filter) {
+						// this.search = {
+						// 	text: '',
+						// 	type: -1,
+						// 	show: null,
+						// 	verify: null
+						// }
+					}
+					this.filter = !this.filter;
+				},
+
+				//GET ORDER LIST BY FILTER
+				fetchOrders: function () {
+					var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+						var _this = this;
+
+						var data;
+						return _regenerator2.default.wrap(function _callee$(_context) {
+							while (1) {
+								switch (_context.prev = _context.next) {
+									case 0:
+										data = this.editedItem;
+										_context.next = 3;
+										return !this.loading;
+
+									case 3:
+										this.loading = _context.sent;
+										_context.next = 6;
+										return _axios2.default.post('/api/GetOrderByFilter', data, { withCredentials: true }).then(function (response) {
+											if (response.status === 200) {
+												_this.orders = response.data.data;
+											}
+										});
+
+									case 6:
+										setTimeout(function () {
+											_this.loading = !_this.loading;
+										}, 500);
+
+									case 7:
+									case 'end':
+										return _context.stop();
+								}
+							}
+						}, _callee, this);
+					}));
+
+					function fetchOrders() {
+						return _ref.apply(this, arguments);
+					}
+
+					return fetchOrders;
+				}(),
+				//CHOOSE STATUS ORDER
+				orderStatus: function orderStatus(status) {
+					var _s = new String(status).toLowerCase();
+					switch (_s) {
+						case 'chờ xử lý':
+							return 1;
+							break;
+						case 'đang xử lý':
+							return 2;
+							break;
+						case 'xác nhận':
+							return 3;
+							break;
+						case 'đang giao':
+							return 4;
+							break;
+						case 'thành công':
+							return 5;
+							break;
+						case 'hủy':
+							return 6;
+							break;
+					}
+				},
+				statusId: function statusId(status) {
+					var _s = new String(status).toLowerCase();
+					var status = this.status.find(function (item) {
+						return item.name.toLowerCase() === _s;
+					});
+					return status.id;
+				}
+			},
+			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+				status: function status(state) {
+					return state.orderStatusStore.orderStatus;
+				}
+			})),
+			watch: {
+				'editedItem.fromDate': function editedItemFromDate(val, oldVal) {
+					this.fromDateString = formatDate(val);
+				},
+				'editedItem.toDate': function editedItemToDate(val, oldVal) {
+					this.toDateString = formatDate(val);
+				},
+				'status': function status(val) {
+					if (val) {
+						var array = [{ id: 0, name: 'Tất cả' }];
+						val.forEach(function (item) {
+							array.push({ id: item.id, name: item.name });
+						});
+						this.statusFilters = array;
+					}
+				}
+			},
+			mounted: function mounted() {
+				var _this2 = this;
+
+				this.$store.dispatch('fetchOrderStatus').then(function (response) {
+					if (response.status == 200) {
+						_this2.fetchOrders();
+					}
+				});
+			}
+		};
 	});
 });
 
@@ -100118,7 +100462,484 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\torder\n")])
+  return _c(
+    "v-card",
+    [
+      _c(
+        "v-toolbar",
+        {
+          staticClass: "elevation-0",
+          attrs: { dense: "", color: "grey lighten-3", flat: "" }
+        },
+        [
+          _c(
+            "v-breadcrumbs",
+            [
+              _c("v-icon", { attrs: { slot: "divider" }, slot: "divider" }, [
+                _vm._v("chevron_right")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.breadcrumbs, function(item, index) {
+                return _c(
+                  "v-breadcrumbs-item",
+                  { key: index, attrs: { to: { name: item.name } } },
+                  [_vm._v("\n\t\t\t\t\t" + _vm._s(item.text) + "\n\t\t\t\t")]
+                )
+              })
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card-title",
+        { attrs: { "primary-title": "" } },
+        [
+          _c("div", [
+            _c("div", { staticClass: "headline" }, [_vm._v(_vm._s(_vm.title))])
+          ]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("v-icon", [_vm._v("fas fa-lock")]),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    color: "red accent-3",
+                    outline: _vm.filter,
+                    dark: "",
+                    small: "",
+                    round: ""
+                  },
+                  on: { click: _vm.filterAction }
+                },
+                [
+                  _c("v-icon", { attrs: { left: "" } }, [_vm._v("search")]),
+                  _vm._v(_vm._s(_vm.filter ? "Tắt bộ lọc" : "Bật bộ lọc"))
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-card-text",
+        [
+          _c(
+            "v-container",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.filter,
+                  expression: "filter"
+                }
+              ],
+              attrs: {
+                fluid: "",
+                "grid-list-md": "",
+                transition: "slide-y-transition"
+              }
+            },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          auto: "",
+                          "prepend-icon": "lens",
+                          items: _vm.statusFilters,
+                          "item-value": "id",
+                          "item-text": "name",
+                          label: "Trạng thái"
+                        },
+                        model: {
+                          value: _vm.editedItem.statusId,
+                          callback: function($$v) {
+                            _vm.$set(_vm.editedItem, "statusId", $$v)
+                          },
+                          expression: "editedItem.statusId"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c(
+                        "v-menu",
+                        {
+                          ref: "fromDialog",
+                          attrs: {
+                            "close-on-content-click": false,
+                            "nudge-right": 40,
+                            lazy: "",
+                            transition: "scale-transition",
+                            "offset-y": "",
+                            "full-width": "",
+                            "max-width": "290px",
+                            "min-width": "290px"
+                          },
+                          model: {
+                            value: _vm.fromModal,
+                            callback: function($$v) {
+                              _vm.fromModal = $$v
+                            },
+                            expression: "fromModal"
+                          }
+                        },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              slot: "activator",
+                              label: "Từ ngày",
+                              "prepend-icon": "event",
+                              readonly: ""
+                            },
+                            slot: "activator",
+                            model: {
+                              value: _vm.fromDateString,
+                              callback: function($$v) {
+                                _vm.fromDateString = $$v
+                              },
+                              expression: "fromDateString"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-date-picker", {
+                            attrs: {
+                              locale: "vn-vi",
+                              "show-current": false,
+                              "no-title": ""
+                            },
+                            on: {
+                              input: function($event) {
+                                _vm.$refs.fromDialog.save(
+                                  _vm.editedItem.fromDate
+                                )
+                              }
+                            },
+                            model: {
+                              value: _vm.editedItem.fromDate,
+                              callback: function($$v) {
+                                _vm.$set(_vm.editedItem, "fromDate", $$v)
+                              },
+                              expression: "editedItem.fromDate"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs3: "" } },
+                    [
+                      _c(
+                        "v-menu",
+                        {
+                          ref: "toDialog",
+                          attrs: {
+                            "close-on-content-click": false,
+                            "nudge-right": 40,
+                            lazy: "",
+                            transition: "scale-transition",
+                            "offset-y": "",
+                            "full-width": "",
+                            "max-width": "290px",
+                            "min-width": "290px"
+                          },
+                          model: {
+                            value: _vm.toModal,
+                            callback: function($$v) {
+                              _vm.toModal = $$v
+                            },
+                            expression: "toModal"
+                          }
+                        },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              slot: "activator",
+                              label: "Đến ngày",
+                              "prepend-icon": "event",
+                              readonly: ""
+                            },
+                            slot: "activator",
+                            model: {
+                              value: _vm.toDateString,
+                              callback: function($$v) {
+                                _vm.toDateString = $$v
+                              },
+                              expression: "toDateString"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-date-picker", {
+                            attrs: {
+                              locale: "vn-vi",
+                              "show-current": false,
+                              "no-title": ""
+                            },
+                            on: {
+                              input: function($event) {
+                                _vm.$refs.toDialog.save(_vm.editedItem.toDate)
+                              }
+                            },
+                            model: {
+                              value: _vm.editedItem.toDate,
+                              callback: function($$v) {
+                                _vm.$set(_vm.editedItem, "toDate", $$v)
+                              },
+                              expression: "editedItem.toDate"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs1: "" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            small: "",
+                            color: "primary",
+                            outline: "",
+                            loading: _vm.loading
+                          },
+                          on: { click: _vm.fetchOrders }
+                        },
+                        [_c("v-icon", [_vm._v("search")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-data-table", {
+            staticClass: "elevation-1",
+            attrs: {
+              headers: _vm.headers,
+              items: _vm.orders,
+              loading: _vm.loading,
+              "hide-actions": ""
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "headerCell",
+                fn: function(props) {
+                  return [
+                    _c("span", { staticClass: "red--text text--accent-3" }, [
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(props.header.text) +
+                          "\n\t\t\t\t"
+                      )
+                    ])
+                  ]
+                }
+              },
+              {
+                key: "items",
+                fn: function(props) {
+                  return [
+                    _c("td", [_vm._v(_vm._s(props.index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_c("strong", [_vm._v(_vm._s(props.item.id))])]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", [
+                        _c("strong", [_vm._v(_vm._s(props.item.store.name))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(props.item.store.address))])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", [
+                        _vm._v("Ngày đặt: " + _vm._s(props.item.bookingDate))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("strong", [
+                          _vm._v(
+                            "Ngày giao: " +
+                              _vm._s(
+                                _vm._f("formatDate")(props.item.receiveDate)
+                              ) +
+                              " " +
+                              _vm._s(props.item.receiveTime)
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      props.item.employee != null
+                        ? _c("div", [_vm._v(_vm._s(props.item.employee.name))])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      props.item.shipper != null
+                        ? _c("div", [_vm._v(_vm._s(props.item.shipper.name))])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", [
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(_vm._f("formatPrice")(props.item.total))
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "primary--text" }, [
+                        _c("strong", [
+                          _vm._v(_vm._s(props.item.payment.paymentMethod))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-md-left" }, [
+                      _c("div", [
+                        _c(
+                          "strong",
+                          {
+                            class: {
+                              "success--text":
+                                props.item.statusId ==
+                                  _vm.statusId("Thành công") ||
+                                props.item.statusId == _vm.statusId("Xác nhận"),
+                              "error--text":
+                                props.item.statusId == _vm.statusId("Hủy"),
+                              "yellow--text text--accent-4":
+                                props.item.statusId ==
+                                  _vm.statusId("Chờ xử lý") ||
+                                props.item.statusId ==
+                                  _vm.statusId("Đang xử lý")
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t" +
+                                _vm._s(props.item.statusName) +
+                                "\n\t\t\t\t\t\t"
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      props.item.statusId == _vm.statusId("Thành công")
+                        ? _c("div", { staticClass: "success--text" }, [
+                            _c("strong", [
+                              _vm._v(_vm._s(props.item.statusName))
+                            ])
+                          ])
+                        : props.item.statusId != _vm.orderStatus("Thành công")
+                          ? _c("div")
+                          : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "v-tooltip",
+                          { attrs: { top: "" } },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  slot: "activator",
+                                  icon: "",
+                                  small: "",
+                                  to: {
+                                    name: "OrderDetail",
+                                    params: { orderId: props.item.id }
+                                  }
+                                },
+                                slot: "activator"
+                              },
+                              [
+                                _c("v-icon", { attrs: { color: "primary" } }, [
+                                  _vm._v("visibility")
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Xem chi tiết")])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                }
+              },
+              {
+                key: "pageText",
+                fn: function(ref) {
+                  var pageStart = ref.pageStart
+                  var pageStop = ref.pageStop
+                  return [
+                    _vm._v(
+                      "\n\t\t\t\tTừ " +
+                        _vm._s(pageStart) +
+                        " đến " +
+                        _vm._s(pageStop) +
+                        "\n\t\t\t"
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -100789,6 +101610,2402 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6dd1125c", module.exports)
+  }
+}
+
+/***/ }),
+/* 977 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if (typeof exports !== "undefined") {
+		factory(exports, require('babel-runtime/core-js/promise'), require('babel-runtime/core-js/object/assign'), require('axios'));
+	} else {
+		var mod = {
+			exports: {}
+		};
+		factory(mod.exports, global.promise, global.assign, global.axios);
+		global.orderStatus = mod.exports;
+	}
+})(this, function (exports) {
+	(function (global, factory) {
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(4), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof exports !== "undefined") {
+			factory(exports);
+		} else {
+			var mod = {
+				exports: {}
+			};
+			factory(mod.exports, global.promise, global.assign, global.axios);
+			global.orderStatus = mod.exports;
+		}
+	})(this, function (exports, _promise, _assign, _axios) {
+		'use strict';
+
+		Object.defineProperty(exports, "__esModule", {
+			value: true
+		});
+
+		var _promise2 = _interopRequireDefault(_promise);
+
+		var _assign2 = _interopRequireDefault(_assign);
+
+		var _axios2 = _interopRequireDefault(_axios);
+
+		function _interopRequireDefault(obj) {
+			return obj && obj.__esModule ? obj : {
+				default: obj
+			};
+		}
+
+		var state = {
+			orderStatus: {},
+			loading: false,
+			dialog: false,
+			editedIndex: -1,
+			editedItem: {},
+			alert: {
+				show: false,
+				message: '',
+				type: 'success'
+			}
+		};
+
+		var mutations = {
+			FETCH_ORDER_STATUS: function FETCH_ORDER_STATUS(state, payload) {
+				state.orderStatus = payload.data;
+			},
+			LOADING_ORDER_STATUS: function LOADING_ORDER_STATUS(state) {
+				state.loading = !state.loading;
+			},
+			DIALOG_ORDER_STATUS: function DIALOG_ORDER_STATUS(state) {
+				state.dialog = !state.dialog;
+			},
+			DIALOG_ORDER_STATUS_CLOSE: function DIALOG_ORDER_STATUS_CLOSE(state) {
+				state.dialog = false;
+				state.editedIndex = -1;
+			},
+			EDIT_ORDER_STATUS: function EDIT_ORDER_STATUS(state, payload) {
+				state.editedIndex = state.orderStatus.indexOf(payload);
+				state.editedItem = (0, _assign2.default)({}, payload);
+				state.dialog = true;
+			},
+			UPDATE_ORDER_STATUS: function UPDATE_ORDER_STATUS(state, payload) {
+				if (state.editedIndex > -1) {
+					(0, _assign2.default)(state.orderStatus[state.editedIndex], payload.data);
+				} else {
+					state.orderStatus.push(payload.data);
+				}
+			},
+			REMOVE_ORDER_STATUS: function REMOVE_ORDER_STATUS(state, payload) {
+				var orderStatus = state.orderStatus;
+				orderStatus.splice(orderStatus.indexOf(payload), 1);
+			},
+			ALERT_ORDER_STATUS: function ALERT_ORDER_STATUS(state, payload) {
+				state.alert = (0, _assign2.default)(state.alert, payload);
+			},
+			ALERT_ORDER_STATUS_CLOSE: function ALERT_ORDER_STATUS_CLOSE(state, payload) {
+				state.alert = {
+					show: false,
+					message: '',
+					type: 'success'
+				};
+			}
+		};
+
+		var actions = {
+			fetchOrderStatus: function fetchOrderStatus(_ref, payload) {
+				var commit = _ref.commit;
+				return new _promise2.default(function (resolve, reject) {
+					_axios2.default.get('/api/GetOrderStatus').then(function (response) {
+						if (response.status === 200) {
+							commit('FETCH_ORDER_STATUS', response.data);
+						}
+						resolve(response);
+					}).catch(function (errors) {
+						reject(errors);
+					});
+				});
+			}
+		};
+
+		var getters = {};
+
+		exports.default = {
+			state: state, mutations: mutations, actions: actions, getters: getters
+		};
+	});
+});
+
+/***/ }),
+/* 978 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(979)
+}
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(981)
+/* template */
+var __vue_template__ = __webpack_require__(982)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-25d56158"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\orders\\details\\index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25d56158", Component.options)
+  } else {
+    hotAPI.reload("data-v-25d56158", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 979 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(980);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(110)("72bb9142", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 980 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(77)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#map[data-v-25d56158] {\r\n\twidth: 100%;\r\n\theight: 250px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 981 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(449), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if (typeof exports !== "undefined") {
+		factory(exports, require('babel-runtime/helpers/extends'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/helpers/defineProperty'), require('axios'), require('vuex'));
+	} else {
+		var mod = {
+			exports: {}
+		};
+		factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.defineProperty, global.axios, global.vuex);
+		global.index = mod.exports;
+	}
+})(this, function (exports) {
+	(function (global, factory) {
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(13), __webpack_require__(12), __webpack_require__(449), __webpack_require__(2), __webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof exports !== "undefined") {
+			factory(exports);
+		} else {
+			var mod = {
+				exports: {}
+			};
+			factory(mod.exports, global._extends, global.regenerator, global.asyncToGenerator, global.defineProperty, global.axios, global.vuex);
+			global.index = mod.exports;
+		}
+	})(this, function (exports, _extends2, _regenerator, _asyncToGenerator2, _defineProperty2, _axios, _vuex) {
+		'use strict';
+
+		Object.defineProperty(exports, "__esModule", {
+			value: true
+		});
+
+		var _extends3 = _interopRequireDefault(_extends2);
+
+		var _regenerator2 = _interopRequireDefault(_regenerator);
+
+		var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+		var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+		var _axios2 = _interopRequireDefault(_axios);
+
+		function _interopRequireDefault(obj) {
+			return obj && obj.__esModule ? obj : {
+				default: obj
+			};
+		}
+
+		exports.default = {
+			data: function data() {
+				var _ref;
+
+				return _ref = {
+					breadcrumbs: [{
+						text: 'Dashboard',
+						action: 'Dashboard',
+						disabled: false
+					}, {
+						text: 'Danh sách đơn đặt hàng',
+						action: 'Order',
+						disabled: false
+					}, {
+						text: 'Chi tiết đơn đặt hàng',
+						action: '',
+						disabled: true
+					}],
+					loading: false,
+					order: null,
+					tab: 0,
+					headers: [{ text: 'Món', sortable: false }, { text: 'Số lượng', sortable: false }, { text: 'Giá', sortable: false }, { text: 'Tổng', sortable: false }],
+					cancelDialog: false,
+					reasons: [{ note: 'Nhập sai số điện thoại' }, { note: 'Nhập sai thông tin liên hệ' }, { note: 'Đơn hàng chậm trễ' }],
+					matrix: {
+						show: false,
+						start: '',
+						end: '',
+						duration: '0 phút',
+						distance: '0 Km'
+					},
+					shippers: [],
+					shipper: null
+				}, (0, _defineProperty3.default)(_ref, 'cancelDialog', false), (0, _defineProperty3.default)(_ref, 'reasons', [{ note: 'Không liên hệ được' }, { note: 'Thông tin không đúng' }, { note: 'Cửa hàng không hoạt động' }, { note: 'Món đặt đã hết' }, { note: 'Xảy ra sự cố không mong muốn' }]), (0, _defineProperty3.default)(_ref, 'notes', []), _ref;
+			},
+
+			methods: {
+				chooseShipper: function () {
+					var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+						var _this = this;
+
+						var data;
+						return _regenerator2.default.wrap(function _callee$(_context) {
+							while (1) {
+								switch (_context.prev = _context.next) {
+									case 0:
+										data = { orderId: this.order.id, shipperId: this.shipper.id, step: this.order.statusStep, statusId: this.order.statusId, confirm: true };
+										_context.next = 3;
+										return true;
+
+									case 3:
+										this.loading = _context.sent;
+										_context.next = 6;
+										return _axios2.default.post('/api/GetOrder/' + this.$route.params.orderId + '/Details/ChooseShipper', data, { withCredentials: true }).then(function (response) {
+											if (response.status == 200 && response.data.type == 'success') {
+												_this.order = response.data.data;
+											}
+										});
+
+									case 6:
+										this.loading = false;
+
+									case 7:
+									case 'end':
+										return _context.stop();
+								}
+							}
+						}, _callee, this);
+					}));
+
+					function chooseShipper() {
+						return _ref2.apply(this, arguments);
+					}
+
+					return chooseShipper;
+				}(),
+				getShippers: function () {
+					var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+						var _this2 = this;
+
+						var data;
+						return _regenerator2.default.wrap(function _callee2$(_context2) {
+							while (1) {
+								switch (_context2.prev = _context2.next) {
+									case 0:
+										data = [];
+										_context2.next = 3;
+										return true;
+
+									case 3:
+										this.loading = _context2.sent;
+
+										this.axios.post('/api/GetUser/Shippers', data, { withCredentials: true }).then(function (response) {
+											if (response.status == 200) {
+												_this2.shippers = response.data.data;
+											}
+										});
+
+									case 5:
+									case 'end':
+										return _context2.stop();
+								}
+							}
+						}, _callee2, this);
+					}));
+
+					function getShippers() {
+						return _ref3.apply(this, arguments);
+					}
+
+					return getShippers;
+				}(),
+				getOrderDetails: function () {
+					var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(id) {
+						var _this3 = this;
+
+						var data;
+						return _regenerator2.default.wrap(function _callee3$(_context3) {
+							while (1) {
+								switch (_context3.prev = _context3.next) {
+									case 0:
+										data = { orderId: id };
+										_context3.next = 3;
+										return true;
+
+									case 3:
+										this.loading = _context3.sent;
+										_context3.next = 6;
+										return _axios2.default.post('/api/GetOrder/' + id + '/Details', data, { withCredentials: true }).then(function (response) {
+											if (response.status == 200) {
+												_this3.order = response.data.data;
+											}
+										});
+
+									case 6:
+										this.loading = false;
+
+									case 7:
+									case 'end':
+										return _context3.stop();
+								}
+							}
+						}, _callee3, this);
+					}));
+
+					function getOrderDetails(_x) {
+						return _ref4.apply(this, arguments);
+					}
+
+					return getOrderDetails;
+				}(),
+				changeTab: function changeTab(index) {
+					this.tab = index;
+				},
+
+
+				//DIRECTION GOOGLE MAP
+				calculateRoute: function calculateRoute() {
+					var str = '';
+					var vm = this;
+					var map = new google.maps.Map(document.getElementById('map'), {
+						zoom: 17,
+						center: { lat: vm.order.store.lat, lng: vm.order.store.lng }
+					});
+					var directionsService = new google.maps.DirectionsService();
+					var directionsDisplay = new google.maps.DirectionsRenderer();
+
+					directionsDisplay.setMap(map);
+
+					var start = { lat: vm.order.store.lat, lng: vm.order.store.lng };
+					var end = { lat: vm.order.lat, lng: vm.order.lng };
+
+					var request = {
+						origin: start,
+						destination: end,
+						travelMode: 'DRIVING'
+					};
+					directionsService.route(request, function (response, status) {
+						if (status === 'OK') {
+							var response = response;
+							directionsDisplay.setDirections(response);
+							var service = new google.maps.DistanceMatrixService();
+							service.getDistanceMatrix({
+								origins: [response.request.origin.location],
+								destinations: [response.request.destination.location],
+								travelMode: 'DRIVING'
+							}, function (res, status) {
+								if (status === 'OK') {
+									var originList = res.originAddresses;
+									var destinationList = res.destinationAddresses;
+									var distance = '0 Km';
+									var duration = '0 phút';
+									var leg = response.routes[0].legs[0];
+									directionsDisplay.setDirections(response);
+									for (var i = 0; i < originList.length; i++) {
+										var results = res.rows[i].elements;
+										for (var j = 0; j < results.length; j++) {
+											var element = results[j];
+											distance = element.distance.text;
+											duration = element.duration.text;
+										}
+
+										vm.matrix.distance = distance;
+										vm.matrix.duration = duration;
+										vm.matrix.start = leg.start_address;
+										vm.matrix.end = leg.end_address;
+										vm.matrix.show = true;
+										directionsDisplay.setDirections(response);
+									}
+								}
+							});
+						}
+					});
+				},
+
+				//STATUS ORDER
+				orderStatus: function orderStatus(status) {
+					var _s = new String(status).toLowerCase();
+					switch (_s) {
+						case 'chờ xử lý':
+							return 1;
+							break;
+						case 'đang xử lý':
+							return 2;
+							break;
+						case 'xác nhận':
+							return 3;
+							break;
+						case 'đang giao':
+							return 4;
+							break;
+						case 'thành công':
+							return 5;
+							break;
+						case 'hủy':
+							return 6;
+							break;
+					}
+				},
+				statusId: function statusId(status) {
+					var _s = new String(status).toLowerCase();
+					var status = this.status.find(function (item) {
+						return item.name.toLowerCase() === _s;
+					});
+					return status.id;
+				},
+				changeStatus: function changeStatus(step) {
+					var _this4 = this;
+
+					var vm = this;
+					var data = { orderId: vm.order.id, step: ++step, confirm: true };
+					vm.$swal({
+						title: 'Bạn có đồng ý chuyển bước?',
+						text: "Bạn sẽ không thể quay trở lại bước trước!",
+						type: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Đồng ý',
+						cancelButtonText: 'Không',
+						confirmButtonClass: 'btn primary',
+						cancelButtonClass: 'btn',
+						buttonsStyling: false,
+						reverseButtons: true
+					}).then(function (result) {
+						if (result.value) {
+							vm.$swal('Đổi trạng thái!', _this4.order.statusName + ' trạng thái đã được thay đổi.', 'success').then(function () {
+								_axios2.default.post('/api/GetOrder/' + _this4.$route.params.orderId + '/Details/ChangeStatus', data).then(function (response) {
+									if (response.status == 200) {
+										vm.order = response.data.data;
+									}
+								});
+							});
+						} else {
+							vm.$swal('Cancelled', '', 'error');
+						}
+					});
+				},
+				cancelOrder: function () {
+					var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4() {
+						var _this5 = this;
+
+						var vm, data;
+						return _regenerator2.default.wrap(function _callee4$(_context4) {
+							while (1) {
+								switch (_context4.prev = _context4.next) {
+									case 0:
+										vm = this;
+										data = { orderId: vm.order.id, confirm: true, orderNotes: this.notes };
+
+										vm.$swal({
+											title: 'Bạn có đồng ý hủy đơn đặt hàng?',
+											text: "Bạn sẽ không thể khôi phục lại đơn đặt hàng đã hủy!",
+											type: 'warning',
+											showCancelButton: true,
+											confirmButtonColor: '#3085d6',
+											cancelButtonColor: '#d33',
+											confirmButtonText: 'Đồng ý!',
+											cancelButtonText: 'Không',
+											confirmButtonClass: 'btn primary',
+											cancelButtonClass: 'btn',
+											buttonsStyling: false,
+											reverseButtons: true
+										}).then(function (result) {
+											if (result.value) {
+												vm.$swal('Hủy đơn đặt hàng!', vm.order.statusName + ' đã được chuyển sang hủy.', 'success').then(function () {
+													_axios2.default.post('/api/GetOrder/' + _this5.$route.params.orderId + '/Details/CancelOrder', data).then(function (response) {
+														if (response.status == 200) {
+															vm.order = response.data.data;
+															vm.cancelDialog = false;
+														}
+													});
+												});
+											} else {
+												vm.$swal('Cancelled', '', 'error');
+											}
+										});
+
+									case 3:
+									case 'end':
+										return _context4.stop();
+								}
+							}
+						}, _callee4, this);
+					}));
+
+					function cancelOrder() {
+						return _ref5.apply(this, arguments);
+					}
+
+					return cancelOrder;
+				}()
+			},
+			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+				status: function status(state) {
+					return state.orderStatusStore.orderStatus;
+				}
+			})),
+			watch: {
+				'tab': function () {
+					var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(val, oldVal) {
+						var _this6 = this;
+
+						return _regenerator2.default.wrap(function _callee6$(_context6) {
+							while (1) {
+								switch (_context6.prev = _context6.next) {
+									case 0:
+										if (val == 1) {
+											if (!this.matrix.show) {
+												setTimeout((0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+													return _regenerator2.default.wrap(function _callee5$(_context5) {
+														while (1) {
+															switch (_context5.prev = _context5.next) {
+																case 0:
+																	_context5.next = 2;
+																	return _this6.calculateRoute();
+
+																case 2:
+																case 'end':
+																	return _context5.stop();
+															}
+														}
+													}, _callee5, _this6);
+												})), 500);
+											}
+										}
+
+									case 1:
+									case 'end':
+										return _context6.stop();
+								}
+							}
+						}, _callee6, this);
+					}));
+
+					function tab(_x2, _x3) {
+						return _ref6.apply(this, arguments);
+					}
+
+					return tab;
+				}(),
+				'cancelDialog': function cancelDialog(val, oldVal) {
+					if (!val) {
+						this.notes = [];
+					}
+				}
+			},
+			mounted: function mounted() {
+				var _this7 = this;
+
+				this.$store.dispatch('fetchOrderStatus').then(function (response) {
+					if (response.status === 200) {
+						_this7.getOrderDetails(_this7.$route.params.orderId);
+						_this7.getShippers();
+					}
+				});
+			}
+		};
+	});
+});
+
+/***/ }),
+/* 982 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-lg": "" } },
+    [
+      _vm.order != null
+        ? _c(
+            "v-card",
+            [
+              _c(
+                "v-breadcrumbs",
+                [
+                  _c(
+                    "v-icon",
+                    { attrs: { slot: "divider" }, slot: "divider" },
+                    [_vm._v("chevron_right")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.breadcrumbs, function(item) {
+                    return _c(
+                      "v-breadcrumbs-item",
+                      {
+                        key: item.text,
+                        attrs: {
+                          disabled: item.disabled,
+                          to: { name: item.action }
+                        }
+                      },
+                      [_vm._v(_vm._s(item.text))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-tabs",
+                {
+                  attrs: {
+                    value: "item-" + _vm.tab,
+                    "slider-color": "primary",
+                    centered: "",
+                    color: "grey lighten-3"
+                  }
+                },
+                [
+                  _c(
+                    "v-tab",
+                    {
+                      attrs: { href: "#item-0", value: 0 },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changeTab(0)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\tThông tin chi tiết\n\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    {
+                      attrs: { href: "#item-1", value: 1 },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changeTab(1)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\tBản đồ\n\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    {
+                      attrs: { href: "#item-2", value: 2 },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.changeTab(2)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\tXử lý\n\t\t\t")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-layout",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.tab == 0,
+                          expression: "tab == 0"
+                        }
+                      ],
+                      attrs: { row: "", wrap: "" }
+                    },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", md6: "", "d-flex": "" } },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  staticClass: "grid-list-md",
+                                  attrs: { row: "", wrap: "" }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tNơi đặt:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "primary--text" },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(_vm.order.store.name) +
+                                                "\n\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s(_vm.order.store.address) +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tNgười nhận:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _c("strong", [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s(_vm.order.name) +
+                                            "\n\t\t\t\t\t\t\t\t"
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tĐịa chỉ giao:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t" +
+                                          _vm._s(_vm.order.address) +
+                                          "\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tSố điện thoại:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t" +
+                                          _vm._s(_vm.order.phone) +
+                                          "\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tNgày đặt:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t" +
+                                          _vm._s(_vm.order.bookingDate) +
+                                          "\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " \n\t\t\t\t\t\t\t\tNgày nhận:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t" +
+                                          _vm._s(
+                                            _vm._f("formatDate")(
+                                              _vm.order.receiveDate
+                                            )
+                                          ) +
+                                          " " +
+                                          _vm._s(_vm.order.receiveTime) +
+                                          "\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tPhí vận chuyển:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _c("strong", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("formatPrice")(
+                                              _vm.order.deliveryPrice
+                                            )
+                                          )
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tTổng tiền:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _c("strong", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("formatPrice")(
+                                              _vm.order.total
+                                            )
+                                          )
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      staticClass: "text-xs-right",
+                                      attrs: { xs5: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\tGhi chú:\n\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "", "offset-xs1": "" } },
+                                    [
+                                      _c("strong", [
+                                        _vm._v(_vm._s(_vm.order.memo))
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", md6: "", "d-flex": "" } },
+                        [
+                          _c(
+                            "v-data-table",
+                            {
+                              staticClass: "elevation-1",
+                              attrs: {
+                                headers: _vm.headers,
+                                items: _vm.order.items,
+                                "hide-actions": ""
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "headerCell",
+                                  fn: function(props) {
+                                    return [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "red--text text--accent-3"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t" +
+                                              _vm._s(props.header.text) +
+                                              "\n\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  }
+                                },
+                                {
+                                  key: "items",
+                                  fn: function(props) {
+                                    return [
+                                      _c("td", [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t" +
+                                            _vm._s(props.item.name) +
+                                            "\n\t\t\t\t\t\t\t"
+                                        ),
+                                        props.item.pivot.toppings.length > 0
+                                          ? _c(
+                                              "h4",
+                                              [
+                                                _vm._v("toppings thêm: "),
+                                                _vm._l(
+                                                  props.item.pivot.toppings,
+                                                  function(topping) {
+                                                    return _c("span", [
+                                                      _vm._v(
+                                                        _vm._s(topping.name) +
+                                                          " (" +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "formatPrice"
+                                                            )(topping.price)
+                                                          ) +
+                                                          "). "
+                                                      )
+                                                    ])
+                                                  }
+                                                )
+                                              ],
+                                              2
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        props.item.pivot.memo != null
+                                          ? _c("div", [
+                                              _vm._v(
+                                                "Ghi chú: " +
+                                                  _vm._s(props.item.pivot.memo)
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { staticClass: "text-xs-center" },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t" +
+                                              _vm._s(
+                                                props.item.pivot.quantity
+                                              ) +
+                                              "\n\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t" +
+                                            _vm._s(
+                                              _vm._f("formatPrice")(
+                                                props.item.pivot.price
+                                              )
+                                            ) +
+                                            "\n\t\t\t\t\t\t"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t" +
+                                            _vm._s(
+                                              _vm._f("formatPrice")(
+                                                props.item.pivot.total
+                                              )
+                                            ) +
+                                            "\n\t\t\t\t\t\t"
+                                        )
+                                      ])
+                                    ]
+                                  }
+                                }
+                              ])
+                            },
+                            [
+                              _c("template", { slot: "footer" }, [
+                                _c("tr", [
+                                  _c("td", { attrs: { colspan: "3" } }, [
+                                    _vm._v("Tạm tính")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { attrs: { colspan: "3" } }, [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("formatPrice")(
+                                            _vm.order.subTotal
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", { attrs: { colspan: "3" } }, [
+                                    _vm._v("Phí vận chuyển:")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("formatPrice")(
+                                            _vm.order.deliveryPrice
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", { attrs: { colspan: "3" } }, [
+                                    _vm._v("Giảm giá:")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("formatPrice")(
+                                            -_vm.order.discountTotal
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
+                                  _c("td", { attrs: { colspan: "3" } }, [
+                                    _vm._v("Tổng:")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "red--text" }, [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("formatPrice")(_vm.order.total)
+                                        )
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { row: "", wrap: "" } },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t\tCSKH:\n\t\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(
+                                              _vm._s(_vm.order.employee.name)
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t\tShipper:\n\t\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.order.shipper != null
+                                        ? _c(
+                                            "v-flex",
+                                            {
+                                              attrs: {
+                                                xs5: "",
+                                                "offset-xs1": ""
+                                              }
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  _vm._s(_vm.order.shipper.name)
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.tab == 1,
+                          expression: "tab == 1"
+                        }
+                      ]
+                    },
+                    [
+                      _vm.matrix.show
+                        ? _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c("v-flex", { attrs: { xs3: "" } }, [
+                                _vm._v("Từ:")
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs9: "" } }, [
+                                _vm._v(_vm._s(_vm.matrix.start))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs3: "" } }, [
+                                _vm._v("\n\t\t\t\t\t\tĐến:\n\t\t\t\t\t")
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs9: "" } }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t" +
+                                    _vm._s(_vm.matrix.end) +
+                                    "\n\t\t\t\t\t"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs3: "" } }, [
+                                _vm._v("\n\t\t\t\t\t\tKhoảng cách:\n\t\t\t\t\t")
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs9: "" } }, [
+                                _c("span", { staticClass: "primary--text" }, [
+                                  _c("strong", [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t" +
+                                        _vm._s(_vm.matrix.distance) +
+                                        "\n\t\t\t\t\t\t\t"
+                                    )
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs3: "" } }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\tPhí vận chuyển:\n\t\t\t\t\t"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs9: "" } }, [
+                                _c("span", { staticClass: "red--text" }, [
+                                  _c("strong", [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t" +
+                                        _vm._s(
+                                          _vm._f("formatPrice")(
+                                            _vm.order.deliveryPrice
+                                          )
+                                        ) +
+                                        "\n\t\t\t\t\t\t"
+                                    )
+                                  ])
+                                ])
+                              ])
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", { attrs: { id: "map" } })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.tab == 2,
+                          expression: "tab == 2"
+                        }
+                      ]
+                    },
+                    [
+                      _vm.order.statusId == _vm.orderStatus("Hủy")
+                        ? _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                {
+                                  staticClass: "text-xs-right",
+                                  attrs: { xs5: "" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  staticClass: "red--text",
+                                  attrs: { xs5: "", "offset-xs1": "" }
+                                },
+                                [
+                                  _c("strong", [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t" +
+                                        _vm._s(_vm.order.statusName) +
+                                        "\n\t\t\t\t\t\t"
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  staticClass: "text-xs-right",
+                                  attrs: { xs5: "" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs5: "", "offset-xs1": "" } },
+                                [
+                                  _c("div", [
+                                    _vm._v(
+                                      "Rất tiếc đơn hàng của quý khách đã bị hủy."
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c("strong", [
+                                      _vm._v("Cám ơn bạn đã sử dụng hệ thống.")
+                                    ])
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  staticClass: "text-xs-right",
+                                  attrs: { xs5: "" }
+                                },
+                                [_vm._v("\n\t\t\t\t\t\tLý do:\n\t\t\t\t\t")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs5: "", "offset-xs1": "" } },
+                                _vm._l(_vm.order.orderNotes, function(
+                                  text,
+                                  index
+                                ) {
+                                  return _c("div", { key: index }, [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t" +
+                                        _vm._s(text) +
+                                        "\n\t\t\t\t\t\t"
+                                    )
+                                  ])
+                                })
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "v-card",
+                        [
+                          _vm.order.statusId != _vm.orderStatus("Hủy")
+                            ? _c(
+                                "v-stepper",
+                                {
+                                  attrs: { value: _vm.order.statusId },
+                                  model: {
+                                    value: _vm.order.statusId,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.order, "statusId", $$v)
+                                    },
+                                    expression: "order.statusId"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-stepper-header",
+                                    [
+                                      _c(
+                                        "v-stepper-step",
+                                        {
+                                          attrs: {
+                                            step: "1",
+                                            complete:
+                                              _vm.order.statusId >
+                                                _vm.orderStatus("Chờ xử lý") &&
+                                              _vm.order.statusId !=
+                                                _vm.orderStatus("Hủy")
+                                          }
+                                        },
+                                        [_vm._v("Chờ xử lý")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-step",
+                                        {
+                                          attrs: {
+                                            step: "2",
+                                            complete:
+                                              _vm.order.statusId >
+                                                _vm.orderStatus("Đang xử lý") &&
+                                              _vm.order.statusId !=
+                                                _vm.orderStatus("Hủy")
+                                          }
+                                        },
+                                        [_vm._v("Đang xử lý")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-step",
+                                        {
+                                          attrs: {
+                                            step: "3",
+                                            complete:
+                                              _vm.order.statusId >
+                                                _vm.orderStatus("Xác nhận") &&
+                                              _vm.order.statusId !=
+                                                _vm.orderStatus("Hủy")
+                                          }
+                                        },
+                                        [_vm._v("Xác nhận")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-step",
+                                        {
+                                          attrs: {
+                                            step: "4",
+                                            complete:
+                                              _vm.order.statusId >
+                                                _vm.orderStatus("Đang giao") &&
+                                              _vm.order.statusId !=
+                                                _vm.orderStatus("Hủy")
+                                          }
+                                        },
+                                        [_vm._v("Đang giao")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-step",
+                                        {
+                                          attrs: {
+                                            step: "5",
+                                            complete:
+                                              _vm.order.statusId ==
+                                                _vm.orderStatus("Thành công") &&
+                                              _vm.order.statusId !=
+                                                _vm.orderStatus("Hủy")
+                                          }
+                                        },
+                                        [_vm._v("Thành công")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-stepper-items",
+                                    [
+                                      _c(
+                                        "v-stepper-content",
+                                        { attrs: { step: "1" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { row: "", wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  staticClass:
+                                                    "yellow--text text--accent-4",
+                                                  attrs: { xs8: "" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                                                        _vm._s(
+                                                          _vm.order.statusName
+                                                        ) +
+                                                        "\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "Đơn đặt hàng của quý khách đang chờ nhân viên tiếp nhận."
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "Xin vui lòng chờ trong giây lát."
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v("Cám ơn.")
+                                                    ])
+                                                  ])
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { color: "primary" },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.changeStatus(
+                                                    _vm.order.statusStep
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Continue")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-content",
+                                        { attrs: { step: "2" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { row: "", wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  staticClass:
+                                                    "yellow--text text--accent-4",
+                                                  attrs: { xs8: "" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                                                        _vm._s(
+                                                          _vm.order.statusName
+                                                        ) +
+                                                        "\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tĐơn hàng "
+                                                    ),
+                                                    _c("span", [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          " " +
+                                                            _vm._s(
+                                                              _vm.order.id
+                                                            ) +
+                                                            " "
+                                                        )
+                                                      ])
+                                                    ]),
+                                                    _vm._v(
+                                                      " đã được nhân viên"
+                                                    ),
+                                                    _vm.order.employee != null
+                                                      ? _c("span", [
+                                                          _c("strong", [
+                                                            _vm._v(
+                                                              " " +
+                                                                _vm._s(
+                                                                  _vm.order
+                                                                    .employee
+                                                                    .name
+                                                                ) +
+                                                                " "
+                                                            )
+                                                          ])
+                                                        ])
+                                                      : _vm._e(),
+                                                    _vm._v(
+                                                      "tiếp nhận và xử lý.\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "Xin vui lòng chờ trong giây lát.\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v("Cám ơn.")
+                                                    ])
+                                                  ])
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { color: "primary" },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.changeStatus(
+                                                    _vm.order.statusStep
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Continue")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-content",
+                                        { attrs: { step: "3" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { row: "", wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  staticClass: "success--text",
+                                                  attrs: { xs8: "" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                                                        _vm._s(
+                                                          _vm.order.statusName
+                                                        ) +
+                                                        "\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tĐơn hàng " +
+                                                        _vm._s(_vm.order.id) +
+                                                        " đã được xác nhận thành công.\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "\n\t\t\t\t\t\t\t\t\t\t\t\tXin vui lòng liên hệ cửa hàng để chuẩn bị.\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\tCám ơn!\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ])
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tShipper:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs6: "" } },
+                                                [
+                                                  _c("v-select", {
+                                                    attrs: {
+                                                      items: _vm.shippers,
+                                                      "item-text": "name",
+                                                      "item-value": "id",
+                                                      "return-object": "",
+                                                      label: "Select",
+                                                      "single-line": ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.shipper,
+                                                      callback: function($$v) {
+                                                        _vm.shipper = $$v
+                                                      },
+                                                      expression: "shipper"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs2: "" } },
+                                                [
+                                                  _c(
+                                                    "v-btn",
+                                                    {
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.stopPropagation()
+                                                          _vm.chooseShipper()
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n\t\t\t\t\t\t\t\t\t\t\tChoose\n\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ]
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "primary",
+                                                disabled:
+                                                  _vm.order.shipper == null
+                                              },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.changeStatus(
+                                                    _vm.order.statusStep
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Continue")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-content",
+                                        { attrs: { step: "4" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { row: "", wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                      _vm._s(
+                                                        _vm.order.statusName
+                                                      ) +
+                                                      "\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tĐơn hàng của quý khách đã được nhân viên "
+                                                    ),
+                                                    _vm.order.shipper != null
+                                                      ? _c("span", [
+                                                          _c("strong", [
+                                                            _vm._v(
+                                                              " " +
+                                                                _vm._s(
+                                                                  _vm.order
+                                                                    .shipper
+                                                                    .name
+                                                                ) +
+                                                                " "
+                                                            )
+                                                          ])
+                                                        ])
+                                                      : _vm._e(),
+                                                    _vm._v(
+                                                      " giao đến.\n\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "\n\t\t\t\t\t\t\t\t\t\t\t\tXin vui lòng chờ đợi ít phút.\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "\n\t\t\t\t\t\t\t\t\t\t\t\tCám ơn.\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      )
+                                                    ])
+                                                  ])
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { color: "primary" },
+                                              nativeOn: {
+                                                click: function($event) {
+                                                  _vm.changeStatus(
+                                                    _vm.order.statusStep
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Continue")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-stepper-content",
+                                        { attrs: { step: "5" } },
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { row: "", wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  staticClass: "success--text",
+                                                  attrs: { xs8: "" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.order.statusName
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs4: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\tThông điệp:\n\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-flex",
+                                                { attrs: { xs8: "" } },
+                                                [
+                                                  _c("div", [
+                                                    _vm._v(
+                                                      "Đơn hàng của quý khách đã được giao thành công."
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "Cám ơn quý khách đã đặt hàng từ hệ thống."
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c("strong", [
+                                                      _vm._v(
+                                                        "Chúc bạn dùng ngon miệng."
+                                                      )
+                                                    ])
+                                                  ])
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value:
+                            _vm.order.statusId != _vm.statusId("Thành công") &&
+                            _vm.order.statusId != _vm.statusId("Hủy"),
+                          expression:
+                            "order.statusId != statusId('Thành công') && order.statusId != statusId('Hủy')"
+                        }
+                      ],
+                      attrs: { color: "error" },
+                      on: {
+                        click: function($event) {
+                          _vm.cancelDialog = !_vm.cancelDialog
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-dialog",
+                {
+                  attrs: { value: _vm.cancelDialog, "max-width": "500" },
+                  model: {
+                    value: _vm.cancelDialog,
+                    callback: function($$v) {
+                      _vm.cancelDialog = $$v
+                    },
+                    expression: "cancelDialog"
+                  }
+                },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", { staticClass: "headline" }, [
+                        _vm._v("Hủy đơn đặt hàng?")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        _vm._l(_vm.reasons, function(item, index) {
+                          return _c("v-checkbox", {
+                            key: index,
+                            attrs: { label: item.note, value: item.note },
+                            model: {
+                              value: _vm.notes,
+                              callback: function($$v) {
+                                _vm.notes = $$v
+                              },
+                              expression: "notes"
+                            }
+                          })
+                        })
+                      ),
+                      _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { round: "", small: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.cancelDialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Hủy")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                color: "red accent-3",
+                                dark: "",
+                                round: "",
+                                small: ""
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.cancelOrder($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Chấp nhận")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-25d56158", module.exports)
   }
 }
 

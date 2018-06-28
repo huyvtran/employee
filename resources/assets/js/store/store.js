@@ -14,6 +14,7 @@ import catalogueStore from './modules/catalogue'
 import toppingStore from './modules/topping'
 import sizeStore from './modules/size'
 import productStore from './modules/product'
+import orderStatusStore from './modules/orderStatus'
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -30,6 +31,7 @@ export default new Vuex.Store({
 		toppingStore,
 		sizeStore,
 		productStore,
+		orderStatusStore
 	},
 	strict: debug
 });

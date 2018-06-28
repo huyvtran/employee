@@ -9,7 +9,7 @@
 
 			<v-layout row wrap  > <!-- Filter Start -->	
 				
-				<v-flex xs2 :key="0">
+				<v-flex xs4 :key="0">
 					<v-select
 					:items="filterCatalogue"
 					item-text="name"
@@ -19,7 +19,7 @@
 					></v-select>
 				</v-flex>	
 
-				<v-flex xs2 :key="0">
+				<v-flex xs2 :key="1">
 					<v-select
 					:items="filterTopping"
 					item-text="name"
@@ -29,7 +29,7 @@
 					></v-select>
 				</v-flex>
 
-				<v-flex xs2 :key="1">
+				<v-flex xs2 :key="2">
 					<v-select
 					:items="filterSize"
 					item-text="name"
@@ -39,11 +39,11 @@
 					></v-select>
 				</v-flex>
 
-				<v-flex xs6 :key="2">
+				<v-flex xs4 :key="3">
 					<v-text-field
 					v-model="search.text"
 					append-icon="search"
-					label="Tìm kiếm danh mục"
+					label="Tìm kiếm món"
 					single-line
 					hide-details
 					></v-text-field>
@@ -78,10 +78,10 @@
 				<div v-if="props.item.description != null">Mô tả: {{props.item.description}}</div>
 			</td>
 			<td>
-				<h4 v-if="!props.item.haveSize">{{ props.item.price | formatPrice}}</h4>
-				<h4 v-else v-for="size in props.item.sizes">
+				<h5 v-if="!props.item.haveSize">{{ props.item.price | formatPrice}}</h5>
+				<h5 v-else v-for="(size, i) in props.item.sizes" :key="i">
 					{{size.name}}: {{size.price | formatPrice}}
-				</h4>
+				</h5>
 			</td>		
 			<td>
 				<div>Trạng thái: <strong>{{ props.item.status}}</strong></div>
@@ -242,7 +242,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			items: state => state.productStore.products,
+			items: state      => state.productStore.products,
 			catalogues: state => Array.from(state.catalogueStore.catalogues)
 		}),
 		filterData() {
@@ -254,7 +254,6 @@ export default {
 	watch: {
 		'catalogues': function(val) {
 			if(val.length > 0) {	
-			console.log(val)	
 				val.forEach(item => {
 					this.filterCatalogue.push({name: item.name, id: item.id})
 				})

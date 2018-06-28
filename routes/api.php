@@ -76,4 +76,18 @@ Route::group(['middleware' => ['api']], function() {
 	Route::post('/GetStore/{sid}/Menu/Product/Delete', 'MenuController@destroyProduct');
 	//GET PRODUCT STATUS
 	Route::get('/GetProductStatus', 'MenuController@getProductStatus');
+	//GET ORDER STATUS
+	Route::get('/GetOrderStatus', 'OrderStatusController@getOrderStatus');
+	//GET ORDER
+	Route::post('/GetOrderByFilter', 'OrderController@getOrderByFilter');
+	//GET ORDER DETAILS
+	Route::post('/GetOrder/{oid}/Details', 'OrderController@getOrderDetail');
+	//PROCESS ORDER
+	Route::post('/GetOrder/{oid}/Details/ChangeStatus', 'OrderController@changeStatusOrder');
+	//CHOOSE SHIPPER
+	Route::post('/GetOrder/{oid}/Details/ChooseShipper', 'OrderController@chooseShipper');
+	//CANCEL ORDER
+ 	Route::post('/GetOrder/{oid}/Details/CancelOrder', 'OrderController@cancelOrder');
+	//GET SHIPPER
+	Route::post('/GetUser/Shippers', 'UserController@getShipper');
 });

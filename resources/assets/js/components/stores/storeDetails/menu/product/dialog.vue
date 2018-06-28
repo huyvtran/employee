@@ -52,7 +52,7 @@
 											<v-text-field v-model.number="editedItem.price" label="Giá" prepend-icon="money" persistent-hint :disabled="editedItem.haveSize" hint="Giá giành cho món không có size" suffix="vnđ" v-validate="{required: !editedItem.haveSize, numeric:true, min:1, max:8}" :error-messages="errors.collect('price')" data-vv-name="price" :required="!editedItem.haveSize"></v-text-field>
 										</v-flex>
 
-										<v-flex xs4  v-for="size in editedItem.sizes" :key="size.id">
+										<v-flex xs4  v-for="(size, i) in editedItem.sizes" :key="i">
 											<v-text-field prepend-icon="money" :disabled="!editedItem.haveSize" :label="`Giá size ${size.name}`" v-model.number="size.price" suffix="vnđ" :hint="`Giá giành cho món có ${size.name}`" persistent-hint :required="editedItem.haveSize" v-validate="{required:true, numeric:true, min:1, max:8}" :error-messages="errors.collect('size._name')" :data-vv-name="size._name"></v-text-field> 
 										</v-flex>
 									</v-layout>
@@ -119,7 +119,7 @@
 			</v-card>
 		</v-dialog>
 		<v-snackbar auto-height top right :timeout="0" color="error" vertical :value="errors.items.length>0 || alert.show && alert.index == 1 && alert.name == $route.name " >
-			<span v-for="error in errors.items" v-if="!alert.show"> {{error.msg}}</span>
+			<span v-for="(error, i) in errors.items" v-if="!alert.show" :key="i"> {{error.msg}}</span>
 			<span v-if="alert.show">{{alert.message}}</span>
 		</v-snackbar>
 	</div>
@@ -295,10 +295,7 @@ export default {
 		'editedItem._name': function(val, oldVal) {
 			//not required
 			if(this.index > -1) {
-				if(oldVal != null) {
-					if(val.length==0) {
-						this.editedItem._name = null
-					}						
+				if(oldVal != null) {		
 					this.disabled = false
 				}
 			}
