@@ -295,7 +295,10 @@ export default {
 		'editedItem._name': function(val, oldVal) {
 			//not required
 			if(this.index > -1) {
-				if(oldVal != null) {						
+				if(oldVal != null) {
+					if(val.length==0) {
+						this.editedItem._name = null
+					}						
 					this.disabled = false
 				}
 			}
