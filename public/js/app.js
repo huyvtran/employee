@@ -92051,7 +92051,13 @@ var render = function() {
                         _vm._v(_vm._s(props.item.count))
                       ]),
                       _vm._v(" lần")
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    props.item.description != null
+                      ? _c("div", [
+                          _vm._v("Mô tả: " + _vm._s(props.item.description))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c(

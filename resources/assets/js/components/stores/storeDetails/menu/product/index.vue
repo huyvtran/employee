@@ -75,6 +75,7 @@
 				<h4>{{ props.item.name}}</h4>
 				<h4 class="grey--text" v-if="props.item._name != null">{{props.item._name}}</h4>
 				<div>Đã bán <strong class="red--text">{{props.item.count}}</strong> lần</div>
+				<div v-if="props.item.description != null">Mô tả: {{props.item.description}}</div>
 			</td>
 			<td>
 				<h4 v-if="!props.item.haveSize">{{ props.item.price | formatPrice}}</h4>
