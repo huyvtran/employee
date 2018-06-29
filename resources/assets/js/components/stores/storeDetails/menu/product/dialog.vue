@@ -272,9 +272,11 @@ export default {
 				await this.$store.dispatch('getCatalogue', this.$route.params.storeId)
 				
 				if(this.index === -1) {
+					var sizes = []
 					await this.sizes.forEach(item => {
-						this.editedItem.sizes.push({id: item.id, 'name': item.name, '_name': item._name, 'price': 0})
+						sizes.push({id: item.id, 'name': item.name, '_name': item._name, 'price': 0})
 					})
+					this.editedItem.sizes = sizes
 				} 
 
 				this.loading = false

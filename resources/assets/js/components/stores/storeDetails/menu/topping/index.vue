@@ -10,7 +10,7 @@
 			<v-text-field
 			v-model="search.text"
 			append-icon="search"
-			label="Tìm kiếm danh mục"
+			label="Tìm kiếm topping"
 			single-line
 			hide-details
 			></v-text-field>
