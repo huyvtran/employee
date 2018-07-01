@@ -45,6 +45,7 @@
 								<div>
 									{{order.store.address}}
 								</div>
+								<h4>{{order.store.phone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
@@ -60,14 +61,14 @@
 								Địa chỉ giao:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
-								{{order.address}}
+								<h4>{{order.address}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
 								Số điện thoại:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
-								{{order.phone}}
+								<h4>{{order.phone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
@@ -88,7 +89,7 @@
 								Phí vận chuyển:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
-								<strong>{{order.deliveryPrice | formatPrice}}</strong>
+								{{order.deliveryPrice | formatPrice}}
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">

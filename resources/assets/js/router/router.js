@@ -19,6 +19,7 @@ import Topping from '@/components/stores/storeDetails/menu/topping/index'
 import Product from '@/components/stores/storeDetails/menu/product/index'
 import Service from '@/components/services/index'
 import Delivery from '@/components/services/deliveries/index'
+import Notification from '@/components/notification/index'
 
 import auth from '@/utils/auth.js'
 
@@ -57,6 +58,7 @@ const router = new Router({
 
 			]
 		},
+		{ path: '/notifications', component: Notification, name: 'Notification', meta: {auth:true}},
 		// { path: '/stores/store-details/:storeId', component: StoreDetails, name: 'StoreDetails', meta: {auth:true}},
 		// { path: '/stores/store-details/:storeId/menu', component: Menu, name: 'Menu', meta: {auth:true}},
 		{ path: '/services', component: Service, name: 'Service', meta:{auth:true}},
