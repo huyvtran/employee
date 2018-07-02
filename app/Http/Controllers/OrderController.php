@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\RegularOrder;
 use App\Models\OrderStatus;
+use App\Models\ActualOrder;
 use App\Http\Resources\OrderResource;
 use DateTime;
 
@@ -32,7 +33,7 @@ class OrderController extends Controller
 					$res   = [
 						'type'    => 'success',
 						'message' => 'Get order details successfully.',
-						'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper'))
+						'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper', 'actualOrder'))
 					];	
 					return response($res, 200);
 				}
@@ -59,7 +60,7 @@ class OrderController extends Controller
 				$res = [
 					'type'    => 'success',
 					'message' => 'Cancelled order successfully.',
-					'data'    => new OrderResource($order->load('user', 'shipper', 'employee', 'store', 'payment'))
+					'data'    => new OrderResource($order->load('user', 'shipper', 'employee', 'store', 'payment', 'actualOrder'))
 				];		
 				return response($res ,200);
 			}
@@ -91,7 +92,7 @@ class OrderController extends Controller
 				$res   = [
 					'type'    => 'success',
 					'message' => 'Get order details successfully.',
-					'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper'))
+					'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper', 'actualOrder'))
 				];	
 				return response($res, 200);
 			}
@@ -111,7 +112,7 @@ class OrderController extends Controller
 			$res   = [
 				'type'    => 'success',
 				'message' => 'Get order details successfully.',
-				'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper'))
+				'data'    => new OrderResource($order->load('products', 'user', 'store', 'employee', 'shipper', 'actualOrder'))
 			];	
 			return response($res, 200);
 		}
@@ -136,7 +137,7 @@ class OrderController extends Controller
 		$res     = [
 			'type'    => 'success',
 			'message' => 'Get history information successfully.',
-			'data'    => OrderResource::collection($orders->load('user', 'shipper', 'employee', 'store', 'payment'))
+			'data'    => OrderResource::collection($orders->load('user', 'shipper', 'employee', 'store', 'payment', 'actualOrder'))
 		];
 
 		return response($res, 200);

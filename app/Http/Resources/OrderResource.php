@@ -32,6 +32,8 @@ class OrderResource extends JsonResource
             'subTotal'        => $this->subtotal_amount,
             'total'           => $this->amount,
             'memo'            => $this->memo,
+            'coupon'          => $this->coupon,
+            'secret'          => $this->secret,
             'discountPercent' => $this->discount,
             'discountTotal'   => $this->discount_total,
             'statusId'        => $this->status_id,
@@ -57,6 +59,9 @@ class OrderResource extends JsonResource
             }),
             'employee'        => $this->whenLoaded('employee', function() {
                 return new UserResource($this->employee);
+            }),
+            'actualOrder'    => $this->whenLoaded('actualOrder', function() {
+                return new ActualOrderResource($this->actualOrder);
             })
         ];
     }

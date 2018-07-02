@@ -26,6 +26,9 @@
 			<v-tab :href="`#item-2`" :value="2" @click.prevent="changeTab(2)">
 				Xử lý
 			</v-tab>
+			<v-tab :href="`#item-3`" :value="2" @click.prevent="changeTab(3)">
+				Đơn hàng thực tế
+			</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-layout row wrap v-show="tab == 0">
@@ -404,6 +407,146 @@
 					</v-stepper>
 				</v-card>
 			</div>
+
+			<v-layout row wrap v-show="tab == 3">
+				<v-flex xs12 md6 d-flex>
+					<v-card>
+						<v-layout row wrap class="grid-list-md">
+							<v-flex xs5 class="text-xs-right">
+								Nơi đặt:
+							</v-flex>
+
+							<v-flex xs5 offset-xs1>
+								<div class="primary--text">
+									<strong>
+										{{order.store.name}}
+									</strong>
+								</div>
+								<div>
+									{{order.store.address}}
+								</div>
+							</v-flex>
+
+							<v-flex xs5 class="text-xs-right">
+								Số điện thoại cửa hàng:
+							</v-flex>
+
+							<v-flex xs5 offset-xs1>
+								<h4>{{order.store.phone}}</h4>
+							</v-flex>
+
+							<v-flex xs5  class="text-xs-right">
+								Người nhận:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								<strong>
+									{{order.name}}
+								</strong>
+							</v-flex>
+
+							<v-flex xs5  class="text-xs-right">
+								Địa chỉ giao:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								<h4>{{order.address}}</h4>
+							</v-flex>
+
+							<v-flex xs5  class="text-xs-right">
+								Số điện thoại:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								<h4>{{order.phone}}</h4>
+							</v-flex>
+
+							<v-flex xs5  class="text-xs-right">
+								Ngày đặt:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								{{order.bookingDate}}
+							</v-flex>
+
+							<v-flex xs5  class="text-xs-right"> 
+								Ngày nhận:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								{{order.receiveDate | formatDate}} {{order.receiveTime}}
+							</v-flex>						
+
+							<v-flex xs5  class="text-xs-right">
+								Ghi chú:
+							</v-flex>
+							<v-flex xs5 offset-xs1>
+								<strong>{{order.memo}}</strong>
+							</v-flex>
+						</v-layout>
+					</v-card>
+				</v-flex>
+
+				<v-flex xs12 md6 d-flex>
+					<v-data-table
+					:headers="headers"
+					:items="order.actualOrder.items"
+					hide-actions
+					class="elevation-1">
+					<template slot="headerCell" slot-scope="props">
+						<span class="red--text text--accent-3">
+							{{ props.header.text }}
+						</span>
+					</template>
+					<template slot="items" slot-scope="props">
+						<td>
+							{{props.item.name}}
+							<h4 v-if="props.item.pivot.toppings.length > 0">toppings thêm: <span v-for="topping in props.item.pivot.toppings">{{topping.name}} ({{topping.price | formatPrice}}). </span></h4>
+							<div v-if="props.item.pivot.memo != null">Ghi chú: {{props.item.pivot.memo}}</div>
+						</td>
+						<td class="text-xs-center">
+							{{props.item.pivot.quantity}}
+						</td>
+						<td>
+							{{props.item.pivot.price | formatPrice}}
+						</td>
+						<td>
+							{{props.item.pivot.total | formatPrice}}
+						</td>
+					</template>
+					<template slot="footer">
+						<tr>
+							<td colspan="3">Tạm tính</td>
+							<td colspan="3"><strong>{{order.actualOrder.subTotal | formatPrice}}</strong></td>
+						</tr>
+						<tr>
+							<td colspan="2">Chiết khấu:</td>
+							<td>{{order.actualOrder.discountPercent}} %</td>
+							<td><strong>{{-order.actualOrder.discountTotal | formatPrice}}</strong></td>
+						</tr>	
+						<tr>
+							<td colspan="3">Tổng:</td>
+							<td class="red--text"><strong>{{order.actualOrder.total | formatPrice}}</strong></td>
+						</tr>			
+					</template></v-data-table>
+				</v-flex>
+				<v-flex xs12>
+					<v-card>
+						<v-card-text>
+							<v-layout row wrap>
+								<v-flex xs5  class="text-xs-right">
+									CSKH:
+								</v-flex>
+								<v-flex xs5 offset-xs1>
+									<strong>{{order.employee.name}}</strong>
+								</v-flex>
+
+								<v-flex xs5  class="text-xs-right">
+									Shipper:
+								</v-flex>
+								<v-flex v-if="order.shipper != null"  xs5 offset-xs1>
+									<strong>{{order.shipper.name}}</strong>
+								</v-flex>
+							</v-layout>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+			</v-layout>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>

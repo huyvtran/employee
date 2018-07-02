@@ -38,7 +38,13 @@ class RegularOrder extends Model
 		return $this->belongsTo('App\Models\OrderStatus', 'status_id');
 	}
 
+	public function actualOrder() {
+		return $this->hasOne('App\Models\ActualOrder', 'order_id');
+	}
+
 	public function products() {
 		return $this->belongsToMany('App\Models\Product','ec_product_ec_regular_order','order_id', 'product_id')->withPivot(['quantity','price','total', 'memo', 'toppings']);
 	}
+
+	
 }
