@@ -69067,7 +69067,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-25d56158"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -104141,7 +104141,8 @@ var render = function() {
                                         "https://www.dofuu.com/" +
                                         _vm.store.city_slug +
                                         "/" +
-                                        _vm.store.slug
+                                        _vm.store.slug,
+                                      target: "_blank"
                                     }
                                   },
                                   [_vm._v(_vm._s(_vm.store.name))]
@@ -104741,23 +104742,23 @@ if (false) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(7), __webpack_require__(3), __webpack_require__(20), __webpack_require__(474)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(7), __webpack_require__(3), __webpack_require__(20), __webpack_require__(138), __webpack_require__(474)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/array/from'), require('babel-runtime/helpers/extends'), require('vuex'), require('@/mixins/index'), require('./dialog'));
+		factory(exports, require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/array/from'), require('babel-runtime/helpers/extends'), require('vuex'), require('@/mixins/index'), require('@/mixins/getLocation'), require('./dialog'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.regenerator, global.asyncToGenerator, global.from, global._extends, global.vuex, global.index, global.dialog);
+		factory(mod.exports, global.regenerator, global.asyncToGenerator, global.from, global._extends, global.vuex, global.index, global.getLocation, global.dialog);
 		global.index = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(7), __webpack_require__(3), __webpack_require__(20), __webpack_require__(474)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13), __webpack_require__(12), __webpack_require__(60), __webpack_require__(7), __webpack_require__(3), __webpack_require__(20), __webpack_require__(138), __webpack_require__(474)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -104767,10 +104768,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.regenerator, global.asyncToGenerator, global.from, global._extends, global.vuex, global.index, global.dialog);
+			factory(mod.exports, global.regenerator, global.asyncToGenerator, global.from, global._extends, global.vuex, global.index, global.getLocation, global.dialog);
 			global.index = mod.exports;
 		}
-	})(this, function (exports, _regenerator, _asyncToGenerator2, _from, _extends2, _vuex, _index, _dialog) {
+	})(this, function (exports, _regenerator, _asyncToGenerator2, _from, _extends2, _vuex, _index, _getLocation, _dialog) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
@@ -104787,6 +104788,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		var _index2 = _interopRequireDefault(_index);
 
+		var _getLocation2 = _interopRequireDefault(_getLocation);
+
 		var _dialog2 = _interopRequireDefault(_dialog);
 
 		function _interopRequireDefault(obj) {
@@ -104796,7 +104799,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		}
 
 		exports.default = {
-			mixins: [_index2.default],
+			mixins: [_index2.default, _getLocation2.default],
 			data: function data() {
 				return {
 					title: 'Danh sách cửa hàng',
@@ -104812,7 +104815,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 						text: '#',
 						align: 'center',
 						value: 'id'
-					}, { text: 'Hình đại diện', value: 'user.email', align: 'center', sortable: false }, { text: 'Cửa hàng', value: 'name', align: 'center' }, { text: 'Liên hệ', value: 'phone', sortable: false }, { text: 'Ẩn/Hiện', value: 'address', sortable: false }, { text: 'Ưu tiên', value: 'priority', align: 'center' }, { text: 'Thành phố', value: 'city_name' }, { text: 'Quận', value: 'district_name' }, { text: 'Tác vụ', sortable: false }],
+					}, { text: 'Hình đại diện', value: 'user.email', align: 'center', sortable: false, width: '120px' }, { text: 'Cửa hàng', value: 'name', align: 'center' }, { text: 'Liên hệ', value: 'phone', sortable: false }, { text: 'Ẩn/Hiện', value: 'address', sortable: false }, { text: 'Chiết khấu', value: 'discount', align: 'center' }, { text: 'Thành phố', value: 'city_name' }, { text: 'Quận', value: 'district_name' }, { text: 'Tác vụ', sortable: false }],
 					loading: false,
 					search: {
 						text: '',
@@ -104823,7 +104826,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					filter: false,
 					filterTypes: [{ name: 'Tất cả', id: -1, countStore: 0 }],
 					filterShow: [{ name: 'Tất cả', value: null }, { name: 'Hiện', value: true }, { name: 'Ẩn', value: false }],
-					filterVerify: [{ name: 'Tất cả', value: null }, { name: 'Đã xác thực', value: true }, { name: 'Chưa xác thực', value: false }]
+					filterVerify: [{ name: 'Tất cả', value: null }, { name: 'Đã xác thực', value: true }, { name: 'Chưa xác thực', value: false }],
+					mapDialog: false,
+					store: null
 				};
 			},
 
@@ -104831,7 +104836,28 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				'vue-dialog': _dialog2.default
 			},
 			methods: {
+				//Show google map
+				showMap: function showMap(request) {
+					this.mapDialog = true;
+					this.location = {
+						lat: request.lat,
+						lng: request.lng
+					};
+					this.store = request;
+				},
 
+				//Icon google map
+				statusIcon: function statusIcon(value) {
+					var status = new String(value).toLowerCase();
+					switch (status) {
+						case 'mở cửa':
+							return { url: apiDomain + '/storage/image/pin-green-icon.png' };
+							break;
+						case 'đóng cửa':
+							return { url: apiDomain + '/storage/image/pin-red-icon.png' };
+							break;
+					}
+				},
 				//Convert value int to string for gender
 				gender: function gender(value) {
 					var gender = parseInt(value);
@@ -107221,19 +107247,137 @@ var render = function() {
                       "td",
                       [
                         _c(
-                          "v-avatar",
-                          {
-                            staticClass: "my-2",
-                            attrs: { size: "120", tile: "" }
-                          },
+                          "v-card",
+                          { attrs: { width: "120px" } },
                           [
-                            _c("img", {
-                              attrs: {
-                                src: _vm.image(props.item.avatar),
-                                alt: "avatar"
-                              }
-                            })
-                          ]
+                            _c(
+                              "v-card-media",
+                              {
+                                attrs: {
+                                  src: _vm.image(props.item.avatar),
+                                  alt: "avatar",
+                                  height: "120px"
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-layout",
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      {
+                                        attrs: {
+                                          xs12: "",
+                                          "align-end": "",
+                                          flexbox: ""
+                                        }
+                                      },
+                                      [_c("v-spacer")],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-actions",
+                              [
+                                _c("v-tooltip", { attrs: { top: "" } }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "black--text",
+                                      attrs: { slot: "activator" },
+                                      slot: "activator"
+                                    },
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        {
+                                          attrs: { size: "18", color: "black" }
+                                        },
+                                        [_vm._v("visibility")]
+                                      ),
+                                      _vm._v(" " + _vm._s(props.item.views))
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "Lượt xem: " + _vm._s(props.item.views)
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("v-tooltip", { attrs: { top: "" } }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "blue--text",
+                                      attrs: { slot: "activator" },
+                                      slot: "activator"
+                                    },
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        {
+                                          attrs: { size: "18", color: "blue" }
+                                        },
+                                        [_vm._v("swap_vert")]
+                                      ),
+                                      _vm._v(" " + _vm._s(props.item.priority))
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "Mức ưu tiên: " +
+                                        _vm._s(props.item.priority)
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                props.item.isVerified
+                                  ? _c("v-tooltip", { attrs: { top: "" } }, [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass: "black--text",
+                                          attrs: { slot: "activator" },
+                                          slot: "activator"
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            {
+                                              attrs: {
+                                                size: "18",
+                                                color: "green darken-3"
+                                              }
+                                            },
+                                            [_vm._v("verified_user")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v("Xác nhận đã hợp tác cùng Dofuu")
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ],
+                          1
                         )
                       ],
                       1
@@ -107260,7 +107404,21 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", [
                         _vm._v("Địa chỉ: "),
-                        _c("strong", [_vm._v(_vm._s(props.item.address))])
+                        _c("strong", [
+                          _c(
+                            "a",
+                            {
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  $event.preventDefault()
+                                  _vm.showMap(props.item)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(props.item.address))]
+                          )
+                        ])
                       ])
                     ]),
                     _vm._v(" "),
@@ -107275,7 +107433,20 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-xs-center" }, [
-                      _c("div", [_vm._v(_vm._s(props.item.priority))])
+                      _c(
+                        "div",
+                        {
+                          staticClass: "font-weight-bold",
+                          class: {
+                            "green--text text--darken-3":
+                              props.item.discount > 10,
+                            "red--text": props.item.discount > 0,
+                            "orange--text text--darken-4":
+                              props.item.discount > 15
+                          }
+                        },
+                        [_vm._v(_vm._s(props.item.discount) + "%")]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(props.item.city_name))]),
@@ -107428,7 +107599,7 @@ var render = function() {
                                       [
                                         _c("v-toolbar-title", [
                                           _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\t\tThông tin người sở hữu\n\t\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\t\tThông tin người sở hữu\n\t\t\t\t\t\t\t\t"
                                           )
                                         ])
                                       ],
@@ -107454,7 +107625,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tUID:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tUID:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107478,7 +107649,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tChủ sở hữu/Quản lý:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tChủ sở hữu/Quản lý:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107502,7 +107673,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tNgày sinh:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tNgày sinh:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107527,7 +107698,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tGiới tính:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tGiới tính:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107569,7 +107740,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tEmail:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tEmail:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107593,7 +107764,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tSố điện thoại:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tSố điện thoại:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107617,7 +107788,7 @@ var render = function() {
                                                   { attrs: { xs4: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\tAddress:\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\tAddress:\n\t\t\t\t\t\t\t\t\t\t"
                                                     )
                                                   ]
                                                 ),
@@ -107717,7 +107888,7 @@ var render = function() {
                                                       [
                                                         _c("v-toolbar-title", [
                                                           _vm._v(
-                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\tCài đặt\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\tCài đặt\n\t\t\t\t\t\t\t\t\t\t\t"
                                                           )
                                                         ])
                                                       ],
@@ -107752,7 +107923,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tMức độ ưu tiên: \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tMức độ ưu tiên: \n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -107789,7 +107960,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tHợp tác:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tHợp tác:\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -107834,7 +108005,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tẨn/Hiện:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tẨn/Hiện:\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -107851,7 +108022,7 @@ var render = function() {
                                                                       "strong",
                                                                       [
                                                                         _vm._v(
-                                                                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
                                                                             _vm._s(
                                                                               props
                                                                                 .item
@@ -107859,7 +108030,7 @@ var render = function() {
                                                                                 ? "Hiện"
                                                                                 : "Ẩn"
                                                                             ) +
-                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                         )
                                                                       ]
                                                                     )
@@ -107875,7 +108046,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tTrạng thái:\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -107892,13 +108063,13 @@ var render = function() {
                                                                       "strong",
                                                                       [
                                                                         _vm._v(
-                                                                          " \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                                          " \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
                                                                             _vm._s(
                                                                               props
                                                                                 .item
                                                                                 .status_name
                                                                             ) +
-                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                         )
                                                                       ]
                                                                     )
@@ -107936,7 +108107,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tKích hoạt tài khoản:\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tKích hoạt tài khoản:\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -107964,7 +108135,7 @@ var render = function() {
                                                                       "strong",
                                                                       [
                                                                         _vm._v(
-                                                                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                                          "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
                                                                             _vm._s(
                                                                               props
                                                                                 .item
@@ -107973,7 +108144,7 @@ var render = function() {
                                                                                 ? "Đã kích hoạt"
                                                                                 : "Chưa kích hoạt"
                                                                             ) +
-                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                         )
                                                                       ]
                                                                     )
@@ -107989,7 +108160,7 @@ var render = function() {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tKhóa tài khoản: \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tKhóa tài khoản: \n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                     )
                                                                   ]
                                                                 ),
@@ -108017,7 +108188,7 @@ var render = function() {
                                                                       "strong",
                                                                       [
                                                                         _vm._v(
-                                                                          "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                                          "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
                                                                             _vm._s(
                                                                               props
                                                                                 .item
@@ -108026,7 +108197,7 @@ var render = function() {
                                                                                 ? "Đã bị cấm"
                                                                                 : "Hoạt động"
                                                                             ) +
-                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                                         )
                                                                       ]
                                                                     )
@@ -108106,6 +108277,184 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _vm.mapDialog
+        ? _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "800" },
+              model: {
+                value: _vm.mapDialog,
+                callback: function($$v) {
+                  _vm.mapDialog = $$v
+                },
+                expression: "mapDialog"
+              }
+            },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "gmap-map",
+                    {
+                      staticStyle: { height: "500px" },
+                      attrs: {
+                        center: _vm.location,
+                        zoom: 15,
+                        "map-type-id": "terrain"
+                      }
+                    },
+                    [
+                      _c(
+                        "GmapMarker",
+                        {
+                          attrs: {
+                            position: _vm.location,
+                            clickable: true,
+                            icon: _vm.typeIcon(_vm.store.type_name)
+                          }
+                        },
+                        [
+                          _c(
+                            "gmap-info-window",
+                            { attrs: { position: _vm.location, opened: true } },
+                            [
+                              _c(
+                                "v-card",
+                                [
+                                  _c(
+                                    "v-card-title",
+                                    { attrs: { "primary-title": "" } },
+                                    [
+                                      _c("div", [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass:
+                                              "body-2 font-weight-bold",
+                                            attrs: {
+                                              href:
+                                                "https://www.dofuu.com/" +
+                                                _vm.store.city_slug +
+                                                "/" +
+                                                _vm.store.slug,
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(_vm.store.name))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "grey--text" },
+                                          [_vm._v(_vm._s(_vm.store.type_name))]
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list",
+                                    { attrs: { dense: "" } },
+                                    [
+                                      _c(
+                                        "v-list-tile",
+                                        { on: { click: function($event) {} } },
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                { attrs: { color: "indigo" } },
+                                                [_vm._v("phone")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-list-tile-title", [
+                                                _c("h4", [
+                                                  _vm._v(
+                                                    _vm._s(_vm.store.phone)
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("v-list-tile-sub-title", [
+                                                _c("h4", [_vm._v("Mobile")])
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-divider", { attrs: { inset: "" } }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        { on: { click: function($event) {} } },
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                { attrs: { color: "indigo" } },
+                                                [_vm._v("place")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-list-tile-title", [
+                                                _c("h4", [
+                                                  _vm._v(
+                                                    _vm._s(_vm.store.address)
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("v-list-tile-sub-title", [
+                                                _c("h4", [_vm._v("Address")])
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("vue-dialog")
     ],
     1
@@ -108132,13 +108481,13 @@ var content = __webpack_require__(975);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(94)("72bb9142", content, false, {});
+var update = __webpack_require__(94)("7b1798da", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25d56158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -108156,7 +108505,7 @@ exports = module.exports = __webpack_require__(61)(false);
 
 
 // module
-exports.push([module.i, "\n#map[data-v-25d56158] {\r\n\twidth: 100%;\r\n\theight: 250px;\n}\r\n", ""]);
+exports.push([module.i, "\n#map {\r\n\twidth: 100%;\r\n\theight: 250px;\n}\n@media print {\n.application {\r\n\t\tdisplay: block !important;\n}\n.application--wrap {\r\n\t\tdisplay: block !important;\n}\n.content--wrap {\r\n\t\tdisplay: block !important;\n}\n.v-toolbar, .v-breadcrumbs, .v-tabs {\r\n\t\tdisplay: none !important;\n}\n.wrap-print {\r\n\t\tpadding-top: 0px !important;\r\n\t\tmargin-top: 0px !important;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -108630,7 +108979,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
-    { attrs: { "grid-list-lg": "" } },
+    { staticClass: "wrap-print", attrs: { "grid-list-lg": "" } },
     [
       _vm.order != null
         ? _c(
@@ -110209,467 +110558,34 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    {
-                      directives: [
+                  _vm.order.actualOrder != null
+                    ? _c(
+                        "v-layout",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.tab == 3,
-                          expression: "tab == 3"
-                        }
-                      ],
-                      attrs: { row: "", wrap: "" }
-                    },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", md6: "", "d-flex": "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-layout",
-                                {
-                                  staticClass: "grid-list-md",
-                                  attrs: { row: "", wrap: "" }
-                                },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tNơi đặt:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "primary--text" },
-                                        [
-                                          _c("strong", [
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t" +
-                                                _vm._s(_vm.order.store.name) +
-                                                "\n\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ])
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("div", [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(_vm.order.store.address) +
-                                            "\n\t\t\t\t\t\t\t\t"
-                                        )
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tSố điện thoại cửa hàng:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c("h4", [
-                                        _vm._v(_vm._s(_vm.order.store.phone))
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tNgười nhận:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c("strong", [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t" +
-                                            _vm._s(_vm.order.name) +
-                                            "\n\t\t\t\t\t\t\t\t"
-                                        )
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tĐịa chỉ giao:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c("h4", [
-                                        _vm._v(_vm._s(_vm.order.address))
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tSố điện thoại:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c("h4", [
-                                        _vm._v(_vm._s(_vm.order.phone))
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tNgày đặt:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t" +
-                                          _vm._s(_vm.order.bookingDate) +
-                                          "\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        " \n\t\t\t\t\t\t\t\tNgày nhận:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t" +
-                                          _vm._s(
-                                            _vm._f("formatDate")(
-                                              _vm.order.receiveDate
-                                            )
-                                          ) +
-                                          " " +
-                                          _vm._s(_vm.order.receiveTime) +
-                                          "\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    {
-                                      staticClass: "text-xs-right",
-                                      attrs: { xs5: "" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\tGhi chú:\n\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "", "offset-xs1": "" } },
-                                    [
-                                      _c("strong", [
-                                        _vm._v(_vm._s(_vm.order.memo))
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", md6: "", "d-flex": "" } },
-                        [
-                          _c(
-                            "v-data-table",
+                          directives: [
                             {
-                              staticClass: "elevation-1",
-                              attrs: {
-                                headers: _vm.headers,
-                                items: _vm.order.actualOrder.items,
-                                "hide-actions": ""
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "headerCell",
-                                  fn: function(props) {
-                                    return [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass:
-                                            "red--text text--accent-3"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t" +
-                                              _vm._s(props.header.text) +
-                                              "\n\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  }
-                                },
-                                {
-                                  key: "items",
-                                  fn: function(props) {
-                                    return [
-                                      _c("td", [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t" +
-                                            _vm._s(props.item.name) +
-                                            "\n\t\t\t\t\t\t\t"
-                                        ),
-                                        props.item.pivot.toppings.length > 0
-                                          ? _c(
-                                              "h4",
-                                              [
-                                                _vm._v("toppings thêm: "),
-                                                _vm._l(
-                                                  props.item.pivot.toppings,
-                                                  function(topping) {
-                                                    return _c("span", [
-                                                      _vm._v(
-                                                        _vm._s(topping.name) +
-                                                          " (" +
-                                                          _vm._s(
-                                                            _vm._f(
-                                                              "formatPrice"
-                                                            )(topping.price)
-                                                          ) +
-                                                          "). "
-                                                      )
-                                                    ])
-                                                  }
-                                                )
-                                              ],
-                                              2
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        props.item.pivot.memo != null
-                                          ? _c("div", [
-                                              _vm._v(
-                                                "Ghi chú: " +
-                                                  _vm._s(props.item.pivot.memo)
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { staticClass: "text-xs-center" },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t" +
-                                              _vm._s(
-                                                props.item.pivot.quantity
-                                              ) +
-                                              "\n\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t" +
-                                            _vm._s(
-                                              _vm._f("formatPrice")(
-                                                props.item.pivot.price
-                                              )
-                                            ) +
-                                            "\n\t\t\t\t\t\t"
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          "\n\t\t\t\t\t\t\t" +
-                                            _vm._s(
-                                              _vm._f("formatPrice")(
-                                                props.item.pivot.total
-                                              )
-                                            ) +
-                                            "\n\t\t\t\t\t\t"
-                                        )
-                                      ])
-                                    ]
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c("template", { slot: "footer" }, [
-                                _c("tr", [
-                                  _c("td", { attrs: { colspan: "3" } }, [
-                                    _vm._v("Tạm tính")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { attrs: { colspan: "3" } }, [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("formatPrice")(
-                                            _vm.order.actualOrder.subTotal
-                                          )
-                                        )
-                                      )
-                                    ])
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", { attrs: { colspan: "2" } }, [
-                                    _vm._v("Chiết khấu:")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.order.actualOrder.discountPercent
-                                      ) + " %"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("formatPrice")(
-                                            -_vm.order.actualOrder.discountTotal
-                                          )
-                                        )
-                                      )
-                                    ])
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", { attrs: { colspan: "3" } }, [
-                                    _vm._v("Tổng:")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "red--text" }, [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("formatPrice")(
-                                            _vm.order.actualOrder.total
-                                          )
-                                        )
-                                      )
-                                    ])
-                                  ])
-                                ])
-                              ])
-                            ],
-                            2
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.tab == 3,
+                              expression: "tab == 3"
+                            }
+                          ],
+                          attrs: { row: "", wrap: "" }
+                        },
                         [
                           _c(
-                            "v-card",
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "", "d-flex": "" } },
                             [
                               _c(
-                                "v-card-text",
+                                "v-card",
                                 [
                                   _c(
                                     "v-layout",
-                                    { attrs: { row: "", wrap: "" } },
+                                    {
+                                      staticClass: "grid-list-md",
+                                      attrs: { row: "", wrap: "" }
+                                    },
                                     [
                                       _c(
                                         "v-flex",
@@ -110679,7 +110595,81 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\tCSKH:\n\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\tNơi đặt:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "primary--text" },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                    _vm._s(
+                                                      _vm.order.store.name
+                                                    ) +
+                                                    "\n\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ])
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("div", [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(
+                                                  _vm.order.store.address
+                                                ) +
+                                                "\n\t\t\t\t\t\t\t\t"
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\tSố điện thoại cửa hàng:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c("h4", [
+                                            _vm._v(
+                                              _vm._s(_vm.order.store.phone)
+                                            )
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\tNgười nhận:\n\t\t\t\t\t\t\t"
                                           )
                                         ]
                                       ),
@@ -110692,7 +110682,9 @@ var render = function() {
                                         [
                                           _c("strong", [
                                             _vm._v(
-                                              _vm._s(_vm.order.employee.name)
+                                              "\n\t\t\t\t\t\t\t\t\t" +
+                                                _vm._s(_vm.order.name) +
+                                                "\n\t\t\t\t\t\t\t\t"
                                             )
                                           ])
                                         ]
@@ -110706,13 +110698,371 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\tShipper:\n\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\tĐịa chỉ giao:\n\t\t\t\t\t\t\t"
                                           )
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _vm.order.shipper != null
-                                        ? _c(
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c("h4", [
+                                            _vm._v(_vm._s(_vm.order.address))
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\tSố điện thoại:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c("h4", [
+                                            _vm._v(_vm._s(_vm.order.phone))
+                                          ])
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\tNgày đặt:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t" +
+                                              _vm._s(_vm.order.bookingDate) +
+                                              "\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            " \n\t\t\t\t\t\t\t\tNgày nhận:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\t" +
+                                              _vm._s(
+                                                _vm._f("formatDate")(
+                                                  _vm.order.receiveDate
+                                                )
+                                              ) +
+                                              " " +
+                                              _vm._s(_vm.order.receiveTime) +
+                                              "\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          staticClass: "text-xs-right",
+                                          attrs: { xs5: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n\t\t\t\t\t\t\t\tGhi chú:\n\t\t\t\t\t\t\t"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: { xs5: "", "offset-xs1": "" }
+                                        },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(_vm._s(_vm.order.memo))
+                                          ])
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "", "d-flex": "" } },
+                            [
+                              _c(
+                                "v-data-table",
+                                {
+                                  staticClass: "elevation-1",
+                                  attrs: {
+                                    headers: _vm.headers,
+                                    items: _vm.order.actualOrder.items,
+                                    "hide-actions": ""
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "headerCell",
+                                      fn: function(props) {
+                                        return [
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "red--text text--accent-3"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t" +
+                                                  _vm._s(props.header.text) +
+                                                  "\n\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      key: "items",
+                                      fn: function(props) {
+                                        return [
+                                          _c("td", [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t" +
+                                                _vm._s(props.item.name) +
+                                                "\n\t\t\t\t\t\t\t"
+                                            ),
+                                            props.item.pivot.toppings.length > 0
+                                              ? _c(
+                                                  "h4",
+                                                  [
+                                                    _vm._v("toppings thêm: "),
+                                                    _vm._l(
+                                                      props.item.pivot.toppings,
+                                                      function(topping) {
+                                                        return _c("span", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              topping.name
+                                                            ) +
+                                                              " (" +
+                                                              _vm._s(
+                                                                _vm._f(
+                                                                  "formatPrice"
+                                                                )(topping.price)
+                                                              ) +
+                                                              "). "
+                                                          )
+                                                        ])
+                                                      }
+                                                    )
+                                                  ],
+                                                  2
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            props.item.pivot.memo != null
+                                              ? _c("div", [
+                                                  _vm._v(
+                                                    "Ghi chú: " +
+                                                      _vm._s(
+                                                        props.item.pivot.memo
+                                                      )
+                                                  )
+                                                ])
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            { staticClass: "text-xs-center" },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    props.item.pivot.quantity
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t" +
+                                                _vm._s(
+                                                  _vm._f("formatPrice")(
+                                                    props.item.pivot.price
+                                                  )
+                                                ) +
+                                                "\n\t\t\t\t\t\t"
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t" +
+                                                _vm._s(
+                                                  _vm._f("formatPrice")(
+                                                    props.item.pivot.total
+                                                  )
+                                                ) +
+                                                "\n\t\t\t\t\t\t"
+                                            )
+                                          ])
+                                        ]
+                                      }
+                                    }
+                                  ])
+                                },
+                                [
+                                  _c("template", { slot: "footer" }, [
+                                    _c("tr", [
+                                      _c("td", { attrs: { colspan: "3" } }, [
+                                        _vm._v("Tạm tính")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", { attrs: { colspan: "3" } }, [
+                                        _c("strong", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPrice")(
+                                                _vm.order.actualOrder.subTotal
+                                              )
+                                            )
+                                          )
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", { attrs: { colspan: "2" } }, [
+                                        _vm._v("Chiết khấu:")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.order.actualOrder
+                                              .discountPercent
+                                          ) + " %"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _c("strong", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPrice")(
+                                                -_vm.order.actualOrder
+                                                  .discountTotal
+                                              )
+                                            )
+                                          )
+                                        ])
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("tr", [
+                                      _c("td", { attrs: { colspan: "3" } }, [
+                                        _vm._v("Tổng:")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", { staticClass: "red--text" }, [
+                                        _c("strong", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPrice")(
+                                                _vm.order.actualOrder.total
+                                              )
+                                            )
+                                          )
+                                        ])
+                                      ])
+                                    ])
+                                  ])
+                                ],
+                                2
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c(
+                                "v-card",
+                                [
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        { attrs: { row: "", wrap: "" } },
+                                        [
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass: "text-xs-right",
+                                              attrs: { xs5: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\tCSKH:\n\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
                                             "v-flex",
                                             {
                                               attrs: {
@@ -110723,12 +111073,50 @@ var render = function() {
                                             [
                                               _c("strong", [
                                                 _vm._v(
-                                                  _vm._s(_vm.order.shipper.name)
+                                                  _vm._s(
+                                                    _vm.order.employee.name
+                                                  )
                                                 )
                                               ])
                                             ]
-                                          )
-                                        : _vm._e()
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-flex",
+                                            {
+                                              staticClass: "text-xs-right",
+                                              attrs: { xs5: "" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\tShipper:\n\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.order.shipper != null
+                                            ? _c(
+                                                "v-flex",
+                                                {
+                                                  attrs: {
+                                                    xs5: "",
+                                                    "offset-xs1": ""
+                                                  }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.order.shipper.name
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -110741,9 +111129,7 @@ var render = function() {
                         ],
                         1
                       )
-                    ],
-                    1
-                  )
+                    : _vm._e()
                 ],
                 1
               ),

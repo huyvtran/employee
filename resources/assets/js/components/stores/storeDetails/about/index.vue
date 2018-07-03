@@ -32,7 +32,7 @@
 					<v-card>
 						<v-card-title primary-title>
 							<div>
-								<a class="headline font-weight-bold" :href="`https://www.dofuu.com/${store.city_slug}/${store.slug}`">{{store.name}}</a>
+								<a class="headline font-weight-bold" :href="`https://www.dofuu.com/${store.city_slug}/${store.slug}`" target="_blank">{{store.name}}</a>
 								<div class="grey--text">{{store.type_name}}</div>
 							</div>
 						</v-card-title>

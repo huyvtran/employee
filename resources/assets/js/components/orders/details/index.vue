@@ -1,5 +1,5 @@
 <template>
-	<v-container grid-list-lg>
+	<v-container grid-list-lg class="wrap-print">
 
 		<v-card v-if="order != null">
 			<v-breadcrumbs>
@@ -408,7 +408,7 @@
 				</v-card>
 			</div>
 
-			<v-layout row wrap v-show="tab == 3">
+			<v-layout row wrap v-show="tab == 3" v-if="order.actualOrder != null">
 				<v-flex xs12 md6 d-flex>
 					<v-card>
 						<v-layout row wrap class="grid-list-md">
@@ -859,9 +859,27 @@ export default {
 	}
 }
 </script>
-<style scoped>
+<style>
 #map {
 	width: 100%;
 	height: 250px;
+}
+@media print {
+	.application {
+		display: block !important;
+	}
+	.application--wrap {
+		display: block !important;
+	}
+	.content--wrap {
+		display: block !important;
+	}
+	.v-toolbar, .v-breadcrumbs, .v-tabs {
+		display: none !important;
+	}
+	.wrap-print {
+		padding-top: 0px !important;
+		margin-top: 0px !important;
+	}
 }
 </style>
