@@ -19,6 +19,13 @@ Vue.filter('formatDate', function(date) {
 	}
 })
 
+Vue.filter('formatDateTimeHumanize', function(date) {
+	if(date) {
+		var start = moment(date, 'DD-MM-YYYY HH:mm')
+		return start.startOf().locale('vi').fromNow()
+	}
+})
+
 Vue.filter('formatPrice', function(price) {
 	if(price) {		
 		return numeral(price).format('0,0$')

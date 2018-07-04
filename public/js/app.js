@@ -65566,6 +65566,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			}
 		});
 
+		_vue2.default.filter('formatDateTimeHumanize', function (date) {
+			if (date) {
+				var start = (0, _moment2.default)(date, 'DD-MM-YYYY HH:mm');
+				return start.startOf().locale('vi').fromNow();
+			}
+		});
+
 		_vue2.default.filter('formatPrice', function (price) {
 			if (price) {
 				return (0, _numeral2.default)(price).format('0,0$');
