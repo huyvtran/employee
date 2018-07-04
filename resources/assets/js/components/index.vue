@@ -125,6 +125,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import moment from 'moment'
 import index from '@/mixins/index'
 export default {
