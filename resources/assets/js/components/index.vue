@@ -125,7 +125,9 @@
 </template>
 
 <script>
+import index from '@/mixins/index'
 export default {
+	mixins: [index],
 	data() {
 		return {
 			notificationMenu:false,
