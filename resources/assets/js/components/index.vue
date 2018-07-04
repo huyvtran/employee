@@ -144,6 +144,18 @@ export default {
 		}
 	},
 	methods: {
+		readNotification: function(notifiable) {
+			const data = notifiable
+			if(notifiable.read_at == null) {
+				axios.post('/api/ReadNotification', data).then(response => {
+					if(response.status == 200) {
+						this.$store.commit('UPDATE_NOTIFICATION', response.data.data)
+					}
+				})
+			}
+			this.$router.replace({name: 'OrderDetails', params: {storeId: notifiable.data.id}})
+			window.location.reload()
+		},
 		formatTime(date) {
 			var start = moment(date, 'DD-MM-YYYY HH:mm')
 			return start.startOf().locale('vi').fromNow()

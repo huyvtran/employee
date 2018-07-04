@@ -112626,6 +112626,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				}
 			},
 			methods: {
+				readNotification: function readNotification(notifiable) {
+					var _this = this;
+
+					var data = notifiable;
+					if (notifiable.read_at == null) {
+						axios.post('/api/ReadNotification', data).then(function (response) {
+							if (response.status == 200) {
+								_this.$store.commit('UPDATE_NOTIFICATION', response.data.data);
+							}
+						});
+					}
+					this.$router.replace({ name: 'OrderDetails', params: { storeId: notifiable.data.id } });
+					window.location.reload();
+				},
 				formatTime: function formatTime(date) {
 					var start = (0, _moment2.default)(date, 'DD-MM-YYYY HH:mm');
 					return start.startOf().locale('vi').fromNow();
