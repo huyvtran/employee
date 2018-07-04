@@ -112639,7 +112639,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 							}
 						});
 					}
-					this.$router.replace({ name: 'OrderDetail', params: { storeId: notifiable.data.id } });
+					this.$router.replace({ name: 'OrderDetail', params: { orderId: notifiable.data.id } });
 					window.location.reload();
 				},
 				formatTime: function formatTime(date) {

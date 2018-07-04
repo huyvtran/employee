@@ -154,7 +154,7 @@ export default {
 					}
 				})
 			}
-			this.$router.replace({name: 'OrderDetail', params: {storeId: notifiable.data.id}})
+			this.$router.replace({name: 'OrderDetail', params: {orderId: notifiable.data.id}})
 			window.location.reload()
 		},
 		formatTime(date) {
