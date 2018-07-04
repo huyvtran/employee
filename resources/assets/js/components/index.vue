@@ -141,6 +141,12 @@ export default {
 		unreadCount() {
 			return this.$store.getters.unreadCount
 		}
+	},
+	methods: {
+		formatTime(date) {
+			var start = moment(date, 'DD-MM-YYYY HH:mm')
+			return start.startOf().locale('vi').fromNow()
+		},
 	}
 }
 </script>
