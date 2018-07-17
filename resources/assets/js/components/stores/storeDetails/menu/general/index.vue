@@ -25,11 +25,13 @@
 			</v-layout> <!-- Filter End -->	
 			<v-flex xs4 v-for="(data, i) in filterData" :key="i">
 				<v-subheader>{{data.name}}</v-subheader>
+				
 				<v-expansion-panel popout focusable>
+
 					<v-expansion-panel-content v-for="(item,i) in data.products" :key="i" mb-3 >
 						<v-list slot="header" dense two-line class="transparent">
 							<v-list-tile avatar>
-								<v-list-tile-avatar size="80" class="pr-2">
+								<v-list-tile-avatar size="40" class="pr-2">
 									<img :src="image(item.image)" alt="avatar">
 								</v-list-tile-avatar>
 								
@@ -39,19 +41,15 @@
 									<v-list-tile-sub-title v-if="item.description != null">Mô tả: {{ item.description }}</v-list-tile-sub-title>
 								</v-list-tile-content>
 
-								<v-list-tile-content>
-									<v-list-tile-title>										
-										Topping: <strong>{{item.haveTopping ? "Có" :  "Không"}}</strong>
-									</v-list-tile-title>
-									<v-list-tile-title>
-										Size: <strong>{{item.haveSize ? "Có" :  "Không"}}</strong>
-									</v-list-tile-title>
-									<v-list-tile-action-text>Đã được đặt <strong>{{item.count}}</strong> lần</v-list-tile-action-text>			
+								<v-list-tile-content>					
+									<h5>Topping: <strong>{{item.haveTopping ? "Có" :  "Không"}}</strong></h5>
+									<h5>Size: <strong>{{item.haveSize ? "Có" :  "Không"}}</strong></h5>
+									<h5>Đã được đặt <strong>{{item.count}}</strong> lần</h5>
 								</v-list-tile-content>
 
 								<v-list-tile-action>
-									<h4 v-if="!item.haveSize">{{item.price | formatPrice}}</h4>
-									<h4 v-else v-for="(size, i) in item.sizes">{{size.name}}: {{size.price | formatPrice}}</h4>									
+									<h5 v-if="!item.haveSize">{{item.price | formatPrice}}</h5>
+									<h5 v-else v-for="(size, i) in item.sizes">{{size.name}}: {{size.price | formatPrice}}</h5>									
 								</v-list-tile-action>
 							</v-list-tile>
 						</v-list>

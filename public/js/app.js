@@ -68916,23 +68916,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else if (typeof exports !== "undefined") {
-		factory(exports, require('babel-runtime/core-js/promise'), require('axios'));
+		factory(exports, require('babel-runtime/core-js/promise'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, global.promise, global.axios);
+		factory(mod.exports, global.promise);
 		global.apiGetLocation = mod.exports;
 	}
 })(this, function (exports) {
 	(function (global, factory) {
 		if (true) {
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -68942,10 +68942,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			var mod = {
 				exports: {}
 			};
-			factory(mod.exports, global.promise, global.axios);
+			factory(mod.exports, global.promise);
 			global.apiGetLocation = mod.exports;
 		}
-	})(this, function (exports, _promise, _axios) {
+	})(this, function (exports, _promise) {
 		'use strict';
 
 		Object.defineProperty(exports, "__esModule", {
@@ -68955,8 +68955,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		exports.typeIcon = typeIcon;
 
 		var _promise2 = _interopRequireDefault(_promise);
-
-		var _axios2 = _interopRequireDefault(_axios);
 
 		function _interopRequireDefault(obj) {
 			return obj && obj.__esModule ? obj : {
@@ -103100,7 +103098,7 @@ var render = function() {
                                   "v-list-tile-avatar",
                                   {
                                     staticClass: "pr-2",
-                                    attrs: { size: "80" }
+                                    attrs: { size: "40" }
                                   },
                                   [
                                     _c("img", {
@@ -103136,47 +103134,39 @@ var render = function() {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
+                                _c("v-list-tile-content", [
+                                  _c("h5", [
+                                    _vm._v("Topping: "),
+                                    _c("strong", [
                                       _vm._v(
-                                        "\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tTopping: "
-                                      ),
-                                      _c("strong", [
-                                        _vm._v(
-                                          _vm._s(
-                                            item.haveTopping ? "Có" : "Không"
-                                          )
+                                        _vm._s(
+                                          item.haveTopping ? "Có" : "Không"
                                         )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-tile-title", [
-                                      _vm._v("\n\t\t\t\t\t\t\t\t\tSize: "),
-                                      _c("strong", [
-                                        _vm._v(
-                                          _vm._s(item.haveSize ? "Có" : "Không")
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-list-tile-action-text", [
-                                      _vm._v("Đã được đặt "),
-                                      _c("strong", [
-                                        _vm._v(_vm._s(item.count))
-                                      ]),
-                                      _vm._v(" lần")
+                                      )
                                     ])
-                                  ],
-                                  1
-                                ),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h5", [
+                                    _vm._v("Size: "),
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(item.haveSize ? "Có" : "Không")
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("h5", [
+                                    _vm._v("Đã được đặt "),
+                                    _c("strong", [_vm._v(_vm._s(item.count))]),
+                                    _vm._v(" lần")
+                                  ])
+                                ]),
                                 _vm._v(" "),
                                 _c(
                                   "v-list-tile-action",
                                   [
                                     !item.haveSize
-                                      ? _c("h4", [
+                                      ? _c("h5", [
                                           _vm._v(
                                             _vm._s(
                                               _vm._f("formatPrice")(item.price)
@@ -103184,7 +103174,7 @@ var render = function() {
                                           )
                                         ])
                                       : _vm._l(item.sizes, function(size, i) {
-                                          return _c("h4", [
+                                          return _c("h5", [
                                             _vm._v(
                                               _vm._s(size.name) +
                                                 ": " +
@@ -105265,7 +105255,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 												return function (_x2) {
 													return _ref3.apply(this, arguments);
 												};
-											}());
+											}()).finally(function () {
+												vm.process = false;
+											});
 										} else {
 											//Accept Add Store
 											vm.$validator.validateAll('user').then(function () {
@@ -105334,11 +105326,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 												return function (_x3) {
 													return _ref4.apply(this, arguments);
 												};
-											}());
+											}()).finally(function () {
+												vm.process = false;
+											});
 										}
-										vm.process = false;
 
-									case 6:
+									case 5:
 									case 'end':
 										return _context5.stop();
 								}
@@ -108512,7 +108505,7 @@ exports = module.exports = __webpack_require__(61)(false);
 
 
 // module
-exports.push([module.i, "\n#map {\r\n\twidth: 100%;\r\n\theight: 250px;\n}\n@media print {\n.application {\r\n\t\tdisplay: block !important;\n}\n.application--wrap {\r\n\t\tdisplay: block !important;\n}\n.content--wrap {\r\n\t\tdisplay: block !important;\n}\n.v-toolbar, .v-breadcrumbs, .v-tabs {\r\n\t\tdisplay: none !important;\n}\n.wrap-print {\r\n\t\tpadding-top: 0px !important;\r\n\t\tmargin-top: 0px !important;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n#map {\r\n\twidth: 100%;\r\n\theight: 250px;\n}\n@media print {\n.application {\r\n\t\tdisplay: block !important;\n}\n.application--wrap {\r\n\t\tdisplay: block !important;\n}\n.content--wrap {\r\n\t\tdisplay: block !important;\n}\n.v-toolbar, .v-breadcrumbs, .v-tabs {\r\n\t\tdisplay: none !important;\n}\n.wrap-print {\r\n\t\tpadding-top: 0px !important;\r\n\t\tmargin-top: 0px !important;\n}\n.button-hidden {\n}\n}\r\n", ""]);
 
 // exports
 

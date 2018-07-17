@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 export function getLocation(value) {
 	var vm = this

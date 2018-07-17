@@ -436,6 +436,8 @@ export default {
 						})	
 
 					}
+				}).finally(() => {
+					vm.process = false
 				})
 			} else {
 				//Accept Add Store
@@ -464,15 +466,14 @@ export default {
 										vm.$store.dispatch('alert', {name: vm.$route.name, index:1, alert: {message: response.data.message, type: 'success'}})
 									}
 								})
-
 							}
-							
 						})	
-
 					}
+				}).finally(() => {
+					vm.process = false
 				})				
 			}
-			vm.process = false
+			
 		},
 		//Change city get district
 		changeCity: function(id) {

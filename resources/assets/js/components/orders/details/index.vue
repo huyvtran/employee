@@ -881,5 +881,8 @@ export default {
 		padding-top: 0px !important;
 		margin-top: 0px !important;
 	}
+	.button-hidden {
+		
+	}
 }
 </style>
