@@ -1,6 +1,5 @@
 <template>
 	<v-card>
-
 		<!-- Breadcrumb Start -->
 		<v-toolbar dense color="grey lighten-3" class="elevation-0" flat>
 			<v-breadcrumbs>
@@ -24,76 +23,174 @@
 
 		<v-card-text>
 			
-		<!-- Filter start-->
-		<v-container v-show="filter" fluid grid-list-md transition="slide-y-transition">
-			<v-layout row wrap  >
-				<v-flex xs3>
-					<v-select
-					auto
-					prepend-icon="lens"
-					:items="statusFilters"
-					v-model="editedItem.statusId"
-					item-value="id"
-					item-text="name"
-					label="Trạng thái"
-					></v-select>
-				</v-flex>
+			<!-- Filter start-->
+			<v-container v-show="filter" fluid grid-list-lg transition="slide-y-transition">
+				<v-layout row wrap  >
+					<v-flex xs3>
+						<v-select
+						auto
+						prepend-icon="lens"
+						:items="statusFilters"
+						v-model="editedItem.statusId"
+						item-value="id"
+						item-text="name"
+						label="Trạng thái"
+						></v-select>
+					</v-flex>
 
-				<v-flex xs3>						
-					<v-menu
-					ref="fromDialog"
-					:close-on-content-click="false"
-					v-model="fromModal"
-					:nudge-right="40"
-					lazy
-					transition="scale-transition"
-					offset-y
-					full-width
-					max-width="290px"
-					min-width="290px">
-					<v-text-field
-					slot="activator"
-					label="Từ ngày"
-					v-model="fromDateString"
-					prepend-icon="event"
-					readonly></v-text-field>
-					<v-date-picker locale="vn-vi" :show-current="false" v-model="editedItem.fromDate" no-title @input="$refs.fromDialog.save(editedItem.fromDate)"></v-date-picker></v-menu>
-				</v-flex>
+					<v-flex xs3>						
+						<v-menu
+						ref="fromDialog"
+						:close-on-content-click="false"
+						v-model="fromModal"
+						:nudge-right="40"
+						lazy
+						transition="scale-transition"
+						offset-y
+						full-width
+						max-width="290px"
+						min-width="290px">
+						<v-text-field
+						slot="activator"
+						label="Từ ngày"
+						v-model="fromDateString"
+						prepend-icon="event"
+						readonly></v-text-field>
+						<v-date-picker locale="vn-vi" :show-current="false" v-model="editedItem.fromDate" no-title @input="$refs.fromDialog.save(editedItem.fromDate)"></v-date-picker></v-menu>
+					</v-flex>
 
-				<v-flex xs3>
-					<v-menu
-					ref="toDialog"
-					:close-on-content-click="false"
-					v-model="toModal"
-					:nudge-right="40"
-					lazy
-					transition="scale-transition"
-					offset-y
-					full-width
-					max-width="290px"
-					min-width="290px"
+					<v-flex xs3>
+						<v-menu
+						ref="toDialog"
+						:close-on-content-click="false"
+						v-model="toModal"
+						:nudge-right="40"
+						lazy
+						transition="scale-transition"
+						offset-y
+						full-width
+						max-width="290px"
+						min-width="290px"
+						>
+
+						<v-text-field
+						slot="activator"
+						label="Đến ngày"
+						v-model="toDateString"
+						prepend-icon="event"
+						readonly
+						></v-text-field>
+						<v-date-picker locale="vn-vi" :show-current="false" v-model="editedItem.toDate" no-title @input="$refs.toDialog.save(editedItem.toDate)"></v-date-picker></v-menu>
+					</v-flex>
+
+					<v-flex xs1>
+						<v-btn small color="primary" outline @click="fetchOrders" :loading="loading">
+							<v-icon>search</v-icon>
+						</v-btn>		
+					</v-flex>
+				</v-layout>
+			</v-container>	<!-- Filter End -->	
+
+			<v-container :grid-list-xs="$vuetify.breakpoint.xs" :grid-list-lg="$vuetify.breakpoint.lg">
+				<v-layout row wrap>
+					<v-data-iterator
+					:items="orders"
+					rows-per-page-text="Số hàng"
+					content-tag="v-layout"
+					row
+					wrap
 					>
+					<v-flex	slot="item"	slot-scope="props" xs12 sm12 md6>
+						<v-card>
+							<v-btn small absolute top right fab flat icon >
+								<v-icon color="green darken-3" v-if="props.item.statusId == statusId('Thành công')">done_outline</v-icon>
+								<v-icon color="red darken-3" v-if="props.item.statusId == statusId('Hủy')">close</v-icon>
+							</v-btn>
+							<v-card-title>
+								<v-flex xs6 class="font-weight-bold">
+									Mã đặt hàng:
+								</v-flex>
+								<v-flex xs6 class="text-xs-right font-weight-bold"> 
+									{{ props.item.id }}
+								</v-flex>
+								<v-flex xs6 class="font-weight-bold">
+									Người đặt:
+								</v-flex>
+								<v-flex xs6 class="text-xs-right font-weight-bold"> 
+									{{ props.item.name }}
+								</v-flex>
+								<v-flex xs6 class="font-weight-bold">
+									Số điện thoại người đặt:
+								</v-flex>
+								<v-flex xs6 class="text-xs-right font-weight-bold"> 
+									{{ props.item.phone | formatPhone}}
+								</v-flex>
+							</v-card-title>
+							<v-divider></v-divider>
+							<v-list dense>
+								<v-list-tile>
+									<v-list-tile-content>Nơi đặt:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										<div>{{ props.item.store.name }}</div>
+									</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content class="align-end font-weight-medium font-italic">{{ props.item.store.address }}</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>Ngày đặt:</v-list-tile-content>
+									<v-list-tile-content class="align-end">{{ props.item.bookingDate }}</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>Ngày giao:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										{{ props.item.receiveDate | formatDate }} {{ props.item.receiveTime }}
+									</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>CSKH:</v-list-tile-content>
+									<v-list-tile-content class="align-end">
+										<div v-if="props.item.employee != null">{{ props.item.employee.name }}</div>	
+									</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>Giao hàng:</v-list-tile-content>
+									<v-list-tile-content class="align-end">
+										<div v-if="props.item.shipper != null">{{ props.item.shipper.name }}</div>
+									</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>Tổng tiền:</v-list-tile-content>
+									<v-list-tile-content class="align-end">
+										<div><strong>{{ props.item.total | formatPrice}}</strong></div>
+										<div class="primary--text"><strong>{{ props.item.payment.paymentMethod}}</strong></div>
+									</v-list-tile-content>
+								</v-list-tile>
+								<v-list-tile>
+									<v-list-tile-content>Trạng thái:</v-list-tile-content>
+									<v-list-tile-content class="align-end">
+										<div>
+											<strong :class="{'success--text': props.item.statusId == statusId('Thành công') || props.item.statusId == statusId('Xác nhận'), 'error--text': props.item.statusId == statusId('Hủy'), 'yellow--text text--accent-4': props.item.statusId == statusId('Chờ xử lý') || props.item.statusId == statusId('Đang xử lý')}">
+												{{props.item.statusName}}
+											</strong>
+										</div>
 
-					<v-text-field
-					slot="activator"
-					label="Đến ngày"
-					v-model="toDateString"
-					prepend-icon="event"
-					readonly
-					></v-text-field>
-					<v-date-picker locale="vn-vi" :show-current="false" v-model="editedItem.toDate" no-title @input="$refs.toDialog.save(editedItem.toDate)"></v-date-picker></v-menu>
-				</v-flex>
-
-				<v-flex xs1>
-					<v-btn small color="primary" outline @click="fetchOrders" :loading="loading">
-						<v-icon>search</v-icon>
-					</v-btn>		
-				</v-flex>
+										<div class="success--text" v-if="props.item.statusId == statusId('Thành công')"><strong>{{props.item.statusName}}</strong></div>
+										<div v-else-if="props.item.statusId != orderStatus('Thành công')">
+										</div>
+									</v-list-tile-content>
+								</v-list-tile>
+							</v-list>
+							<v-card-actions>								
+								<v-btn small block :to="{name: 'OrderDetail', params: {orderId: props.item.id}}">Xem chi tiết</v-btn>
+							</v-card-actions>
+						</v-card>
+					</v-flex>
+				</v-data-iterator>
 			</v-layout>
-		</v-container>	<!-- Filter End -->	
-
+		</v-container>
 		<!-- Table -->
-		<v-data-table :headers="headers" :items="orders" class="elevation-1" :loading="loading" hide-actions >
+		<!-- <v-data-table :headers="headers" :items="orders" class="elevation-1" :loading="loading" hide-actions >
 			<template slot="headerCell" slot-scope="props">
 				<span class="red--text text--accent-3">
 					{{ props.header.text }}
@@ -153,8 +250,8 @@
 				Từ {{ pageStart }} đến {{ pageStop }}
 			</template>
 		</v-data-table>	
-
-	</v-card-text>
+	-->
+</v-card-text>
 </v-card>
 </template>
 
