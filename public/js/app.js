@@ -106299,6 +106299,7 @@ var render = function() {
                                                 }
                                               ],
                                               attrs: {
+                                                mask: "(####) ### - ####",
                                                 "prepend-icon": "phone",
                                                 label: "Số điện thoại",
                                                 "error-messages": _vm.errors.collect(
@@ -106538,6 +106539,7 @@ var render = function() {
                                               }
                                             ],
                                             attrs: {
+                                              mask: "(####) ### - ####",
                                               "prepend-icon": "phone",
                                               label: "Số điện thoại cửa hàng",
                                               "error-messages": _vm.errors.collect(
@@ -112675,15 +112677,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("v-btn", { attrs: { color: "success" }, on: { click: _vm.send } }, [
-        _vm._v("Send mail")
-      ])
-    ],
-    1
-  )
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -113261,9 +113255,11 @@ var render = function() {
                       }
                     },
                     [
-                      _c("v-tab", [_vm._v("\n\t\t\t\t\t\tRecent\n\t\t\t\t\t")]),
+                      _c("v-tab", [_vm._v("\n\t\t\t\t\t\tMới\n\t\t\t\t\t")]),
                       _vm._v(" "),
-                      _c("v-tab", [_vm._v("\n\t\t\t\t\t\tOld\n\t\t\t\t\t")])
+                      _c("v-tab", [
+                        _vm._v("\n\t\t\t\t\t\tTrước đó\n\t\t\t\t\t")
+                      ])
                     ],
                     1
                   ),
@@ -113604,7 +113600,7 @@ var render = function() {
                           _c(
                             "router-link",
                             { attrs: { to: { name: "Notification" } } },
-                            [_vm._v(" See All ")]
+                            [_vm._v(" Xem tất cả ")]
                           )
                         ],
                         1

@@ -38,10 +38,10 @@
 			<v-card>
 				<v-tabs	v-model="tab"	color="primary"	dark fixed-tabs slider-color="primary" height="40">
 					<v-tab>
-						Recent
+						Mới
 					</v-tab>
 					<v-tab>
-						Old
+						Trước đó
 					</v-tab>
 				</v-tabs>
 
@@ -112,7 +112,7 @@
 				<v-divider></v-divider>
 				<v-list>
 					<v-system-bar status color="primary" lights-out class="justify-center">
-						<router-link :to="{name: 'Notification'}"> See All </router-link>
+						<router-link :to="{name: 'Notification'}"> Xem tất cả </router-link>
 					</v-system-bar>
 				</v-list>
 			</v-card>

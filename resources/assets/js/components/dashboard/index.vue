@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-btn color="success" @click="send">Send mail</v-btn>
+		<!-- <v-btn color="success" @click="send">Send mail</v-btn> -->
 	</div>
 </template>
 

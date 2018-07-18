@@ -108,6 +108,7 @@
 									<v-subheader>Liên hệ</v-subheader>
 									<v-container>
 										<v-text-field 
+										mask="(####) ### - ####"
 										prepend-icon="phone"
 										label="Số điện thoại" 
 										v-model="editedItem.user.phone"
@@ -174,6 +175,7 @@
 										data-vv-scope="store"></v-text-field>
 
 										<v-text-field
+										mask="(####) ### - ####"
 										prepend-icon="phone" 
 										label="Số điện thoại cửa hàng" 
 										v-model="editedItem.store.phone"v-validate="'required|numeric|min:10|max:12'"
