@@ -102938,7 +102938,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				return {
 					menu: [],
 					search: {
-						text: '',
+						text: null,
 						catalogue: null
 					},
 					filterCatalogue: [{ name: 'Tất cả', id: null }]
@@ -102965,6 +102965,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 					return list.filter(function (item) {
 						return item.id === search;
 					});
+				},
+				filterByKeywords: function filterByKeywords(list, value) {
+					var search = value;
+					var products = [];
+					var data = list.slice(0);
+
+					if (search === null || !search.length) {
+						return data;
+					}
+
+					var temp = data.filter(function (item) {
+						return item.products.some(function (product) {
+							return product.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+						});
+					});
+					return temp;
 				}
 			},
 			computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
@@ -102977,7 +102993,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			}), {
 				filterData: function filterData() {
 					if (this.menu.length > 0) {
-						return this.filterByCatalogue(this.menu, this.search.catalogue);
+						return this.filterByKeywords(this.filterByCatalogue(this.menu, this.search.catalogue), this.search.text);
 					}
 				}
 			}),
@@ -104182,7 +104198,13 @@ var render = function() {
                                     [
                                       _c("v-list-tile-title", [
                                         _c("h4", [
-                                          _vm._v(_vm._s(_vm.store.phone))
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPhone")(
+                                                _vm.store.phone
+                                              )
+                                            )
+                                          )
                                         ])
                                       ]),
                                       _vm._v(" "),
@@ -104625,7 +104647,13 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("v-list-tile-sub-title", [
                                         _c("h4", [
-                                          _vm._v(_vm._s(_vm.store.phone))
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm._f("formatPhone")(
+                                                _vm.store.phone
+                                              )
+                                            )
+                                          )
                                         ])
                                       ])
                                     ],
@@ -107399,7 +107427,11 @@ var render = function() {
                     _c("td", [
                       _c("div", [
                         _vm._v("SĐT: "),
-                        _c("strong", [_vm._v(_vm._s(props.item.phone))])
+                        _c("strong", [
+                          _vm._v(
+                            _vm._s(_vm._f("formatPhone")(props.item.phone))
+                          )
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", [
@@ -107781,7 +107813,10 @@ var render = function() {
                                                     _c("strong", [
                                                       _vm._v(
                                                         _vm._s(
-                                                          props.item.user.phone
+                                                          _vm._f("formatPhone")(
+                                                            props.item.user
+                                                              .phone
+                                                          )
                                                         ) + " "
                                                       )
                                                     ])
@@ -108384,7 +108419,11 @@ var render = function() {
                                               _c("v-list-tile-title", [
                                                 _c("h4", [
                                                   _vm._v(
-                                                    _vm._s(_vm.store.phone)
+                                                    _vm._s(
+                                                      _vm._f("formatPhone")(
+                                                        _vm.store.phone
+                                                      )
+                                                    )
                                                   )
                                                 ])
                                               ]),
@@ -109157,7 +109196,13 @@ var render = function() {
                                       ]),
                                       _vm._v(" "),
                                       _c("h4", [
-                                        _vm._v(_vm._s(_vm.order.store.phone))
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("formatPhone")(
+                                              _vm.order.store.phone
+                                            )
+                                          )
+                                        )
                                       ])
                                     ]
                                   ),
@@ -109230,7 +109275,13 @@ var render = function() {
                                     { attrs: { xs5: "", "offset-xs1": "" } },
                                     [
                                       _c("h4", [
-                                        _vm._v(_vm._s(_vm.order.phone))
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("formatPhone")(
+                                              _vm.order.phone
+                                            )
+                                          )
+                                        )
                                       ])
                                     ]
                                   ),
@@ -110660,7 +110711,11 @@ var render = function() {
                                         [
                                           _c("h4", [
                                             _vm._v(
-                                              _vm._s(_vm.order.store.phone)
+                                              _vm._s(
+                                                _vm._f("formatPhone")(
+                                                  _vm.order.store.phone
+                                                )
+                                              )
                                             )
                                           ])
                                         ]
@@ -110740,7 +110795,13 @@ var render = function() {
                                         },
                                         [
                                           _c("h4", [
-                                            _vm._v(_vm._s(_vm.order.phone))
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("formatPhone")(
+                                                  _vm.order.phone
+                                                )
+                                              )
+                                            )
                                           ])
                                         ]
                                       ),
@@ -111591,6 +111652,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		//
 		//
 		//
+		//
+		//
 
 
 		function formatDate(str) {
@@ -112131,97 +112194,151 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-card-title",
+                                    "v-list",
+                                    { attrs: { dense: "" } },
                                     [
                                       _c(
-                                        "v-flex",
-                                        {
-                                          staticClass: "font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
+                                        "v-list-tile",
                                         [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\tMã đặt hàng:\n\t\t\t\t\t\t\t\t"
+                                          _c(
+                                            "v-list-tile-content",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v("Mã đặt hàng:")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            {
+                                              staticClass:
+                                                "align-end font-weight-bold"
+                                            },
+                                            [
+                                              _c("div", [
+                                                _vm._v(_vm._s(props.item.id))
+                                              ])
+                                            ]
                                           )
-                                        ]
+                                        ],
+                                        1
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-flex",
-                                        {
-                                          staticClass:
-                                            "text-xs-right font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
+                                        "v-list-tile",
                                         [
-                                          _vm._v(
-                                            " \n\t\t\t\t\t\t\t\t\t" +
-                                              _vm._s(props.item.id) +
-                                              "\n\t\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          staticClass: "font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\tNgười đặt:\n\t\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          staticClass:
-                                            "text-xs-right font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            " \n\t\t\t\t\t\t\t\t\t" +
-                                              _vm._s(props.item.name) +
-                                              "\n\t\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          staticClass: "font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n\t\t\t\t\t\t\t\t\tSố điện thoại người đặt:\n\t\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          staticClass:
-                                            "text-xs-right font-weight-bold",
-                                          attrs: { xs6: "" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            " \n\t\t\t\t\t\t\t\t\t" +
-                                              _vm._s(
-                                                _vm._f("formatPhone")(
-                                                  props.item.phone
+                                          _c(
+                                            "v-list-tile-content",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v("Trạng thái:")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            {
+                                              staticClass:
+                                                "align-end font-weight-bold"
+                                            },
+                                            [
+                                              _c("div", [
+                                                _c(
+                                                  "strong",
+                                                  {
+                                                    class: {
+                                                      "success--text":
+                                                        props.item.statusId ==
+                                                          _vm.statusId(
+                                                            "Thành công"
+                                                          ) ||
+                                                        props.item.statusId ==
+                                                          _vm.statusId(
+                                                            "Xác nhận"
+                                                          ),
+                                                      "error--text":
+                                                        props.item.statusId ==
+                                                        _vm.statusId("Hủy"),
+                                                      "yellow--text text--accent-4":
+                                                        props.item.statusId ==
+                                                          _vm.statusId(
+                                                            "Chờ xử lý"
+                                                          ) ||
+                                                        props.item.statusId ==
+                                                          _vm.statusId(
+                                                            "Đang xử lý"
+                                                          )
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                        _vm._s(
+                                                          props.item.statusName
+                                                        ) +
+                                                        "\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                    )
+                                                  ]
                                                 )
-                                              ) +
-                                              "\n\t\t\t\t\t\t\t\t"
+                                              ])
+                                            ]
                                           )
-                                        ]
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c(
+                                            "v-list-tile-content",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v("Người đặt:")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            {
+                                              staticClass:
+                                                "align-end font-weight-bold"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(props.item.name) +
+                                                  "\n\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c(
+                                            "v-list-tile-content",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v("Số điện thoại:")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            {
+                                              staticClass:
+                                                "align-end font-weight-bold"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    _vm._f("formatPhone")(
+                                                      props.item.phone
+                                                    )
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
                                       )
                                     ],
                                     1
@@ -112334,6 +112451,56 @@ var render = function() {
                                         "v-list-tile",
                                         [
                                           _c("v-list-tile-content", [
+                                            _vm._v("Tổng tiền:")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            { staticClass: "align-end" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "red--text text--darken-3 font-weight-bold"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm._f("formatPrice")(
+                                                        props.item.total
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "primary--text"
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        props.item.payment
+                                                          .paymentName
+                                                      )
+                                                    )
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c("v-list-tile-content", [
                                             _vm._v("CSKH:")
                                           ]),
                                           _vm._v(" "),
@@ -112376,131 +112543,6 @@ var render = function() {
                                                     )
                                                   ])
                                                 : _vm._e()
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-tile",
-                                        [
-                                          _c("v-list-tile-content", [
-                                            _vm._v("Tổng tiền:")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-tile-content",
-                                            { staticClass: "align-end" },
-                                            [
-                                              _c("div", [
-                                                _c("strong", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm._f("formatPrice")(
-                                                        props.item.total
-                                                      )
-                                                    )
-                                                  )
-                                                ])
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "primary--text"
-                                                },
-                                                [
-                                                  _c("strong", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        props.item.payment
-                                                          .paymentMethod
-                                                      )
-                                                    )
-                                                  ])
-                                                ]
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-tile",
-                                        [
-                                          _c("v-list-tile-content", [
-                                            _vm._v("Trạng thái:")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-list-tile-content",
-                                            { staticClass: "align-end" },
-                                            [
-                                              _c("div", [
-                                                _c(
-                                                  "strong",
-                                                  {
-                                                    class: {
-                                                      "success--text":
-                                                        props.item.statusId ==
-                                                          _vm.statusId(
-                                                            "Thành công"
-                                                          ) ||
-                                                        props.item.statusId ==
-                                                          _vm.statusId(
-                                                            "Xác nhận"
-                                                          ),
-                                                      "error--text":
-                                                        props.item.statusId ==
-                                                        _vm.statusId("Hủy"),
-                                                      "yellow--text text--accent-4":
-                                                        props.item.statusId ==
-                                                          _vm.statusId(
-                                                            "Chờ xử lý"
-                                                          ) ||
-                                                        props.item.statusId ==
-                                                          _vm.statusId(
-                                                            "Đang xử lý"
-                                                          )
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                        _vm._s(
-                                                          props.item.statusName
-                                                        ) +
-                                                        "\n\t\t\t\t\t\t\t\t\t\t\t"
-                                                    )
-                                                  ]
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              props.item.statusId ==
-                                              _vm.statusId("Thành công")
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "success--text"
-                                                    },
-                                                    [
-                                                      _c("strong", [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            props.item
-                                                              .statusName
-                                                          )
-                                                        )
-                                                      ])
-                                                    ]
-                                                  )
-                                                : props.item.statusId !=
-                                                  _vm.orderStatus("Thành công")
-                                                  ? _c("div")
-                                                  : _vm._e()
                                             ]
                                           )
                                         ],

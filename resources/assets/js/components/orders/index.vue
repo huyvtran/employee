@@ -106,26 +106,39 @@
 								<v-icon color="green darken-3" v-if="props.item.statusId == statusId('Thành công')">done_outline</v-icon>
 								<v-icon color="red darken-3" v-if="props.item.statusId == statusId('Hủy')">close</v-icon>
 							</v-btn>
-							<v-card-title>
-								<v-flex xs6 class="font-weight-bold">
-									Mã đặt hàng:
-								</v-flex>
-								<v-flex xs6 class="text-xs-right font-weight-bold"> 
-									{{ props.item.id }}
-								</v-flex>
-								<v-flex xs6 class="font-weight-bold">
-									Người đặt:
-								</v-flex>
-								<v-flex xs6 class="text-xs-right font-weight-bold"> 
-									{{ props.item.name }}
-								</v-flex>
-								<v-flex xs6 class="font-weight-bold">
-									Số điện thoại người đặt:
-								</v-flex>
-								<v-flex xs6 class="text-xs-right font-weight-bold"> 
-									{{ props.item.phone | formatPhone}}
-								</v-flex>
-							</v-card-title>
+							<v-list dense>
+								<v-list-tile>
+									<v-list-tile-content class="font-weight-bold">Mã đặt hàng:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										<div>{{ props.item.id }}</div>
+									</v-list-tile-content>
+								</v-list-tile>
+
+								<v-list-tile>
+									<v-list-tile-content class="font-weight-bold">Trạng thái:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										<div>
+											<strong :class="{'success--text': props.item.statusId == statusId('Thành công') || props.item.statusId == statusId('Xác nhận'), 'error--text': props.item.statusId == statusId('Hủy'), 'yellow--text text--accent-4': props.item.statusId == statusId('Chờ xử lý') || props.item.statusId == statusId('Đang xử lý')}">
+												{{props.item.statusName}}
+											</strong>
+										</div>
+									</v-list-tile-content>
+								</v-list-tile>
+
+								<v-list-tile>
+									<v-list-tile-content class="font-weight-bold">Người đặt:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										{{ props.item.name }}
+									</v-list-tile-content>
+								</v-list-tile>
+								
+								<v-list-tile>
+									<v-list-tile-content class="font-weight-bold">Số điện thoại:</v-list-tile-content>
+									<v-list-tile-content class="align-end font-weight-bold">
+										{{ props.item.phone | formatPhone}}
+									</v-list-tile-content>
+								</v-list-tile>
+							</v-list>
 							<v-divider></v-divider>
 							<v-list dense>
 								<v-list-tile>
@@ -147,6 +160,16 @@
 										{{ props.item.receiveDate | formatDate }} {{ props.item.receiveTime }}
 									</v-list-tile-content>
 								</v-list-tile>
+								
+								<v-list-tile>
+									<v-list-tile-content>Tổng tiền:</v-list-tile-content>
+									<v-list-tile-content class="align-end">
+										<div class="red--text text--darken-3 font-weight-bold">{{ props.item.total | formatPrice}}</div>
+										<div class="primary--text"><strong>{{ props.item.payment.paymentName}}</strong></div>
+									</v-list-tile-content>
+								</v-list-tile>
+
+
 								<v-list-tile>
 									<v-list-tile-content>CSKH:</v-list-tile-content>
 									<v-list-tile-content class="align-end">
@@ -157,27 +180,6 @@
 									<v-list-tile-content>Giao hàng:</v-list-tile-content>
 									<v-list-tile-content class="align-end">
 										<div v-if="props.item.shipper != null">{{ props.item.shipper.name }}</div>
-									</v-list-tile-content>
-								</v-list-tile>
-								<v-list-tile>
-									<v-list-tile-content>Tổng tiền:</v-list-tile-content>
-									<v-list-tile-content class="align-end">
-										<div><strong>{{ props.item.total | formatPrice}}</strong></div>
-										<div class="primary--text"><strong>{{ props.item.payment.paymentMethod}}</strong></div>
-									</v-list-tile-content>
-								</v-list-tile>
-								<v-list-tile>
-									<v-list-tile-content>Trạng thái:</v-list-tile-content>
-									<v-list-tile-content class="align-end">
-										<div>
-											<strong :class="{'success--text': props.item.statusId == statusId('Thành công') || props.item.statusId == statusId('Xác nhận'), 'error--text': props.item.statusId == statusId('Hủy'), 'yellow--text text--accent-4': props.item.statusId == statusId('Chờ xử lý') || props.item.statusId == statusId('Đang xử lý')}">
-												{{props.item.statusName}}
-											</strong>
-										</div>
-
-										<div class="success--text" v-if="props.item.statusId == statusId('Thành công')"><strong>{{props.item.statusName}}</strong></div>
-										<div v-else-if="props.item.statusId != orderStatus('Thành công')">
-										</div>
 									</v-list-tile-content>
 								</v-list-tile>
 							</v-list>

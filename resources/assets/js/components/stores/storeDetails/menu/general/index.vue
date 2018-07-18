@@ -82,7 +82,7 @@ export default {
 		return {
 			menu: [],
 			search: {
-				text: '',
+				text: null,
 				catalogue: null,
 			},
 			filterCatalogue: [{name: 'Tất cả', id: null}]
@@ -106,6 +106,20 @@ export default {
 			return list.filter(item => item.id === search)
 
 		},
+		filterByKeywords(list, value) {
+			var search   = value
+			var products = []
+			var data     = list.slice(0)
+
+			if(search === null || !search.length) {
+				return data
+			}
+
+			let temp   = data.filter(item => {
+				return item.products.some((product) => product.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
+			})
+			return temp
+		}
 	},
 	computed: {
 		...mapState({
@@ -114,7 +128,7 @@ export default {
 		}),
 		filterData() {
 			if(this.menu.length>0) {
-				return this.filterByCatalogue(this.menu, this.search.catalogue)
+				return this.filterByKeywords(this.filterByCatalogue(this.menu, this.search.catalogue), this.search.text)
 			}
 		}
 	},

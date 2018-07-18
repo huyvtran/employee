@@ -48,7 +48,7 @@
 								<div>
 									{{order.store.address}}
 								</div>
-								<h4>{{order.store.phone}}</h4>
+								<h4>{{order.store.phone | formatPhone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
@@ -71,7 +71,7 @@
 								Số điện thoại:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
-								<h4>{{order.phone}}</h4>
+								<h4>{{order.phone | formatPhone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
@@ -432,7 +432,7 @@
 							</v-flex>
 
 							<v-flex xs5 offset-xs1>
-								<h4>{{order.store.phone}}</h4>
+								<h4>{{order.store.phone | formatPhone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
@@ -455,7 +455,7 @@
 								Số điện thoại:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
-								<h4>{{order.phone}}</h4>
+								<h4>{{order.phone | formatPhone}}</h4>
 							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
