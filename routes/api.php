@@ -94,4 +94,6 @@ Route::group(['middleware' => ['api']], function() {
 	Route::post('/ReadNotification', 'NotificationController@readNotification');
 	//GET NOTIFICATIONS
 	Route::post('/GetNotification', 'NotificationController@getNotification');
+	//GET TEST
+	Route::get('/GetTest', 'OrderController@calculatePoint');
 });

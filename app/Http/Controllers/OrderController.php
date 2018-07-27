@@ -13,7 +13,7 @@ use DateTime;
 class OrderController extends Controller
 {
 	public function __construct() {
-		$this->middleware('auth:api');
+		$this->middleware('auth:api')->except('calculatePoint');
 		$this->orderCancelled = OrderStatus::where('order_status_name', '=', 'Hủy')->first();
 		$this->orderCompleted = OrderStatus::where('order_status_name', '=', 'Thành công')->first();
 	}
@@ -87,6 +87,13 @@ class OrderController extends Controller
 						$item->count = $item->count + $item->pivot->quantity;
 						$item->save();
 					}
+					if(is_null($order->coupon) && is_null($order->secret) && $order->store->verified) {
+						if($order->subtotal_amount >= 50000) {
+							$point               = $this->calculatePoint($order->subtotal_amount);
+							$order->user->points = $order->user->points + $point;
+							$order->user->save();
+						}
+					}
 				}
 
 				$res   = [
@@ -141,5 +148,13 @@ class OrderController extends Controller
 		];
 
 		return response($res, 200);
+	}
+
+	public function calculatePoint($amount) {
+		
+		$surplus = (int)$amount/50000;
+		$value   = explode(".", $surplus);
+		$point   = (int)$value[0];
+		return $point;
 	}
 }
