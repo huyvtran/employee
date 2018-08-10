@@ -78,9 +78,11 @@ export default {
 					})
 				}
 
+			}).finally(() => {
+				vm.loading = !vm.loading
 			})
 			
-			vm.loading = !vm.loading
+			
 		}
 	},
 	created() {

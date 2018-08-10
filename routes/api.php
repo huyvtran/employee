@@ -88,6 +88,8 @@ Route::group(['middleware' => ['api']], function() {
 	Route::post('/GetOrder/{oid}/Details/ChooseShipper', 'OrderController@chooseShipper');
 	//CANCEL ORDER
 	Route::post('/GetOrder/{oid}/Details/CancelOrder', 'OrderController@cancelOrder');
+	//GET CUSTOMER
+	Route::get('/GetUser/Customers', 'UserController@getCustomer');
 	//GET SHIPPER
 	Route::post('/GetUser/Shippers', 'UserController@getShipper');
 	//GET READ NOTIFICATIONS 

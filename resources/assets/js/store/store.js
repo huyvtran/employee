@@ -9,6 +9,7 @@ import cityStore from './modules/city'
 import districtStore from './modules/district'
 import typeStore from './modules/type'
 import storeStore from './modules/store'
+import userStore from './modules/user'
 import activityStore from './modules/activity'
 import catalogueStore from './modules/catalogue'
 import toppingStore from './modules/topping'
@@ -27,6 +28,7 @@ export default new Vuex.Store({
 		districtStore,
 		typeStore,
 		storeStore,
+		userStore,
 		activityStore,
 		catalogueStore,
 		toppingStore,

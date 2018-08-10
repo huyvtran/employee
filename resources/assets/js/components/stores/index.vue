@@ -380,12 +380,12 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 import index from '@/mixins/index'
 import getLocation from '@/mixins/getLocation'
 import Dialog from './dialog'
 export default {
-	mixins: [index, getLocation],
+	mixins: [ index, getLocation ],
 	data() {
 		return {
 			title: 'Danh sách cửa hàng',

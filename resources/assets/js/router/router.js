@@ -10,6 +10,9 @@ import Order from '@/components/orders/index'
 import OrderDetail from '@/components/orders/details/index'
 import Store from '@/components/stores/index'
 import StoreDetails from '@/components/stores/storeDetails/index'
+import User from '@/components/users/index'
+import Customer from '@/components/users/customers/index'
+import Shipper from '@/components/users/shippers/index'
 import About from '@/components/stores/storeDetails/about/index'
 import Menu from '@/components/stores/storeDetails/menu/index'
 import General from '@/components/stores/storeDetails/menu/general/index'
@@ -49,14 +52,25 @@ const router = new Router({
 			children: [
 			{ path: 'about', component: About, name: 'About', meta: {auth:true}},
 			{ path: 'menu', component: Menu, name: 'Menu', redirect: {name: 'General'},children: [
-			{path: 'general', component: General, name: 'General'},
-			{path: 'catalogues', component: Catalogue, name: 'Catalogue'},
-			{path: 'sizes', component: Size, name: 'Size'},
-			{path: 'toppings', component: Topping, name: 'Topping'},
-			{path: 'products', component: Product, name: 'Product'},
+			{ path: 'general', component: General, name: 'General'},
+			{ path: 'catalogues', component: Catalogue, name: 'Catalogue'},
+			{ path: 'sizes', component: Size, name: 'Size'},
+			{ path: 'toppings', component: Topping, name: 'Topping'},
+			{ path: 'products', component: Product, name: 'Product'},
 			], meta: {auth:true}},
 
 			]
+		},
+		{ 
+			path: '/users', 
+			component: User, 
+			name: 'User', 
+			meta: {auth:true},
+			children: [
+				{ path: 'customers', component: Customer, name: 'Customer'},
+				{ path: 'shippers', component: Shipper, name: 'Shipper'}
+			]
+
 		},
 		{ path: '/notifications', component: Notification, name: 'Notification', meta: {auth:true}},
 		// { path: '/stores/store-details/:storeId', component: StoreDetails, name: 'StoreDetails', meta: {auth:true}},

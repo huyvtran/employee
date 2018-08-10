@@ -6,6 +6,7 @@
 				<v-btn flat class="black--text" :to="{name: 'Dashboard'}">Dashboard</v-btn>
 				<v-btn flat class="black--text" :to="{name: 'Order'}">Đơn đặt hàng</v-btn>
 				<v-btn flat class="black--text" :to="{name: 'Store'}">Quản lý cửa hàng</v-btn>
+				<v-btn flat class="black--text" :to="{name: 'Customer'}">Quản lý người dùng</v-btn>
 				<v-menu open-on-hover bottom offset-y>
 					<v-btn slot="activator" class="black--text" flat>Quản lý dịch vụ <v-icon right>arrow_drop_down</v-icon></v-btn>
 					<v-list>

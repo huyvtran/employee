@@ -4,8 +4,13 @@ export default {
 		image(url) {
 			if(url == null) {
 				return imageUrl+'/img/default.png'
+			} else {
+				if(url.slice(1, 8) === "storage") {
+					return imageURL+url
+				} else {
+					return url
+				}
 			}
-			return imageUrl+url
 		},
 		// status: function(status) {
 		// 	const _s = new String(status).toLowerCase();
