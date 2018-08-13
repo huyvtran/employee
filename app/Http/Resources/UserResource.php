@@ -26,7 +26,9 @@ class UserResource extends JsonResource
             'phone'     => $this->phone,
             'image'     => $this->image,
             'isActived' => $this->actived,
-            'isBanned'  => $this->banned
+            'isBanned'  => $this->banned,
+            'points'    => $this->points,
+            'free_ship' => $this->free_ship,
         ];
     }
 }

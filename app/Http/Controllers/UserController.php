@@ -13,8 +13,8 @@ class UserController extends Controller
 		$this->partner  = Role::where('name', 'Partner')->first();
 		$this->shipper  = Role::where('name', 'Shipper')->first();
         $this->customer = Role::where('name', 'Customer')->first();
-		$this->middleware('auth:api');
-	}
+        $this->middleware('auth:api');
+    }
 
     /**
     * Display a listing of the resource.
@@ -27,11 +27,33 @@ class UserController extends Controller
 
         $res   = [
             'type'    => 'success',
-            'message' => 'Get shipper information successfully.',
+            'message' => 'Get customer information successfully.',
             'data'    => UserResource::collection($users)
         ];
 
         return response($res, 200);
+    }
+
+    public function showCustomer($id) {
+        $user = User::findorFail($id);
+        if(!empty($user)) {
+
+            $res   = [
+                'type'    => 'success',
+                'message' => 'Get customer information successfully.',
+                'data'    => new UserResource($user)
+            ];
+
+            return response($res, 200);
+        }
+
+        $res   = [
+            'type'    => 'error',
+            'message' => 'Something went wrong.'
+        ];
+
+        return response($res, 500);
+
     }
 
     public function getShipper() {

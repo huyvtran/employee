@@ -107,7 +107,7 @@
 							<v-icon>more_vert</v-icon>
 						</v-btn>
 						<v-list>
-							<v-list-tile :to="{name: 'About', params: {storeId: props.item.id}}" avatar>
+							<v-list-tile :to="{name: 'CustomerDetail', params: {userId: props.item.id}}" avatar>
 								<v-list-tile-avatar>								
 									<v-icon class="blue white--text" size="32">account_circle</v-icon>
 								</v-list-tile-avatar>

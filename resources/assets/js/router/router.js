@@ -9,9 +9,10 @@ import Dashboard from '@/components/dashboard/index'
 import Order from '@/components/orders/index'
 import OrderDetail from '@/components/orders/details/index'
 import Store from '@/components/stores/index'
-import StoreDetails from '@/components/stores/storeDetails/index'
+import StoreDetail from '@/components/stores/storeDetails/index'
 import User from '@/components/users/index'
 import Customer from '@/components/users/customers/index'
+import CustomerDetail from '@/components/users/customers/details/index'
 import Shipper from '@/components/users/shippers/index'
 import About from '@/components/stores/storeDetails/about/index'
 import Menu from '@/components/stores/storeDetails/menu/index'
@@ -47,7 +48,7 @@ const router = new Router({
 		{ path: '/stores', component: Store, name: 'Store', meta:{auth:true}},
 		{
 			path: '/stores/store-details/:storeId',
-			component: StoreDetails,
+			component: StoreDetail,
 			redirect: {name: 'About'},
 			children: [
 			{ path: 'about', component: About, name: 'About', meta: {auth:true}},
@@ -72,9 +73,13 @@ const router = new Router({
 			]
 
 		},
+		{
+			path: '/users/customers/:userId/details',
+			component: CustomerDetail,
+			name: 'CustomerDetail',
+			meta: {auth:true}
+		},
 		{ path: '/notifications', component: Notification, name: 'Notification', meta: {auth:true}},
-		// { path: '/stores/store-details/:storeId', component: StoreDetails, name: 'StoreDetails', meta: {auth:true}},
-		// { path: '/stores/store-details/:storeId/menu', component: Menu, name: 'Menu', meta: {auth:true}},
 		{ path: '/services', component: Service, name: 'Service', meta:{auth:true}},
 		{ path: '/deliveries', component: Delivery, name: 'Delivery', meta:{auth:true}},
 		]
