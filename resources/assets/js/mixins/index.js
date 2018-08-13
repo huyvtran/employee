@@ -6,7 +6,7 @@ export default {
 				return imageUrl+'/img/default.png'
 			} else {
 				if(url.slice(1, 8) === "storage") {
-					return imageURL+url
+					return imageUrl+url
 				} else {
 					return url
 				}

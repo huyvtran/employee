@@ -81,6 +81,7 @@
 			
 			<!-- Table -->
 			<v-data-table
+			:loading="loading"
 			:headers="headers"
 			:search="search.text"
 			:items="filterData"
@@ -96,7 +97,7 @@
 					</v-btn></div>
 				</td>
 				<td>
-					<v-card width="120px">						
+					<v-card width="120px">			
 						<v-card-media
 						:src="image(props.item.avatar)"
 						alt="avatar"
@@ -385,7 +386,7 @@ import index from '@/mixins/index'
 import getLocation from '@/mixins/getLocation'
 import Dialog from './dialog'
 export default {
-	mixins: [ index, getLocation ],
+	mixins: [index,getLocation],
 	data() {
 		return {
 			title: 'Danh sách cửa hàng',
@@ -545,7 +546,10 @@ export default {
 	},
 	created() {
 		setTimeout(() => {
-			this.$store.dispatch('fetchStore')
+			this.loading = !this.loading
+			this.$store.dispatch('fetchStore').finally(() => {
+				this.loading = !this.loading
+			})
 			this.$store.dispatch('fetchType').then(async(response) => {
 				if(response.status == 200) {
 					await this.$store.dispatch('fetchCity')
