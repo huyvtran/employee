@@ -91,7 +91,7 @@ class StoreController extends Controller
                 'store_show'    => $storeForm['isShowed'],
             ]);
 
-        	return $this->respondSuccess('Add store', $store->load('activities', 'user'), 201, 'one');
+            return $this->respondSuccess('Add store', $store->load('activities', 'user'), 201, 'one');
         }
 
         return response(['Something went wrong'], 500);
@@ -128,33 +128,45 @@ class StoreController extends Controller
         //Update Store
         $store = Store::find($id);
         $store->update([
-                'store_name'    => $request->name,
-                'store_slug'    => str_slug($request->name, '-'),
-                'store_phone'   => $request->phone,
-                'preparetime'   => (int) $request->preparetime,
-                'store_address' => $request->address,
-                'lat'           => $request->lat,
-                'lng'           => $request->lng,
-                'priority'      => $request->priority,
-                'discount'      => $request->discount,
-                'district_id'   => (int) $request->district_id,
-                'type_id'       => (int) $request->type_id,
-                'status_id'     => $this->store_status->id,
-                'verified'      => $request->isVerified,
-                'store_show'    => $request->isShowed,
-            ]);
+            'store_name'    => $request->name,
+            'store_slug'    => str_slug($request->name, '-'),
+            'store_phone'   => $request->phone,
+            'preparetime'   => (int) $request->preparetime,
+            'store_address' => $request->address,
+            'lat'           => $request->lat,
+            'lng'           => $request->lng,
+            'priority'      => $request->priority,
+            'discount'      => $request->discount,
+            'district_id'   => (int) $request->district_id,
+            'type_id'       => (int) $request->type_id,
+            'status_id'     => $this->store_status->id,
+            'verified'      => $request->isVerified,
+            'store_show'    => $request->isShowed,
+        ]);
 
         return $this->respondSuccess('Update store', $store->load('activities', 'user'), 200, 'one');
+    }
+    
+    public function updateActivity(Request $request, $id)
+    {
+        $store = Store::findorFail($id);
+        $data  = $request->data;
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['times'] = serialize($data[$i]['times']);
+        }
+        $store->activities()->detach();
+        $store->activities()->sync($data);
+        return $this->respondSuccess('Update activities', $store->load('activities', 'user'), 200, 'one');
     }
 
     public function updateAvatar(Request $request, $store_id)
     {
-        $avatar  = $request->avatar;
-        $storeId = (int) $store_id;
-        $store   = Store::findorFail($storeId);
-        $dir     = '/storage/' . $store->user_id . '/stores/av/';
-        $path    = StoreController::PUBLIC_PATH . $dir;
-        // $path = public_path($dir);
+        $avatar    = $request->avatar;
+        $storeId   = (int) $store_id;
+        $store     = Store::findorFail($storeId);
+        $dir       = '/storage/' . $store->user_id . '/stores/av/';
+        $path      = StoreController::PUBLIC_PATH . $dir;
+        // $path   = public_path($dir);
         $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->id) . '-6' . time() . '.jpeg');
         $imageUrl  = $dir . $imageName;
 
@@ -203,17 +215,7 @@ class StoreController extends Controller
         }
     }
 
-    public function updateActivity(Request $request, $id)
-    {
-        $store = Store::findorFail($id);
-        $data  = $request->data;
-        for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['times'] = serialize($data[$i]['times']);
-        }
-        $store->activities()->detach();
-        $store->activities()->sync($data);
-        return $this->respondSuccess('Update activities', $store->load('activities', 'user'), 200, 'one');
-    }
+    
 
     protected function respondSuccess($message, $data, $status = 200, $type, $pagination = [])
     {
@@ -224,12 +226,12 @@ class StoreController extends Controller
 
         switch ($type) {
             case 'one':
-                $res['store']  = new StoreResource($data);
-                break;
+            $res['store']  = new StoreResource($data);
+            break;
 
             case 'many':
-                $res['stores'] = StoreResource::collection($data);
-                break;
+            $res['stores'] = StoreResource::collection($data);
+            break;
         }
 
         return response($res, $status);

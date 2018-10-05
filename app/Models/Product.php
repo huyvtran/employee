@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-	protected $table = 'ec_products';
-
-	protected $guarded = [];
-
-	protected $hidden = [];
+	protected $table    = 'ec_products';
+	
+	protected $fillable = ['name', '_name', 'price', 'count', 'have_size', 'have_topping', 'image', 'priority', 'status_id', 'catalogue_id', 'description'];
+	
+	protected $hidden   = [];
 
 	public function catalogue() {
 		return $this->belongsTo('App\Models\Catalogue', 'catalogue_id');
@@ -19,6 +19,11 @@ class Product extends Model
 	public function status() {
 		return $this->belongsTo('App\Models\ProductStatus', 'status_id');
 	}
+
+	// ORDER BY PRIORITY
+    public function scopeOrderByPriority($query, $name) {
+        return $query->orderBy('priority', $name);
+    }
 
 	public function getHaveSizeAttribute($value) {
 		if($value) {

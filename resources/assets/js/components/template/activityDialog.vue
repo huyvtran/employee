@@ -3,7 +3,7 @@
 		<v-card>
 			<v-card-title class="headline">{{title}}</v-card-title>
 			<v-card-text>
-				<v-layout row wrap v-for="(item, index) in activities" :key="item.id"> 
+				<v-layout row wrap v-for="(item, index) in activities" :key="item.id">
 					<v-flex xs12 sm4 md4>
 						<v-checkbox hide-details :label="item.daysOfWeek" v-model="items[index].id" :value="item.id" class="pt-3"></v-checkbox>
 					</v-flex>
@@ -13,7 +13,7 @@
 								<v-dialog  ref="from" persistent v-model="time.fromModal" lazy full-width width="290px" :return-value.sync="time.from">
 									<v-text-field
 									hide-details
-									slot="activator"									
+									slot="activator"
 									label="Bắt đầu"
 									v-model="time.from"
 									prepend-icon="access_time"
@@ -56,51 +56,51 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import axios from 'axios'
-export default {
-	props:['store'],
-	data: function() {
-		return {
-			title: 'Cập nhật thời gian hoạt động',
-			items: [],
-		}
-	},
-	methods: {
-		saveTime(ref, time, index) {
-			this.$refs[ref][index].save(time)
-		},
-		save: async function() {
-			var data = []
-			this.items.forEach(item => {
-				if(item.id != null) {
-					var timeTemp = []
-					item.times.forEach(time => {
-						if(time.from != null && time.to != null) {						
-							timeTemp.push({from: time.from, to: time.to})
-						}
-					})
-					data.push({activity_id: item.id, times: timeTemp})
-				}
-			})
-			if(data.length>0) {
-				var payload = {data: data}
-				axios.post('/api/UpdateStore/'+this.store.id+'/Activity', payload).then(response => {
-					if(response.status === 200) {
-						this.$store.commit('SHOW_STORE', response.data)
-						this.$store.commit('ALERT_ACTIVITY', {show: true, type: 'success', message: response.data.message})
-						this.$store.commit('DIALOG_CLOSE_ACTIVITY')
-					}
-				}).catch(error => {
-
-				})
+	import {mapState} from 'vuex'
+	import axios from 'axios'
+	export default {
+		props:['store'],
+		data: function() {
+			return {
+				title: 'Cập nhật thời gian hoạt động',
+				items: [],
 			}
-		}
-	},
-	computed: {
+		},
+		methods: {
+			saveTime(ref, time, index) {
+				this.$refs[ref][index].save(time)
+			},
+			save: async function() {
+				var data = []
+				this.items.forEach(item => {
+					if(item.id != null) {
+						var timeTemp = []
+						item.times.forEach(time => {
+							if(time.from != null && time.to != null) {
+								timeTemp.push({from: time.from, to: time.to})
+							}
+						})
+						data.push({activity_id: item.id, times: timeTemp})
+					}
+				})
+				if(data.length>0) {
+					var payload = {data: data}
+					axios.post('/api/UpdateStore/'+this.store.id+'/Activity', payload).then(response => {
+						if(response.status === 200) {
+							this.$store.commit('SHOW_STORE', response.data)
+							this.$store.commit('ALERT_ACTIVITY', {show: true, type: 'success', message: response.data.message})
+							this.$store.commit('DIALOG_CLOSE_ACTIVITY')
+						}
+					}).catch(error => {
+
+					})
+				}
+			}
+		},
+		computed: {
 		//Store Activity
 		...mapState({
-			dialog: state     => state.activityStore.dialog,
+			dialog: state    => state.activityStore.dialog,
 			activities: state => state.activityStore.activities
 		}),
 	},

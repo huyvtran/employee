@@ -13,9 +13,9 @@ class ActivityController extends Controller
     }
 
     public function getActivity() {
-    	$activity = Activity::get();
-
-        $res = [
+        $activity = Activity::get();
+        
+        $res      = [
             'type'    => 'success',
             'message' => 'Get activity successfully',
             'data'    => ActivityResource::collection($activity)

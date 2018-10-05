@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $table = "ec_stores";
-
+    protected $table    = "ec_stores";
+    
     protected $fillable = ['store_name', 'store_slug', 'store_phone', 'preparetime', 'store_address', 'lat', 'lng', 'discount', 'store_avatar', 'verified', 'store_show', 'priority', 'user_id', 'district_id', 'type_id', 'status_id', 'views', 'likes'];
-
-    protected $hidden = ['pivot', 'city_id'];
+    
+    protected $hidden   = ['pivot', 'city_id'];
 
     //SET VERIFIED ATTRIBUTE
     public function getVerifiedAttribute($value)

@@ -6,7 +6,7 @@
 			</v-toolbar>
 			<v-divider></v-divider>
 			<v-layout row wrap class="justify-center pt-3">			
-				<vue-croppie ref="croppieRef"  @result="result" :enableResize="false" :enableExif="true" :mouseWheelZoom="false"	@update="update" :viewport="{ width: 250, height: 250}" :boundary="{width: 300, height: 300}">
+				<vue-croppie ref="croppieRef"  @result="result" :enableResize="false" :enableExif="true" :mouseWheelZoom="false"	@update="update" :viewport="{ width: 250, height: 250}" :boundary="{width: 350, height: 350}">
 				</vue-croppie>
 				<v-btn color="white" @click.stop.prevent="onPickImage" :loading="loading" round small class="black--text"><v-icon left >camera_alt</v-icon> Tải ảnh</v-btn>
 				<v-btn color="white" small class="black--text elevation-1" icon @click="rotate(90)"><v-icon>rotate_left</v-icon></v-btn>
@@ -47,6 +47,10 @@
 					height: 960, 
 					type: 'circle'
 				},
+				size: {
+					width: 350,
+					height: 350
+				},
 				boundary: {
 					width: 960, 
 					height: 960
@@ -57,9 +61,10 @@
 			}
 		},
 		methods: {
-			open(title) {
-				this.dialog  = true
-				this.title   = title
+			open(title, size) {
+				this.dialog = true
+				this.size   = size
+				this.title  = title
 				return new Promise((resolve, reject) => {
 					this.resolve = resolve
 					this.reject  = reject
@@ -101,7 +106,7 @@
 			update(val) {
 				let options = {
 					format: 'jpeg', 
-					size: { width: 960, height: 960 },
+					size: this.size,
 					circle: false
 				}
 				this.$refs.croppieRef.result(options, (output) => {
