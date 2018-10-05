@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use App\Http\Resources\StoreResource;
 use App\Models\Role;
-use App\Models\User;
 use App\Models\Store;
 use App\Models\StoreStatus;
-use App\Http\Resources\StoreResource;
+use App\Models\User;
 use DateTime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StoreController extends Controller
 {
 
-    public function __construct() {
+    const PUBLIC_PATH = '/var/www/dofuu.com/public';
+
+    public function __construct()
+    {
         $this->role_partner = Role::where('name', 'Partner')->first();
-        $this->store_status = StoreStatus::where('store_status_name', 'Đóng cửa')->first(); 
+        $this->store_status = StoreStatus::where('store_status_name', 'Đóng cửa')->first();
         $this->middleware('auth:api');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,17 +30,10 @@ class StoreController extends Controller
      */
     public function getStore()
     {
-        $stores = Store::get();
+        $stores = Store::orderByPriority('desc')->get();
 
-        $res = [
-            'type'    => 'success',
-            'message' => 'Get stores successfully',
-            'data'    => StoreResource::collection($stores->load('activities', 'user'))
-        ];        
-        
-        return response($res, 200);
+        return $this->respondSuccess('Get store', $stores->load('activities', 'user'), 200, 'many');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -50,78 +46,52 @@ class StoreController extends Controller
         $userForm  = $request->user;
         $storeForm = $request->store;
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'user.email' => 'unique:ec_users,email',
-            'user.phone' => 'unique:ec_users,phone'
+            'user.phone' => 'unique:ec_users,phone',
         ]);
-        
-        if($validator->fails()){
-            return response($validator->errors()->getMessages(),422);
+
+        if ($validator->fails()) {
+            return response($validator->errors()->getMessages(), 422);
         }
 
-        if((int)$this->role_partner->id === (int)$userForm['role_id']) {
+        if ((int) $this->role_partner->id === (int) $userForm['role_id']) {
             //Add user
-            $user             = new User;
-            $user->name       = $userForm['name'];
-            $user->email      = $userForm['email'];
-            $user->password   = bcrypt($userForm['password']);
-            $user->birthday   = $userForm['birthday'];
-            $user->gender     = $userForm['gender'];
-            $user->address    = $userForm['address'];
-            $user->lat        = $userForm['lat'];
-            $user->lng        = $userForm['lng'];
-            $user->phone      = $userForm['phone'];
-            $user->have_store = 1;
-            $user->actived    = $userForm['isActived'];
-            $user->role_id    = $this->role_partner->id;
-            $user->created_at = new DateTime;
-            $user->save();
-            //Add store
-            $store                = new Store;
-            $store->store_name    = $storeForm['name'];
-            $store->store_slug    = str_slug($storeForm['name'], '-');
-            $store->store_phone   = $storeForm['phone'];
-            $store->preparetime   = (int)$storeForm['preparetime'];
-            $store->store_address = $storeForm['address'];
-            $store->lat           = $storeForm['lat'];
-            $store->lng           = $storeForm['lng'];
-            $store->priority      = $storeForm['priority'];
-            $store->discount      = $storeForm['discount'];
-            $store->user_id       = $user->id;
-            $store->district_id   = (int)$storeForm['district_id'];
-            $store->type_id       = (int)$storeForm['type_id'];
-            $store->status_id     = $this->store_status->id;
-            
-            $store->verified      = $storeForm['isVerified'];
-            $store->store_show    = $storeForm['isShowed'];
-            $store->created_at    = new DateTime;
-            $store->save();
+            $user = new User;
+            $user = User::create([
+                'name'       => $userForm['name'],
+                'email'      => $userForm['email'],
+                'password'   => bcrypt($userForm['password']),
+                'birthday'   => $userForm['birthday'],
+                'gender'     => $userForm['gender'],
+                'address'    => $userForm['address'],
+                'lat'        => $userForm['lat'],
+                'lng'        => $userForm['lng'],
+                'phone'      => $userForm['phone'],
+                'have_store' => 1,
+                'actived'    => $userForm['isActived'],
+                'role_id'    => $this->role_partner->id,
+            ]);
 
-            // Store Avatar
-            if(!is_null($storeForm['avatar'])) {
-                $data              = $storeForm['avatar'];
-                list($type, $data) = explode(';', $data);
-                list(, $data)      = explode (',', $data);
-                $data              = base64_decode($data);
-                $imageName         = str_replace(' ','-', 'dofuu-'.str_replace('-','', date('Y-m-d')).'-'.$store->id.'-'.time(). '.jpeg');
-                $path = '/var/www/dofuu.com/public/storage/'.$store->user_id.'/stores/av/';
-                if(!file_exists($path)){
-                    mkdir($path, 0755, true);
-                }
+            $store = Store::create([
+                'store_name'    => $storeForm['name'],
+                'store_slug'    => str_slug($storeForm['name'], '-'),
+                'store_phone'   => $storeForm['phone'],
+                'preparetime'   => (int) $storeForm['preparetime'],
+                'store_address' => $storeForm['address'],
+                'lat'           => $storeForm['lat'],
+                'lng'           => $storeForm['lng'],
+                'priority'      => $storeForm['priority'],
+                'discount'      => $storeForm['discount'],
+                'user_id'       => $user->id,
+                'district_id'   => (int) $storeForm['district_id'],
+                'type_id'       => (int) $storeForm['type_id'],
+                'status_id'     => $this->store_status->id,
+                'verified'      => $storeForm['isVerified'],
+                'store_show'    => $storeForm['isShowed'],
+            ]);
 
-                file_put_contents($path . $imageName, $data);
-                $imageUrl            = '/storage/'.$user->id.'/stores/av/'.$imageName;
-                $store->store_avatar = $imageUrl;
-                $store->save();
-            }
-
-            $res = [
-                'type'    => 'success',
-                'message' => 'Added store successfully',
-                'data'    => new StoreResource($store->load('activities', 'user'))
-            ];      
-
-            return response($res, 201);
+        	return $this->respondSuccess('Add store', $store->load('activities', 'user'), 201, 'one');
         }
 
         return response(['Something went wrong'], 500);
@@ -137,13 +107,7 @@ class StoreController extends Controller
     {
         $store = Store::findorFail($id);
 
-        $res = [
-            'type'    => 'success',
-            'message' => 'Added store successfully',
-            'data'    => new StoreResource($store->load('activities', 'user'))
-        ];
-
-        return response($res, 200);      
+        return $this->respondSuccess('Show store', $store->load('activities', 'user'), 200, 'one');
     }
 
     /**
@@ -162,73 +126,46 @@ class StoreController extends Controller
         //     return response($validator->errors()->getMessages(),422);
         // }
         //Update Store
-        $store                = Store::find($id);
-        $store->store_name    = $request->name;
-        $store->store_slug    = str_slug($request->name, '-');
-        $store->store_phone   = $request->phone;
-        $store->preparetime   = (int)$request->preparetime;
-        $store->store_address = $request->address;
-        $store->lat           = $request->lat;
-        $store->lng           = $request->lng;
-        $store->district_id   = (int)$request->district_id;
-        $store->type_id       = (int)$request->type_id;
-        $store->status_id     = $this->store_status->id;
-        $store->priority      = $request->priority;
-        $store->discount      = $request->discount;
-        $store->store_show    = $request->isShowed;
-        $store->verified      = $request->isVerified;
-        $store->updated_at    = new DateTime;
-        // Store Avatar
-        if(!is_null($request->avatar)) {
-            if($store->store_avatar !== $request->avatar && !is_null($store->store_avatar)) {
-                $url               = $store->store_avatar;
-                $oldPath = '/var/www/dofuu.com/public';
-                unlink($oldPath.$url);
-                $data              = $request->avatar;
-                list($type, $data) = explode(';', $data);
-                list(, $data)      = explode (',', $data);
-                $data              = base64_decode($data);
-                $imageName         = str_replace(' ','-', 'dofuu-'.str_replace('-','', date('Y-m-d')).'-'.$store->id.'-'.time(). '.jpeg');
+        $store = Store::find($id);
+        $store->update([
+                'store_name'    => $request->name,
+                'store_slug'    => str_slug($request->name, '-'),
+                'store_phone'   => $request->phone,
+                'preparetime'   => (int) $request->preparetime,
+                'store_address' => $request->address,
+                'lat'           => $request->lat,
+                'lng'           => $request->lng,
+                'priority'      => $request->priority,
+                'discount'      => $request->discount,
+                'district_id'   => (int) $request->district_id,
+                'type_id'       => (int) $request->type_id,
+                'status_id'     => $this->store_status->id,
+                'verified'      => $request->isVerified,
+                'store_show'    => $request->isShowed,
+            ]);
 
-                // //path linux
-                // $path = '/var/www/dofuu.xyz/public/storage/'.$store->user_id.'/stores/av/';
-                $path = '/var/www/dofuu.com/public/storage/'.$store->user_id.'/stores/av/';
-                // $path = public_path('storage/'.$store->user_id.'/stores/av/');
-                if(!file_exists($path)){
-                    mkdir($path, 0755, true);
-                }
-                file_put_contents($path . $imageName, $data);
-                $imageUrl            = '/storage/'.$store->user_id.'/stores/av/'.$imageName;
-                $store->store_avatar = $imageUrl;
+        return $this->respondSuccess('Update store', $store->load('activities', 'user'), 200, 'one');
+    }
 
-            } else if(is_null($store->store_avatar)) {
-                $data              = $request->avatar;
-                list($type, $data) = explode(';', $data);
-                list(, $data)      = explode (',', $data);
-                $data              = base64_decode($data);
-                $imageName         =str_replace(' ','-', 'dofuu-'.str_replace('-','', date('Y-m-d')).'-'.$store->id.'-'.time(). '.jpeg');
-                // $path              = public_path('storage/'.$store->user_id.'/stores/av/');
-                // $path = '/var/www/dofuu.xyz/public/storage/'.$store->user_id.'/stores/av/';
-                $path = '/var/www/dofuu.com/public/storage/'.$store->user_id.'/stores/av/';
-                if(!file_exists($path)){
-                    mkdir($path, 0755, true);
-                }
-                file_put_contents($path . $imageName, $data);
-                $imageUrl            = '/storage/'.$store->user_id.'/stores/av/'.$imageName;
-                $store->store_avatar = $imageUrl;
-            }
+    public function updateAvatar(Request $request, $store_id)
+    {
+        $avatar  = $request->avatar;
+        $storeId = (int) $store_id;
+        $store   = Store::findorFail($storeId);
+        $dir     = '/storage/' . $store->user_id . '/stores/av/';
+        $path    = StoreController::PUBLIC_PATH . $dir;
+        // $path = public_path($dir);
+        $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->id) . '-6' . time() . '.jpeg');
+        $imageUrl  = $dir . $imageName;
 
-        }
-        $store->save();
+        $this->handleUploadedImage($avatar, $path, $imageName);
+        $this->handleRemoveImage($store->store_avatar);
 
-        
-        $res = [
-            'type'    => 'success',
-            'message' => 'Updated store successfully',
-            'data'    => new StoreResource($store->load('activities', 'user'))
-        ];      
+        $store->update([
+            'store_avatar' => $imageUrl,
+        ]);
 
-        return response($res, 200);
+        return $this->respondSuccess('Update image', $store->load('activities', 'user'), 200, 'one');
     }
 
     /**
@@ -237,24 +174,64 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    protected function handleUploadedImage($image, $path, $name)
     {
-        //
+
+        if (!is_null($image)) {
+            $data              = $image;
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $data              = base64_decode($data);
+
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            file_put_contents($path . $name, $data);
+        }
     }
 
-    public function updateActivity(Request $request, $id) {
+    protected function handleRemoveImage($image)
+    {
+
+        if (!is_null($image)) {
+            if (substr($image, 1, 7) === 'storage') {
+                // $url = public_path($image);
+                $url = UserController::PUBLIC_PATH . $image;
+                unlink($url);
+            }
+        }
+    }
+
+    public function updateActivity(Request $request, $id)
+    {
         $store = Store::findorFail($id);
         $data  = $request->data;
-        for($i = 0; $i < count($data); $i++) {
+        for ($i = 0; $i < count($data); $i++) {
             $data[$i]['times'] = serialize($data[$i]['times']);
         }
         $store->activities()->detach();
         $store->activities()->sync($data);
+        return $this->respondSuccess('Update activities', $store->load('activities', 'user'), 200, 'one');
+    }
+
+    protected function respondSuccess($message, $data, $status = 200, $type, $pagination = [])
+    {
         $res = [
             'type'    => 'success',
-            'message' => 'Update activities successfully',
-            'data'    => new StoreResource($store->load('activities', 'user'))
+            'message' => $message . ' successfully.',
         ];
-        return response($res, 200);
+
+        switch ($type) {
+            case 'one':
+                $res['store']  = new StoreResource($data);
+                break;
+
+            case 'many':
+                $res['stores'] = StoreResource::collection($data);
+                break;
+        }
+
+        return response($res, $status);
     }
 }

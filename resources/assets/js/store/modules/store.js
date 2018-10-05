@@ -16,7 +16,7 @@ const state = {
 
 const mutations = {
 	FETCH_STORE (state, payload) {
-		state.stores = payload.data
+		state.stores = payload.stores
 	},
 	
 	LOADING_STORE(state) {
@@ -33,7 +33,7 @@ const mutations = {
 	},
 	
 	SHOW_STORE(state, payload) {
-		state.store = Object.assign({}, payload.data)
+		state.store = Object.assign({}, payload.store)
 	},
 
 	EDIT_STORE(state, payload) {
@@ -44,9 +44,9 @@ const mutations = {
 	
 	UPDATE_STORE(state, payload) {
 		if(state.editedIndex > -1) {
-			Object.assign(state.stores[state.editedIndex], payload.data)	
+			Object.assign(state.stores[state.editedIndex], payload.store)	
 		} else {
-			state.stores.unshift(payload.data)
+			state.stores.unshift(payload.store)
 		}
 
 	},

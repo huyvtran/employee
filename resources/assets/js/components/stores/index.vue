@@ -85,7 +85,7 @@
 			:headers="headers"
 			:search="search.text"
 			:items="filterData"
-			hide-actions
+			:pagination.sync="pagination"
 			class="elevation-1"
 			>
 			<template slot="items" slot-scope="props">
@@ -97,18 +97,22 @@
 					</v-btn></div>
 				</td>
 				<td>
-					<v-card width="120px">			
-						<v-card-media
-						:src="image(props.item.avatar)"
-						alt="avatar"
-						height="120px"
-						>
-						<v-layout >
-							<v-flex xs12 align-end flexbox>								
-								<v-spacer></v-spacer>
-							</v-flex>
-						</v-layout>
-					</v-card-media>
+					<v-hover>
+					<v-card  slot-scope="{ hover }" width="120px">		
+						<v-img	:aspect-ratio="16/9" :src="image(props.item.avatar)" height="120">
+							<v-expand-transition>
+								<div v-if="hover || $vuetify.breakpoint.smAndDown" class="d-flex transition-fast-in-fast-out black lighten-2 v-card--reveal white--text" style=" cursor: pointer;"  @click.prevent="updatingAvatar(props.item)" :style="cameraOverlay">
+									<v-layout column justify-center align-center>
+										<v-flex>
+											<v-icon color="white">camera_alt</v-icon>
+										</v-flex>
+										<v-flex >
+											<div>Đổi ảnh</div>
+										</v-flex>
+									</v-layout>
+								</div>
+							</v-expand-transition>		
+						</v-img>
 					<v-card-actions>
 						<v-tooltip top>
 							<span class="black--text" slot="activator"><v-icon size="18" color="black">visibility</v-icon> {{props.item.views}}</span>
@@ -125,6 +129,7 @@
 						</v-tooltip>	
 					</v-card-actions>
 				</v-card>
+			</v-hover>
 			</td>
 			<td class="text-xs-center">
 				<div>{{ props.item.type_name }}</div>
@@ -377,64 +382,72 @@
 	</v-card>
 </v-dialog>
 <vue-dialog></vue-dialog>
+<vue-image ref="avatar"></vue-image>
 </v-card>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import index from '@/mixins/index'
-import getLocation from '@/mixins/getLocation'
-import Dialog from './dialog'
-export default {
-	mixins: [index,getLocation],
-	data() {
-		return {
-			title: 'Danh sách cửa hàng',
-			breadcrumbs: [
-			{
-				text: 'Dashboard',
-				name: 'Dashboard',
-				disabled: false
-			},
-			{
-				text: 'Store',
-				disabled: true
+	import axios from 'axios'
+	import { mapState } from 'vuex'
+	import index from '@/mixins/index'
+	import getLocation from '@/mixins/getLocation'
+	import Dialog from './dialog'
+	import ImageDialog from '@/components/commons/ImageDialog'
+	export default {
+		mixins: [index, getLocation],
+		data() {
+			return {
+				title: 'Danh sách cửa hàng',
+				breadcrumbs: [
+				{
+					text: 'Dashboard',
+					name: 'Dashboard',
+					disabled: false
+				},
+				{
+					text: 'Store',
+					disabled: true
+				}
+				],
+				pagination: {
+					sortBy: 'discount',
+					descending: true
+				},
+				headers: [
+				{
+					text: '#',
+					align: 'center',
+					value: 'id'
+				},
+				{ text: 'Hình đại diện', value:'user.email', align: 'center', sortable:false, width:'120px'},
+				{ text: 'Cửa hàng', value: 'name', align: 'center'},
+				{ text: 'Liên hệ', value: 'phone', sortable:false},
+				{ text: 'Ẩn/Hiện', value: 'address', sortable:false },
+				{ text: 'Chiết khấu', value: 'discount', align: 'center' },
+				{ text: 'Thành phố', value: 'city_name' },
+				{ text: 'Quận', value: 'district_name' },
+				{ text: 'Tác vụ', sortable: false}
+				],
+				loading: false,
+				search: {
+					text: '',
+					type: -1,
+					show: null,
+					verify: null
+				},
+				filter:false,
+				filterTypes: [{name: 'Tất cả', id: -1, countStore: 0}],
+				filterShow: [{name: 'Tất cả', value: null}, {name: 'Hiện', value: true}, {name: 'Ẩn', value: false}],
+				filterVerify: [{name: 'Tất cả', value: null}, {name: 'Đã xác thực', value: true}, {name: 'Chưa xác thực', value: false}],
+				mapDialog: false,
+				store:null
 			}
-			],
-			headers: [
-			{
-				text: '#',
-				align: 'center',
-				value: 'id'
-			},
-			{ text: 'Hình đại diện', value:'user.email', align: 'center', sortable:false, width:'120px'},
-			{ text: 'Cửa hàng', value: 'name', align: 'center'},
-			{ text: 'Liên hệ', value: 'phone', sortable:false},
-			{ text: 'Ẩn/Hiện', value: 'address', sortable:false },
-			{ text: 'Chiết khấu', value: 'discount', align: 'center' },
-			{ text: 'Thành phố', value: 'city_name' },
-			{ text: 'Quận', value: 'district_name' },
-			{ text: 'Tác vụ', sortable: false}
-			],
-			loading: false,
-			search: {
-				text: '',
-				type: -1,
-				show: null,
-				verify: null
-			},
-			filter:false,
-			filterTypes: [{name: 'Tất cả', id: -1, countStore: 0}],
-			filterShow: [{name: 'Tất cả', value: null}, {name: 'Hiện', value: true}, {name: 'Ẩn', value: false}],
-			filterVerify: [{name: 'Tất cả', value: null}, {name: 'Đã xác thực', value: true}, {name: 'Chưa xác thực', value: false}],
-			mapDialog: false,
-			store:null
-		}
-	},
-	components: {
-		'vue-dialog': Dialog,
-	},
-	methods: {
+		},
+		components: {
+			'vue-dialog': Dialog,
+			'vue-image': ImageDialog
+		},
+		methods: {
 		//Show google map
 		showMap(request) {
 			this.mapDialog = true
@@ -468,6 +481,28 @@ export default {
 		//Edit Store
 		editItem (item) {
 			this.$store.dispatch('editStore', item)
+		},
+		updatingAvatar(store) {
+			console.log(store)
+			var vm = this
+			this.$refs.avatar.open('Thay đổi ảnh đại diện').then(response => {
+				if(response.status) {
+					console.log(response)
+					vm.updateAvatar(response.avatar, store)
+				}
+			})
+		},
+		updateAvatar(avatar, store) {
+			var vm        = this
+			const storeId = store.id
+			const data    = { avatar: avatar }
+			axios.post('/api/UpdateStore/'+storeId+'/Avatar', data, { withCredentials: true }).then(response => {
+				if(response.status === 200 ){
+					store.avatar = response.data.store.avatar		
+				}
+			}).finally(() => {
+
+			})
 		},
 		filterAction() {
 			if(this.filter) {
@@ -525,6 +560,9 @@ export default {
 				return this.filterByVerify(this.filterByShow(this.filterByType(this.items, this.search.type), this.search.show), this.search.verify)
 			}
 
+		},
+		cameraOverlay: function() {
+			return this.$vuetify.breakpoint.smAndDown ? `height: 30%` : `height: 100%`
 		}
 	},
 	watch: {

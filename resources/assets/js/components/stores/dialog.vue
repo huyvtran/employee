@@ -112,7 +112,7 @@
 										prepend-icon="phone"
 										label="Số điện thoại" 
 										v-model="editedItem.user.phone"
-										v-validate="'required|numeric|min:10|max:12'"
+										v-validate="'required|numeric|min:10|max:10'"
 										:error-messages="errors.collect('phone')"
 										data-vv-name="phone"
 										data-vv-scope="user"></v-text-field>
@@ -142,12 +142,6 @@
 						<v-card>
 							<v-card-title primary class="title">Thông tin cửa hàng</v-card-title>
 							<v-card-text>
-								<v-subheader>Ảnh đại diện</v-subheader>
-								<v-layout justify-center >
-									<v-flex xs8 sm8 md6>
-										<vue-image :image="editedItem.store.avatar" @IMAGE="getImage"></vue-image>		
-									</v-flex>
-								</v-layout>
 								<form>
 									<v-subheader>Thông tin cửa hàng</v-subheader>
 									<v-container>
@@ -178,7 +172,7 @@
 										mask="(####) ### - ####"
 										prepend-icon="phone" 
 										label="Số điện thoại cửa hàng" 
-										v-model="editedItem.store.phone"v-validate="'required|numeric|min:10|max:12'"
+										v-model="editedItem.store.phone"v-validate="'required|numeric|min:10|max:10'"
 										:error-messages="errors.collect('storePhone')"
 										data-vv-name="storePhone"
 										data-vv-scope="store"></v-text-field>
@@ -332,7 +326,6 @@ export default {
 					lat: 10.0452,
 					lng: 105.7469,
 					discount:0,
-					avatar: null,		
 					priority:0,
 					isShowed: false,
 					isVerified: false,
@@ -363,8 +356,7 @@ export default {
 					address: '',
 					lat: 10.0452,
 					lng: 105.7469,
-					discount:0,
-					avatar: null,		
+					discount:0,	
 					priority:0,
 					isShowed: false,
 					isVerified: false,		
@@ -391,7 +383,7 @@ export default {
 					var geocoder = new google.maps.Geocoder();
 					geocoder.geocode({address: input.value}, function(results, status) {
 						if(status === 'OK') {
-							vm.editedItem.store.address = results[0].formatted_address.slice(0, -10) 
+							vm.editedItem.store.address = results[0].formatted_address
 							vm.editedItem.store.lat     = results[0].geometry.location.lat()
 							vm.editedItem.store.lng     = results[0].geometry.location.lng()
 						}
@@ -405,7 +397,7 @@ export default {
 		setPlace(place) {
 			this.place = place
 			if(this.place) {
-				this.editedItem.store.address = this.place.formatted_address.slice(0, -10)
+				this.editedItem.store.address = this.place.formatted_address
 				this.editedItem.store.lat     = this.place.geometry.location.lat()
 				this.editedItem.store.lng     = this.place.geometry.location.lng()
 			}
@@ -451,7 +443,7 @@ export default {
 							if(resultStore) {
 								
 								await getLocation(vm.editedItem.user.address).then(response => {
-									vm.editedItem.user.address = response[0].formatted_address.slice(0, -10)
+									vm.editedItem.user.address = response[0].formatted_address
 									vm.editedItem.user.lat     = response[0].geometry.location.lat()
 									vm.editedItem.user.lng     = response[0].geometry.location.lng()	
 								})

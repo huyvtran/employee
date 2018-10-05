@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Mail\TestMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,14 +11,13 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 use Illuminate\Support\Facades\Mail;
-use App\Mail\TestMail;
 
-Route::group(['middleware' => ['api']], function() {
+Route::group(['middleware' => ['api']], function () {
 	//TEST MAIL
-	Route::get('/SendMail', function() {
-		Mail::to('sp.dofuu@gmail.com')->send(new TestMail());	
+	Route::get('/SendMail', function () {
+		Mail::to('sp.dofuu@gmail.com')->send(new TestMail());
 	});
 	//LOGIN
 	Route::post('/login', 'AuthController@login');
@@ -40,6 +39,8 @@ Route::group(['middleware' => ['api']], function() {
 	Route::post('/AddStore', 'StoreController@addStore');
 	//UPDATE STORE
 	Route::put('/UpdateStore/{sid}', 'StoreController@updateStore');
+	//UPDATE IMAGE STORE
+	Route::post('/UpdateStore/{sid}/Avatar', 'StoreController@updateAvatar');
 	//UPDATE ACTIVITY FOR STORE
 	Route::post('/UpdateStore/{sid}/Activity', 'StoreController@updateActivity');
 	//GET TYPE
@@ -94,7 +95,7 @@ Route::group(['middleware' => ['api']], function() {
 	Route::get('/GetUser/{uid}/Customer', 'UserController@showCustomer');
 	//GET SHIPPER
 	Route::post('/GetUser/Shippers', 'UserController@getShipper');
-	//GET READ NOTIFICATIONS 
+	//GET READ NOTIFICATIONS
 	Route::post('/ReadNotification', 'NotificationController@readNotification');
 	//GET NOTIFICATIONS
 	Route::post('/GetNotification', 'NotificationController@getNotification');
