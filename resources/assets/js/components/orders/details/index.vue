@@ -81,12 +81,12 @@
 								{{order.bookingDate}}
 							</v-flex>
 
-							<v-flex xs5  class="text-xs-right"> 
+							<v-flex xs5  class="text-xs-right">
 								Ngày nhận:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
 								{{order.receiveDate | formatDate}} {{order.receiveTime}}
-							</v-flex>						
+							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
 								Phí vận chuyển:
@@ -145,17 +145,17 @@
 							<td colspan="3"><strong>{{order.subTotal | formatPrice}}</strong></td>
 						</tr>
 						<tr>
-							<td colspan="3">Phí vận chuyển:</td>	
+							<td colspan="3">Phí vận chuyển:</td>
 							<td><strong>{{order.deliveryPrice | formatPrice}}</strong></td>
 						</tr>
 						<tr>
 							<td colspan="3">Giảm giá:</td>
 							<td><strong>{{-order.discountTotal | formatPrice}}</strong></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td colspan="3">Tổng:</td>
 							<td class="red--text"><strong>{{order.total | formatPrice}}</strong></td>
-						</tr>			
+						</tr>
 					</template></v-data-table>
 				</v-flex>
 				<v-flex xs12>
@@ -184,12 +184,12 @@
 			<div v-show="tab == 1">
 				<v-layout row wrap v-if="matrix.show">
 					<v-flex xs3>Từ:</v-flex>
-					<v-flex xs9>{{matrix.start}}</v-flex>
+					<v-flex xs9>{{order.store.address}}</v-flex>
 					<v-flex xs3>
 						Đến:
 					</v-flex>
 					<v-flex xs9>
-						{{matrix.end}}
+						{{order.address}}
 					</v-flex>
 					<v-flex xs3>
 						Khoảng cách:
@@ -214,7 +214,7 @@
 			</div>
 
 			<div v-show="tab == 2">
-				<v-layout row wrap v-if="order.statusId == orderStatus('Hủy')"> 
+				<v-layout row wrap v-if="order.statusId == orderStatus('Hủy')">
 					<v-flex xs5 class="text-xs-right">
 						Trạng thái:
 					</v-flex>
@@ -242,12 +242,12 @@
 					</v-flex>
 
 				</v-layout>
-				<v-card>						
+				<v-card>
 					<v-stepper v-model="order.statusId" :value="order.statusId" v-if="order.statusId != orderStatus('Hủy')">
 						<v-stepper-header>
-							<v-stepper-step step="1" :complete="order.statusId > orderStatus('Chờ xử lý') && order.statusId != orderStatus('Hủy')">Chờ xử lý</v-stepper-step>		
+							<v-stepper-step step="1" :complete="order.statusId > orderStatus('Chờ xử lý') && order.statusId != orderStatus('Hủy')">Chờ xử lý</v-stepper-step>
 							<v-divider></v-divider>
-							<v-stepper-step step="2" :complete="order.statusId > orderStatus('Đang xử lý') && order.statusId != orderStatus('Hủy')">Đang xử lý</v-stepper-step>				
+							<v-stepper-step step="2" :complete="order.statusId > orderStatus('Đang xử lý') && order.statusId != orderStatus('Hủy')">Đang xử lý</v-stepper-step>
 							<v-divider></v-divider >
 							<v-stepper-step step="3" :complete="order.statusId > orderStatus('Xác nhận') && order.statusId != orderStatus('Hủy')">Xác nhận</v-stepper-step>
 							<v-divider></v-divider>
@@ -327,8 +327,8 @@
 												Xin vui lòng liên hệ cửa hàng để chuẩn bị.
 											</strong>
 										</div>
-										<div>		
-											<strong>				
+										<div>
+											<strong>
 												Cám ơn!
 											</strong>
 										</div>
@@ -379,7 +379,7 @@
 											<strong>
 												Cám ơn.
 											</strong>
-										</div>											
+										</div>
 									</v-flex>
 								</v-layout>
 								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Continue</v-btn>
@@ -465,12 +465,12 @@
 								{{order.bookingDate}}
 							</v-flex>
 
-							<v-flex xs5  class="text-xs-right"> 
+							<v-flex xs5  class="text-xs-right">
 								Ngày nhận:
 							</v-flex>
 							<v-flex xs5 offset-xs1>
 								{{order.receiveDate | formatDate}} {{order.receiveTime}}
-							</v-flex>						
+							</v-flex>
 
 							<v-flex xs5  class="text-xs-right">
 								Ghi chú:
@@ -518,11 +518,11 @@
 							<td colspan="2">Chiết khấu:</td>
 							<td>{{order.actualOrder.discountPercent}} %</td>
 							<td><strong>{{-order.actualOrder.discountTotal | formatPrice}}</strong></td>
-						</tr>	
+						</tr>
 						<tr>
 							<td colspan="3">Tổng:</td>
 							<td class="red--text"><strong>{{order.actualOrder.total | formatPrice}}</strong></td>
-						</tr>			
+						</tr>
 					</template></v-data-table>
 				</v-flex>
 				<v-flex xs12>
@@ -551,7 +551,7 @@
 		<v-card-actions>
 			<v-spacer></v-spacer>
 			<v-btn color="error" v-show="order.statusId != statusId('Thành công') && order.statusId != statusId('Hủy')" @click="cancelDialog = !cancelDialog">Cancel</v-btn>
-		</v-card-actions>	
+		</v-card-actions>
 		<v-dialog v-model="cancelDialog" :value="cancelDialog" max-width="500">
 			<v-card>
 				<v-card-title class="headline">Hủy đơn đặt hàng?</v-card-title>
@@ -574,6 +574,7 @@
 
 <script>
 import axios from 'axios'
+import { initMap, calculateDirection } from '@/utils'
 import {mapState} from 'vuex'
 export default {
 	data() {
@@ -666,75 +667,34 @@ export default {
 
 		//DIRECTION GOOGLE MAP
 		calculateRoute() {
-			var str = ''
-			var vm = this
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 17,
-				center: {lat:vm.order.store.lat, lng:vm.order.store.lng}
-			});
-			var directionsService = new google.maps.DirectionsService;
-			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var vm        = this
+			var start     = vm.order.store
+			var end       = vm.order
+			var distance  = '0 Km'
+			var duration  = '0 phút'
+			var map       = initMap(start)
 
-			directionsDisplay.setMap(map)
-
-			var start = {lat: vm.order.store.lat, lng: vm.order.store.lng}
-			var end   = {lat: vm.order.lat, lng: vm.order.lng}
-
-			var request = {
-				origin: start,
-				destination: end,
-				travelMode: 'DRIVING'
-			}
-			directionsService.route(request, function(response, status) {
-				if(status === 'OK') {
-					var response = response
-					directionsDisplay.setDirections(response);
-					var service  = new google.maps.DistanceMatrixService()
-					service.getDistanceMatrix(
-					{
-						origins: [response.request.origin.location],
-						destinations: [response.request.destination.location],
-						travelMode: 'DRIVING'
-					}, function(res, status) {
-						if (status === 'OK') {
-							var originList      = res.originAddresses
-							var destinationList = res.destinationAddresses
-							var distance        = '0 Km'
-							var duration        = '0 phút'
-							var leg            = response.routes[ 0 ].legs[ 0 ];
-							directionsDisplay.setDirections(response);
-							for (var i = 0; i < originList.length; i++) {
-								var results = res.rows[i].elements
-								for (var j = 0; j < results.length; j++) {
-									var element = results[j]
-									distance    = element.distance.text
-									duration    = element.duration.text
-								}
-
-								vm.matrix.distance = distance
-								vm.matrix.duration = duration
-								vm.matrix.start    = leg.start_address
-								vm.matrix.end      = leg.end_address
-								vm.matrix.show     = true
-								directionsDisplay.setDirections(response);
-							}
-						}					
-					})
-				}				
+			calculateDirection(map, start, end).then(response => {
+				var leg  = response.routes[0].legs[0];
+				distance = leg.distance.text
+				duration = leg.duration.text
+				vm.matrix.distance = distance
+				vm.matrix.duration = duration
+				vm.matrix.show     = true
 			})
 		},
 		//STATUS ORDER
 		orderStatus: function(status) {
 			const _s = new String(status).toLowerCase();
 			switch(_s) {
-				case 'chờ xử lý': 
+				case 'chờ xử lý':
 				return 1
 				break;
 				case 'đang xử lý':
 				return 2
 				break;
 				case 'xác nhận':
-				return 3 
+				return 3
 				break;
 				case 'đang giao':
 				return 4
@@ -742,7 +702,7 @@ export default {
 				case 'thành công':
 				return 5
 				break;
-				case 'hủy': 
+				case 'hủy':
 				return 6
 				break;
 			}
@@ -825,7 +785,7 @@ export default {
 					} else{
 						vm.$swal('Cancelled', '', 'error')
 					}
-				})			
+				})
 		}
 	},
 	computed: {
@@ -837,10 +797,10 @@ export default {
 		'tab': async function(val, oldVal) {
 			if(val == 1) {
 				if(!this.matrix.show) {
-					setTimeout(async () => {					
+					setTimeout(async () => {
 						await this.calculateRoute()
 					}, 500)
-				}				
+				}
 			}
 		},
 		'cancelDialog': function(val, oldVal) {
@@ -882,7 +842,7 @@ export default {
 		margin-top: 0px !important;
 	}
 	.button-hidden {
-		
+
 	}
 }
 </style>
