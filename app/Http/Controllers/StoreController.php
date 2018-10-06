@@ -164,14 +164,17 @@ class StoreController extends Controller
         $avatar    = $request->avatar;
         $storeId   = (int) $store_id;
         $store     = Store::findorFail($storeId);
-        $dir       = '/storage/' . $store->user_id . '/stores/av/';
-        $path      = StoreController::PUBLIC_PATH . $dir;
-        // $path   = public_path($dir);
+
+        $this->handleRemoveImage($store->store_avatar);
+        
+        $dir       = '/storage/st/'. $storeId .'/av/';
+        // $path      = StoreController::PUBLIC_PATH . $dir;
+        $path   = public_path($dir);
         $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->id) . '-6' . time() . '.jpeg');
         $imageUrl  = $dir . $imageName;
 
         $this->handleUploadedImage($avatar, $path, $imageName);
-        $this->handleRemoveImage($store->store_avatar);
+  
 
         $store->update([
             'store_avatar' => $imageUrl,
@@ -208,8 +211,8 @@ class StoreController extends Controller
 
         if (!is_null($image)) {
             if (substr($image, 1, 7) === 'storage') {
-                // $url = public_path($image);
-                $url = UserController::PUBLIC_PATH . $image;
+                $url = public_path($image);
+                // $url = UserController::PUBLIC_PATH . $image;
                 unlink($url);
             }
         }
