@@ -170,7 +170,7 @@ class StoreController extends Controller
         $dir       = '/storage/st/'. $storeId .'/av/';
         $path      = StoreController::PUBLIC_PATH . $dir;
         // $path   = public_path($dir);
-        $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->id) . '-6' . time() . '.jpeg');
+        $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->name) . '-6' . time() . '.jpeg');
         $imageUrl  = $dir . $imageName;
 
         $this->handleUploadedImage($avatar, $path, $imageName);

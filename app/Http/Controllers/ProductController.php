@@ -8,24 +8,26 @@ use App\Models\Store;
 use App\Http\Resources\ProductResource;
 class ProductController extends Controller
 {
+    const PUBLIC_PATH = '/var/www/dofuu.com/public';
+
     public function updateAvatar(Request $request, $productId) {
 
-		$avatar    = $request->avatar;
-		$storeId   = (int)$request->storeId;
-		$product   = Product::findorFail($productId);
-		$store     = Store::findorFail($storeId);
-		
-		$dir       = '/storage/' . $store->user_id . '/stores/products/';
-
-		$path   = StoreController::PUBLIC_PATH . $dir;
-		// $path      = public_path($dir);
-
-		$imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($product->name) . '-6' . time() . '.jpeg');
-	
-		$imageUrl  = $dir . $imageName;
-
+        $avatar    = $request->avatar;
+        $storeId   = (int)$request->storeId;
+        $product   = Product::findorFail($productId);
+        $this->handleRemoveImage($product->image);
+        
+        $dir       = '/storage/st/'. $storeId . '/pr/';
+        
+        $path      = ProductController::PUBLIC_PATH . $dir;
+        // $path   = public_path($dir);
+        
+        $imageName = $this->imageName($product->name);
+        
+        $imageUrl  = $dir . $imageName;
+        
         $this->handleUploadedImage($avatar, $path, $imageName);
-     	$this->handleRemoveImage($product->image);
+  
 
         $product->update([
             'image' => $imageUrl,
@@ -34,6 +36,10 @@ class ProductController extends Controller
 	    return $this->respondSuccess('Update image', $product, 200, 'one');
     }
 
+
+    protected function imageName($name) {
+        return str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($name) . '-6' . time() . '.jpeg');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -63,7 +69,7 @@ class ProductController extends Controller
         if (!is_null($image)) {
             if (substr($image, 1, 7) === 'storage') {
                 // $url = public_path($image);
-                $url = UserController::PUBLIC_PATH . $image;
+                $url = ProductController::PUBLIC_PATH . $image;
                 unlink($url);
             }
         }

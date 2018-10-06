@@ -243,7 +243,7 @@
 				const data      = { storeId: storeId, avatar: avatar }
 				axios.post('/api/Menu/Product/'+productId+'/UpdateAvatar', data, { withCredentials: true }).then(response => {
 					if(response.status === 200 ){
-						store.image = response.data.product.image		
+						product.image = response.data.product.image		
 					}
 				}).finally(() => {
 
