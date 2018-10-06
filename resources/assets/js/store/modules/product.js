@@ -10,26 +10,25 @@ const state = {
 
 const mutations = {
 	FETCH_PRODUCT (state, payload) {
-		state.products = payload.data
+		state.products = payload.products
 	},
 	EDIT_PRODUCT(state, payload) {
 		state.editedIndex   = state.products.indexOf(payload)
 		state.editedItem    = Object.assign({}, payload)
-		state.productDialog = true
 	},
 	SHOW_PRODUCT_DIALOG(state) {
 		state.productDialog = true
 	},
-	async CLOSE_PRODUCT_DIALOG(state) {
+	CLOSE_PRODUCT_DIALOG(state) {
 		state.editedIndex   = -1
 		state.editedItem    = null,
 		state.productDialog = false
 	},
 	UPDATE_PRODUCT(state, payload) {
 		if(state.editedIndex > -1) {
-			Object.assign(state.products[state.editedIndex], payload.data)	
+			Object.assign(state.products[state.editedIndex], payload.product)	
 		} else {
-			state.products.unshift(payload.data)
+			state.products.unshift(payload.product)
 		}
 	},
 	DESTROY_PRODUCT(state, payload) {

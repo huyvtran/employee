@@ -68,13 +68,13 @@ Route::group(['middleware' => ['api']], function () {
 	//EDIT SIZE
 	Route::post('/GetStore/{sid}/Menu/Size/Edit', 'MenuController@editSize');
 	//GET PRODUCT
-	Route::get('/GetStore/{sid}/Menu/Product', 'MenuController@getProduct');
+	Route::get('/GetStore/{sid}/Menu/Product', 'ProductController@getProduct');
 	//ADD PRODUCT
-	Route::post('/GetStore/{sid}/Menu/Product/Add', 'MenuController@addProduct');
+	Route::post('/GetStore/{sid}/Menu/Product/Add', 'ProductController@addProduct');
 	//EDIT PRODUCT
-	Route::post('/GetStore/{sid}/Menu/Product/Edit', 'MenuController@editProduct');
+	Route::post('/GetStore/{sid}/Menu/Product/Edit', 'ProductController@updateProduct');
 	//DELETE PRODUCT
-	Route::post('/GetStore/{sid}/Menu/Product/Delete', 'MenuController@destroyProduct');
+	Route::post('/GetStore/{sid}/Menu/Product/Delete', 'ProductController@destroyProduct');
 	//EDIT PRODUCT AVATAR
 	Route::post('/Menu/Product/{productId}/UpdateAvatar', 'ProductController@updateAvatar');
 	//GET PRODUCT STATUS

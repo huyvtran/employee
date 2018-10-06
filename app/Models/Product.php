@@ -21,8 +21,26 @@ class Product extends Model
 	}
 
 	// ORDER BY PRIORITY
-    public function scopeOrderByPriority($query, $name) {
-        return $query->orderBy('priority', $name);
+    public function scopeOrderByPriority($query, $sort) {
+        return $query->orderBy('priority', $sort);
+    }
+    // ORDER BY NAME
+    public function scopeOrderByName($query, $sort) {
+        return $query->orderBy('name', $sort);
+    }
+    //LIKE NAME
+    public function scopeLikeName($query, $name) {
+    	return $query->where('name', 'LIKE BINARY', $name);
+    }
+    //WHERE BY CATALOGUE ID
+    public function scopeByCatalogueId($query, $catalogueId) {
+    	$catalogue_id = (int) $catalogueId;
+    	return $query->where('catalogue_id', $catalogue_id);
+    }
+
+    public function scopeHasNotId($query, $productId) {
+    	$product_id = (int) $productId;
+    	return $query->where('ec_products.id', '!=', $product_id);
     }
 
 	public function getHaveSizeAttribute($value) {

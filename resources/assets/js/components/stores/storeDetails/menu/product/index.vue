@@ -185,8 +185,9 @@
 					vm.loading = false
 				})
 			},
-			editItem: function(item) {
-				this.$store.commit('EDIT_PRODUCT', item)
+			editItem: async function(item) {
+				await this.$store.commit('EDIT_PRODUCT', item)
+				this.$store.commit('SHOW_PRODUCT_DIALOG')
 			},
 			removeItem: function(item) {
 				var vm = this
@@ -230,6 +231,7 @@
 			updatingAvatar(product) {
 				var vm     = this
 				const size = { width: 350, height: 350 }
+				this.$store.commit('EDIT_PRODUCT', product)
 				this.$refs.avatar.open('Thay đổi ảnh '+product.name, size).then(response => {
 					if(response.status) {
 						vm.updateAvatar(response.avatar, product)
@@ -243,7 +245,7 @@
 				const data      = { storeId: storeId, avatar: avatar }
 				axios.post('/api/Menu/Product/'+productId+'/UpdateAvatar', data, { withCredentials: true }).then(response => {
 					if(response.status === 200 ){
-						product.image = response.data.product.image		
+						vm.$store.commit('UPDATE_PRODUCT', response.data)
 					}
 				}).finally(() => {
 

@@ -74,10 +74,10 @@
 			cancel() {
 				var vm     = this
 				if(!!vm.cropped) {
-					vm.$refs.confirm.open('Thay đổi chưa lưu', 'các thay đổi bạn thực hiện đối với ảnh đại diện của mình sẽ không được lưu nếu bạn đóng hộp thoại').then((confirm) => {
+					vm.$refs.confirm.open('Thay đổi chưa lưu', 'các thay đổi bạn thực hiện đối với ảnh đại diện của mình sẽ không được lưu nếu bạn đóng hộp thoại').then(async(confirm) => {
 						if(confirm) {
-							vm.cropped = null
-							vm.refresh()			
+							vm.cropped = await null
+							await vm.refresh()			
 							vm.resolve({status: false})
 							vm.dialog  = false
 						}
@@ -91,11 +91,11 @@
 				var vm     = this
 				if(!vm.process) {
 					vm.process = !vm.process
-					setTimeout(()=> {
+					setTimeout(async ()=> {
 						vm.resolve({status: true, avatar: vm.cropped})
 						vm.process = !vm.process
-						vm.cropped = null
-						vm.refresh()
+						vm.cropped = await null
+						await vm.refresh()
 						vm.dialog  = false
 					}, 200)					
 				}				
