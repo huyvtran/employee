@@ -5,7 +5,7 @@
 				<v-toolbar-title>{{ title }}</v-toolbar-title>
 			</v-toolbar>
 			<v-divider></v-divider>
-			<v-card-text v-show="!!message">Bạn có chắc muốn {{message}} này không?</v-card-text>
+			<v-card-text v-show="!!message">Bạn có chắc muốn <span v-html="message"></span> này không?</v-card-text>
 			<v-divider></v-divider>
 			<v-card-actions>
 				<!-- <slot name="actions"></slot> -->

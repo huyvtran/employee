@@ -134,6 +134,7 @@
 	</v-data-table>
 	<vue-dialog></vue-dialog>
 	<vue-image ref="avatar"></vue-image>
+	<vue-confirm ref="confirm"></vue-confirm>
 </div>
 </template>
 
@@ -143,11 +144,13 @@
 	import {mapState} from 'vuex'
 	import index from '@/mixins/index'
 	import ImageDialog from '@/components/commons/ImageDialog'
+	import ConfirmDialog from '@/components/commons/confirmDialog'
 	export default {
 		mixins: [index],
 		components: {
 			'vue-dialog': Dialog,
-			'vue-image': ImageDialog
+			'vue-image': ImageDialog,
+			'vue-confirm': ConfirmDialog
 		},
 		data() {
 			return {
@@ -191,40 +194,45 @@
 			},
 			removeItem: function(item) {
 				var vm = this
-				vm.$swal({
-					title: 'Bạn có chắc xóa?',
-					text: "Bạn sẽ không thể khôi phục lại!",
-					type: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Đồng ý!',
-					cancelButtonText: 'Không, Hủy',
-					confirmButtonClass: 'btn error',
-					cancelButtonClass: 'btn',
-					buttonsStyling: false,
-					reverseButtons: true
-				}).then((result) => {
-					if (result.value) {
-						vm.$swal(
-							'Deleted!',
-							item.name+' đã được xóa.',
-							'success'
-							).then(() => {
-								axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Delete', item).then(response => {
-									if(response.status == 204) {
-										vm.$store.commit('DESTROY_PRODUCT', item)
-									}
-								})
-							})
-						} else{
-							vm.$swal(
-								'Cancelled',
-								'',
-								'error'
-								)
-						}
-					})
+				vm.$refs.confirm.open('Xác nhận xóa', 'xóa <strong>'+item.name +'</strong>').then(response => {
+					if(response) {
+						axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Product/Delete', item).then(response => {
+							if(response.status == 204) {
+								vm.$store.commit('DESTROY_PRODUCT', item)
+							}
+						})
+					}
+				})
+				// vm.$swal({
+				// 	title: 'Bạn có chắc xóa?',
+				// 	text: "Bạn sẽ không thể khôi phục lại!",
+				// 	type: 'warning',
+				// 	showCancelButton: true,
+				// 	confirmButtonColor: '#3085d6',
+				// 	cancelButtonColor: '#d33',
+				// 	confirmButtonText: 'Đồng ý!',
+				// 	cancelButtonText: 'Không, Hủy',
+				// 	confirmButtonClass: 'btn error',
+				// 	cancelButtonClass: 'btn',
+				// 	buttonsStyling: false,
+				// 	reverseButtons: true
+				// }).then((result) => {
+				// 	if (result.value) {
+				// 		vm.$swal(
+				// 			'Deleted!',
+				// 			item.name+' đã được xóa.',
+				// 			'success'
+				// 			).then(() => {
+								
+				// 			})
+				// 		} else{
+				// 			vm.$swal(
+				// 				'Cancelled',
+				// 				'',
+				// 				'error'
+				// 				)
+				// 		}
+				// 	})
 
 
 			},
