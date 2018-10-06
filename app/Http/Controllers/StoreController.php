@@ -168,8 +168,8 @@ class StoreController extends Controller
         $this->handleRemoveImage($store->store_avatar);
         
         $dir       = '/storage/st/'. $storeId .'/av/';
-        // $path      = StoreController::PUBLIC_PATH . $dir;
-        $path   = public_path($dir);
+        $path      = StoreController::PUBLIC_PATH . $dir;
+        // $path   = public_path($dir);
         $imageName = str_replace(' ', '-', 'dofuu-6' . str_replace('-', '', date('Y-m-d')) . '-6' . md5($store->id) . '-6' . time() . '.jpeg');
         $imageUrl  = $dir . $imageName;
 
@@ -211,8 +211,8 @@ class StoreController extends Controller
 
         if (!is_null($image)) {
             if (substr($image, 1, 7) === 'storage') {
-                $url = public_path($image);
-                // $url = UserController::PUBLIC_PATH . $image;
+                // $url = public_path($image);
+                $url = StoreController::PUBLIC_PATH . $image;
                 unlink($url);
             }
         }
