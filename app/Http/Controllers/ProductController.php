@@ -144,8 +144,8 @@ class ProductController extends Controller
         
         $dir       = '/storage/st/'. $storeId . '/pr/';
         
-        // $path   = ProductController::PUBLIC_PATH . $dir;
-        $path      = public_path($dir);
+        $path   = ProductController::PUBLIC_PATH . $dir;
+        // $path      = public_path($dir);
         
         $imageName = $this->imageName($product->name);
         
@@ -193,8 +193,8 @@ class ProductController extends Controller
 
         if (!is_null($image)) {
             if (substr($image, 1, 7) === 'storage') {
-                $url = public_path($image);
-                // $url = ProductController::PUBLIC_PATH . $image;
+                // $url = public_path($image);
+                $url = ProductController::PUBLIC_PATH . $image;
                 unlink($url);
             }
         }
