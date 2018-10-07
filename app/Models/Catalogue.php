@@ -18,6 +18,14 @@ class Catalogue extends Model
 		} 
 		return false;
 	}
+	
+	public function scopeOrderByName($query, $sort) {
+		return $query->orderBy('catalogue', $sort);
+	}
+
+	public function scopeOrderByPriority($query, $sort) {
+		return $query->orderBy('priority', $sort);
+	}
 
 	public function store() {
 		return $this->belongsTo('App\Models\Store', 'store_id');

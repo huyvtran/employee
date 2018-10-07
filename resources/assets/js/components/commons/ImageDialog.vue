@@ -62,14 +62,14 @@
 		},
 		methods: {
 			open(title, size) {
-				this.dialog = true
-				this.size   = size
-				this.title  = title
+				this.dialog  = true
+				this.size    = size
+				this.title   = title
+				this.loading = false
 				return new Promise((resolve, reject) => {
 					this.resolve = resolve
 					this.reject  = reject
 				})
-
 			},
 			cancel() {
 				var vm     = this
@@ -128,23 +128,25 @@
 				if(!file.length) {
 					return 
 				} 
-				let filename = file[0].name
-				vm.loading = !vm.loading
+				let filename     = file[0].name
+				vm.loading       = !vm.loading
 				const fileReader = new FileReader()
+
 				fileReader.onload = (e) => {
-					var image = new Image()
-					image.src = fileReader.result
+					var image  = new Image()
+					image.src  = fileReader.result
+
 					setTimeout(() => {
+						vm.loading = !vm.loading
 						this.$refs.croppieRef.bind({
 							url: image.src,
-						});				
-						vm.loading = !vm.loading
+						});			
 					}, 1000)
-					
 				}
 				fileReader.readAsDataURL(file[0])
 			},
 			refresh() {
+				this.$refs.fileInput.value = ""
 				this.$refs.croppieRef.refresh()
 			}
 		},

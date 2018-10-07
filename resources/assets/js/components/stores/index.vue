@@ -440,7 +440,7 @@
 				filterShow: [{name: 'Tất cả', value: null}, {name: 'Hiện', value: true}, {name: 'Ẩn', value: false}],
 				filterVerify: [{name: 'Tất cả', value: null}, {name: 'Đã xác thực', value: true}, {name: 'Chưa xác thực', value: false}],
 				mapDialog: false,
-				store:null
+				store:null,
 			}
 		},
 		components: {
