@@ -44,12 +44,7 @@
 										<v-flex xs12>
 											<v-radio-group v-model="editedItem.haveSize" row label="Size">
 												<v-radio color="primary" label="Có" :value="true" @change="changeAttribute('size')"></v-radio>
-												<v-radio color="primary" label="Không" :value="false" @change="changeAttribute('size')"></v-radio>
 											</v-radio-group>									
-										</v-flex>
-
-										<v-flex xs12>
-											<v-text-field v-model.number="editedItem.price" label="Giá" prepend-icon="money" persistent-hint :disabled="editedItem.haveSize" hint="Giá giành cho món không có size" suffix="vnđ" v-validate="{required: !editedItem.haveSize, numeric:true, min:1, max:8}" :error-messages="errors.collect('price')" data-vv-name="price" :required="!editedItem.haveSize"></v-text-field>
 										</v-flex>
 
 										<v-flex xs4  v-for="(size, i) in editedItem.sizes" :key="i">
@@ -135,8 +130,7 @@ export default {
 			editedItem: {
 				'name': '',
 				'_name': null,
-				'price': 0,
-				'haveSize': false,
+				'haveSize': true,
 				'haveTopping': false,
 				'sizes': [],
 				'priority': 0,
@@ -148,8 +142,7 @@ export default {
 			default: {
 				'name': '',
 				'_name': null,
-				'price': 0,
-				'haveSize': false,
+				'haveSize': true,
 				'haveTopping': false,
 				'sizes': [],
 				'priority': 0,

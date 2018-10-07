@@ -44,7 +44,6 @@ class ProductController extends Controller
         $product = Product::create([
             'name'         => Str::lower($request->name),
             '_name'        => Str::lower($request->_name),
-            'price'        => 0,
             'have_size'    => $request->haveSize,
             'have_topping' => $request->haveTopping,
             'priority'     => $request->priority,
@@ -54,7 +53,7 @@ class ProductController extends Controller
         ]);
 
         foreach($request->sizes as $size) {
-            
+
             $product->sizes()->attach([
                 $size['id'] => ['price' => $size['price']]
             ]);
@@ -66,7 +65,7 @@ class ProductController extends Controller
 
     //EDIT PRODUCT
     public function updateProduct(ProductRequest $request, $id) {
-        
+
         $product_id   = $request->id;
         $catalogue_id = $request->catalogue_id;
         $name         = Str::lower($request->name);
@@ -76,7 +75,7 @@ class ProductController extends Controller
         }])->findorFail($id);
         
         if(count($find->products)>0){
-            
+
             $res      = [
                 'type'    => 'error',
                 'message' => 'Đã tồn tại '.$name,
@@ -91,7 +90,6 @@ class ProductController extends Controller
         $product->update([
             'name'         => Str::lower($request->name),
             '_name'        => Str::lower($request->_name),
-            'price'        => 0,
             'have_size'    => $request->haveSize,
             'have_topping' => $request->haveTopping,
             'priority'     => $request->priority,
@@ -104,7 +102,7 @@ class ProductController extends Controller
 
         if($product->have_size) {
             foreach($request->sizes as $size) {
-                
+
                 $product->sizes()->attach([
                     $size['id'] => ['price' => $size['price']]
                 ]);
@@ -120,7 +118,7 @@ class ProductController extends Controller
         $productId = (int) $request->id;
         
         try{
-            
+
             $product = Product::findorFail($productId);
             $this->handleRemoveImage($product->image);
             
@@ -129,7 +127,7 @@ class ProductController extends Controller
             return response('Sản phẩm đã được xóa', 204);
 
         } catch(Exception $e) {
-            
+
             return response('Có lỗi trong xóa sản phẩm', 500);
 
         }
@@ -152,13 +150,13 @@ class ProductController extends Controller
         $imageUrl  = $dir . $imageName;
         
         $this->handleUploadedImage($avatar, $path, $imageName);
-  
+
 
         $product->update([
             'image' => $imageUrl,
         ]);
 
-	    return $this->respondSuccess('Update image', $product, 200, 'one');
+        return $this->respondSuccess('Update image', $product, 200, 'one');
     }
 
 
@@ -200,7 +198,16 @@ class ProductController extends Controller
         }
     }
 
-    
+    protected function respondError($message, $data = [], $status = 500) {
+
+        $res      = [
+            'type'    => 'error',
+            'message' => $message,
+            'data'    => []
+        ];
+
+        return response($res, $status);
+    }
 
     protected function respondSuccess($message, $data, $status = 200, $type)
     {

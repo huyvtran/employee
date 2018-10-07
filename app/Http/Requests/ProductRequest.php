@@ -27,7 +27,6 @@ class ProductRequest extends FormRequest
             'name'         => 'required|max:254',
             '_name'        => 'max:254',
             'description'  => 'max:254',
-            'price'        => 'required_if:haveSize,false|numeric',
             'size.*.price' => 'required_if:haveSize,true|numeric',
             'haveSize'     => 'required|boolean',
             'haveTopping'  => 'required|boolean',
