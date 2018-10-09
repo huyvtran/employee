@@ -112,7 +112,7 @@
 										prepend-icon="phone"
 										label="Số điện thoại" 
 										v-model="editedItem.user.phone"
-										v-validate="'required|numeric|min:10|max:10'"
+										v-validate="'required|numeric|min:10|max:11'"
 										:error-messages="errors.collect('phone')"
 										data-vv-name="phone"
 										data-vv-scope="user"></v-text-field>
@@ -172,7 +172,7 @@
 										mask="(####) ### - ####"
 										prepend-icon="phone" 
 										label="Số điện thoại cửa hàng" 
-										v-model="editedItem.store.phone"v-validate="'required|numeric|min:10|max:10'"
+										v-model="editedItem.store.phone"v-validate="'required|numeric|min:10|max:11'"
 										:error-messages="errors.collect('storePhone')"
 										data-vv-name="storePhone"
 										data-vv-scope="store"></v-text-field>
