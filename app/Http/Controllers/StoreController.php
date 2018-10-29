@@ -35,6 +35,13 @@ class StoreController extends Controller
         return $this->respondSuccess('Get store', $stores->load('activities', 'user'), 200, 'many');
     }
 
+    public function getStoreVerified(Request $request) {
+        $cityId = $request->cityId;
+        $stores = Store::ofCity($cityId)->verified()->get();
+
+        return $this->respondSuccess('Get store', $stores, 200, 'many');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

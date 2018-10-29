@@ -20,6 +20,9 @@ class CityResource extends JsonResource
             'slug'            => $this->city_slug,
             'lat'             => $this->lat,
             'lng'             => $this->lng,
+            'stores'          => $this->whenLoaded('stores', function() {
+                return StoreResource::collection($this->stores->map(function($query) { return $query;})->sortBy('store_name'));
+            }),
             'service'         => new ServiceResource($this->whenLoaded('service', function() {
                 return $this->service;     
             })),

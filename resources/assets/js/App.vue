@@ -49,4 +49,7 @@ export default{
   position: absolute;
   width: 100%;
 }
+.border--radius {
+	border-radius: 8px
+}
 </style>

@@ -11,6 +11,7 @@ class Store extends Model
     protected $fillable = ['store_name', 'store_slug', 'store_phone', 'preparetime', 'store_address', 'lat', 'lng', 'discount', 'store_avatar', 'verified', 'store_show', 'priority', 'user_id', 'district_id', 'type_id', 'status_id', 'views', 'likes'];
     
     protected $hidden   = ['pivot', 'city_id'];
+    
 
     //SET VERIFIED ATTRIBUTE
     public function getVerifiedAttribute($value)
@@ -57,6 +58,10 @@ class Store extends Model
         return $query->orderBy('priority', $name);
     }
 
+    public function scopeOrderByName($query, $sort) {
+        return $query->orderBy('store_name', $sort);
+    }
+
     // SEARCH STORE BY PLACE
     public function scopeLikePlace($query, $keywords)
     {
@@ -67,6 +72,10 @@ class Store extends Model
     public function scopeShow($query)
     {
         return $query->where('store_show', 1);
+    }
+    // GET STORE VERIFIED
+    public function scopeVerified($query) {
+        return $query->where('verified', 1)->orWhere('discount', '>', 0);
     }
 
     // GET STORE BY DISTRICT ID

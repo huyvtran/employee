@@ -18,7 +18,7 @@ class User extends Authenticatable implements AuthenticatableUserContract, Authe
      * @var array
      */
     protected $table    = 'ec_users';
-    protected $fillable = ['name', 'email', 'password', 'phone'];
+    protected $fillable = ['name', 'email', 'password', 'birthday', 'gender', 'address', 'lat', 'lng', 'phone', 'have_store', 'actived', 'role_id'];
     protected $hidden   = ['password', 'remember_token', 'api_token'];
 
     public function store() {

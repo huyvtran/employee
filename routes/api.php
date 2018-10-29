@@ -29,10 +29,21 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('/dfe', 'AuthController@me');
 	//GET CITY
 	Route::get('/GetCity', 'CityController@getCity');
+
+	Route::group(['prefix' => 'City'], function() {
+		Route::get('/GetCityWithStore', 'CityController@getCityWithStore');
+	});
 	//GET DISTRICT
 	Route::get('/GetDistrict', 'DistrictController@getDistrict');
 	//GET STORE
 	Route::get('/GetStore', 'StoreController@getStore');
+	
+	Route::group(['prefix' => 'Store'], function() {
+		//GET STORE VERIFIED
+		Route::get('/GetStoreVerified', 'StoreController@getStoreVerified');
+		
+	});
+
 	//GET STORE BY ID
 	Route::get('/GetStore/{sid}', 'StoreController@showStore');
 	//ADD STORE
@@ -103,4 +114,21 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('/GetNotification', 'NotificationController@getNotification');
 	//GET TEST
 	Route::get('/GetTest', 'OrderController@calculatePoint');
+	
+
+	Route::group(['prefix' => 'Coupon'], function() {
+		//GET COUPON STATUS
+		Route::get('/GetCouponStatus', 'CouponStatusController@getStatus');
+		//GET COUPON
+		Route::get('/GetCoupon', 'CouponController@getCoupon');
+		//SHOW COUPON
+		Route::get('/{couponId}/ShowCoupon', 'CouponController@showCoupon');
+		//ADD COUPON
+		Route::post('/AddCoupon', 'CouponController@addCoupon');
+		//UPDATE COUPON
+		Route::post('/{couponId}/UpdateCoupon/', 'CouponController@updateCoupon');
+		//UPDATE COUPON STORE
+		Route::post('/{couponId}/UpdateStore', 'CouponController@updateStore');
+	});	
+
 });

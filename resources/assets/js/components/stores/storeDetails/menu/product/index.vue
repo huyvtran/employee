@@ -203,38 +203,6 @@
 						})
 					}
 				})
-				// vm.$swal({
-				// 	title: 'Bạn có chắc xóa?',
-				// 	text: "Bạn sẽ không thể khôi phục lại!",
-				// 	type: 'warning',
-				// 	showCancelButton: true,
-				// 	confirmButtonColor: '#3085d6',
-				// 	cancelButtonColor: '#d33',
-				// 	confirmButtonText: 'Đồng ý!',
-				// 	cancelButtonText: 'Không, Hủy',
-				// 	confirmButtonClass: 'btn error',
-				// 	cancelButtonClass: 'btn',
-				// 	buttonsStyling: false,
-				// 	reverseButtons: true
-				// }).then((result) => {
-				// 	if (result.value) {
-				// 		vm.$swal(
-				// 			'Deleted!',
-				// 			item.name+' đã được xóa.',
-				// 			'success'
-				// 			).then(() => {
-								
-				// 			})
-				// 		} else{
-				// 			vm.$swal(
-				// 				'Cancelled',
-				// 				'',
-				// 				'error'
-				// 				)
-				// 		}
-				// 	})
-
-
 			},
 			updatingAvatar(product) {
 				var vm     = this

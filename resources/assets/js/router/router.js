@@ -10,6 +10,8 @@ import Order from '@/components/orders/index'
 import OrderDetail from '@/components/orders/details/index'
 import Store from '@/components/stores/index'
 import StoreDetail from '@/components/stores/storeDetails/index'
+import Coupon from '@/components/coupons/index'
+import CouponDetail from '@/components/coupons/details/index'
 import User from '@/components/users/index'
 import Customer from '@/components/users/customers/index'
 import CustomerDetail from '@/components/users/customers/details/index'
@@ -61,6 +63,18 @@ const router = new Router({
 			], meta: {auth:true}},
 
 			]
+		},
+		{
+			path: '/coupons',
+			component: Coupon,
+			name: 'Coupon',
+			meta: {auth:true},
+		},
+		{
+			path: '/coupons/details/:couponId',
+			component: CouponDetail,
+			name: 'CouponDetail',
+			meta: {auth: true}
 		},
 		{ 
 			path: '/users', 

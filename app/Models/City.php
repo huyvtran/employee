@@ -25,7 +25,17 @@ class City extends Model
         return false;
 
     }
-    
+
+    // GET STORE SHOWED
+    public function scopeShow($query)
+    {
+        return $query->where('city_show', 1);
+    }
+
+    public function scopeDefault($query) {
+        return $query->where('id', 10001);
+    }
+
     public function country() {
         return $this->belongsTo('App\Models\Country', 'country_id');
     }

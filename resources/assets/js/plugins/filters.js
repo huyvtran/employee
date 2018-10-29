@@ -26,17 +26,21 @@ Vue.filter('formatDateTimeHumanize', function(date) {
 	}
 })
 
-Vue.filter('formatPrice', function(price) {
-	if(price) {		
-		return numeral(price).format('0,0$')
+Vue.filter('formatDateTime', function(date) {
+	if(date) {
+		return moment(date).format('HH:mm DD-MM-YYYY')
 	}
+})
+
+Vue.filter('formatPrice', function(price) {
+	return numeral(price).format('0,0$')
 })
 
 Vue.filter('subPrice', function(price, qty) {
 	return numeral(Math.floor(price*qty)).format('0,0$')
 })
 
-Vue.filter('formatPhone', function(phone) {
-	
+Vue.filter('formatPhone', function(phone) {	
 	return phone.replace(/(\d{4}|\d{5})(\d{3})(\d{3})/,"($1) $2-$3")
 })
+
