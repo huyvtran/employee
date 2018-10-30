@@ -257,7 +257,6 @@
 						</v-stepper-header>
 						<v-stepper-items>
 							<v-stepper-content step="1">
-
 								<v-layout row wrap>
 									<v-flex xs4>
 										Trạng thái:
@@ -277,7 +276,7 @@
 									</v-flex>
 								</v-layout>
 								<v-spacer></v-spacer>
-								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Continue</v-btn>
+								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Tiếp tục</v-btn>
 							</v-stepper-content>
 							<v-stepper-content step="2">
 								<v-layout row wrap>
@@ -303,7 +302,7 @@
 										<div><strong>Cám ơn.</strong></div>
 									</v-flex>
 								</v-layout>
-								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Continue</v-btn>
+								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Tiếp tục</v-btn>
 							</v-stepper-content>
 							<v-stepper-content step="3">
 								<v-layout row wrap>
@@ -349,11 +348,11 @@
 									</v-flex>
 									<v-flex xs2>
 										<v-btn @click.stop="chooseShipper()">
-											Choose
+											Chọn
 										</v-btn>
 									</v-flex>
 								</v-layout>
-								<v-btn color="primary" @click.native="changeStatus(order.statusStep)" :disabled="order.shipper == null">Continue</v-btn>
+								<v-btn color="primary" @click.native="changeStatus(order.statusStep)" :disabled="order.shipper == null">Tiếp tục</v-btn>
 							</v-stepper-content>
 							<v-stepper-content step="4">
 								<v-layout row wrap>
@@ -381,8 +380,8 @@
 											</strong>
 										</div>
 									</v-flex>
-								</v-layout>
-								<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Continue</v-btn>
+									<v-btn color="primary" @click.native="changeStatus(order.statusStep)">Tiếp tục</v-btn>									
+								</v-layout>								
 							</v-stepper-content>
 							<v-stepper-content step="5">
 								<v-layout row wrap>
@@ -549,9 +548,9 @@
 			</v-layout>
 		</v-card-text>
 		<v-card-actions>
-			<v-spacer></v-spacer>
-			<v-btn color="error" v-show="order.statusId != statusId('Thành công') && order.statusId != statusId('Hủy')" @click="cancelDialog = !cancelDialog">Cancel</v-btn>
+			<v-btn color="error" v-show="order.statusId != statusId('Thành công') && order.statusId != statusId('Hủy')" @click="cancelDialog = !cancelDialog" small>Hủy</v-btn>
 		</v-card-actions>
+
 		<v-dialog v-model="cancelDialog" :value="cancelDialog" max-width="500">
 			<v-card>
 				<v-card-title class="headline">Hủy đơn đặt hàng?</v-card-title>
@@ -573,97 +572,97 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { initMap, calculateDirection } from '@/utils'
-import {mapState} from 'vuex'
-export default {
-	data() {
-		return {
-			breadcrumbs: [
-			{
-				text: 'Dashboard',
-				action: 'Dashboard',
-				disabled: false
-			},
-			{
-				text: 'Danh sách đơn đặt hàng',
-				action: 'Order',
-				disabled: false
-			},
-			{
-				text: 'Chi tiết đơn đặt hàng',
-				action: '',
-				disabled: true
+	import axios from 'axios'
+	import { initMap, calculateDirection } from '@/utils'
+	import {mapState} from 'vuex'
+	export default {
+		data() {
+			return {
+				breadcrumbs: [
+				{
+					text: 'Dashboard',
+					action: 'Dashboard',
+					disabled: false
+				},
+				{
+					text: 'Danh sách đơn đặt hàng',
+					action: 'Order',
+					disabled: false
+				},
+				{
+					text: 'Chi tiết đơn đặt hàng',
+					action: '',
+					disabled: true
+				}
+				],
+				loading: false,
+				order: null,
+				tab: 0,
+				headers: [
+				{ text: 'Món', sortable: false, },
+				{ text: 'Số lượng', sortable: false, },
+				{ text: 'Giá', sortable: false, },
+				{ text: 'Tổng', sortable:false}
+				],
+				cancelDialog: false,
+				reasons: [
+				{note: 'Nhập sai số điện thoại'},
+				{note: 'Nhập sai thông tin liên hệ'},
+				{note: 'Đơn hàng chậm trễ'},
+				],
+				matrix: {
+					show:false,
+					start: '',
+					end: '',
+					duration: '0 phút',
+					distance: '0 Km'
+				},
+				shippers: [],
+				shipper: null,
+				cancelDialog: false,
+				reasons: [
+				{note: 'Không liên hệ được'},
+				{note: 'Thông tin không đúng'},
+				{note: 'Cửa hàng không hoạt động'},
+				{note: 'Món đặt đã hết'},
+				{note: 'Xảy ra sự cố không mong muốn'},
+				],
+				notes: []
 			}
-			],
-			loading: false,
-			order: null,
-			tab: 0,
-			headers: [
-			{ text: 'Món', sortable: false, },
-			{ text: 'Số lượng', sortable: false, },
-			{ text: 'Giá', sortable: false, },
-			{ text: 'Tổng', sortable:false}
-			],
-			cancelDialog: false,
-			reasons: [
-			{note: 'Nhập sai số điện thoại'},
-			{note: 'Nhập sai thông tin liên hệ'},
-			{note: 'Đơn hàng chậm trễ'},
-			],
-			matrix: {
-				show:false,
-				start: '',
-				end: '',
-				duration: '0 phút',
-				distance: '0 Km'
+		},
+		methods: {
+			chooseShipper: async function() {
+				const data = {orderId: this.order.id, shipperId: this.shipper.id, step: this.order.statusStep, statusId: this.order.statusId, confirm: true}
+				this.loading = await true
+				await axios.post('/api/GetOrder/'+this.$route.params.orderId+'/Details/ChooseShipper', data, {withCredentials: true}).then(response => {
+					if(response.status == 200 && response.data.type == 'success') {
+						this.order = response.data.data
+					}
+				})
+				this.loading = false
 			},
-			shippers: [],
-			shipper: null,
-			cancelDialog: false,
-			reasons: [
-			{note: 'Không liên hệ được'},
-			{note: 'Thông tin không đúng'},
-			{note: 'Cửa hàng không hoạt động'},
-			{note: 'Món đặt đã hết'},
-			{note: 'Xảy ra sự cố không mong muốn'},
-			],
-			notes: []
-		}
-	},
-	methods: {
-		chooseShipper: async function() {
-			const data = {orderId: this.order.id, shipperId: this.shipper.id, step: this.order.statusStep, statusId: this.order.statusId, confirm: true}
-			this.loading = await true
-			await axios.post('/api/GetOrder/'+this.$route.params.orderId+'/Details/ChooseShipper', data, {withCredentials: true}).then(response => {
-				if(response.status == 200 && response.data.type == 'success') {
-					this.order = response.data.data
-				}
-			})
-			this.loading = false
-		},
-		getShippers: async function() {
-			const data = []
-			this.loading = await true
-			this.axios.post('/api/GetUser/Shippers', data, {withCredentials:true}).then(response => {
-				if(response.status == 200) {
-					this.shippers = response.data.data
-				}
-			})
-		},
-		getOrderDetails: async function(id) {
-			const data = {orderId: id}
-			this.loading = await true
-			await axios.post('/api/GetOrder/'+id+'/Details', data, {withCredentials: true}).then(response => {
-				if(response.status == 200) {
-					this.order = response.data.data
-				}
-			})
-			this.loading = false
-		},
-		changeTab(index) {
-			this.tab = index
-		},
+			getShippers: async function() {
+				const data = []
+				this.loading = await true
+				this.axios.post('/api/GetUser/Shippers', data, {withCredentials:true}).then(response => {
+					if(response.status == 200) {
+						this.shippers = response.data.data
+					}
+				})
+			},
+			getOrderDetails: async function(id) {
+				const data = {orderId: id}
+				this.loading = await true
+				await axios.post('/api/GetOrder/'+id+'/Details', data, {withCredentials: true}).then(response => {
+					if(response.status == 200) {
+						this.order = response.data.data
+					}
+				})
+				this.loading = false
+			},
+			changeTab(index) {
+				this.tab = index
+			},
 
 		//DIRECTION GOOGLE MAP
 		calculateRoute() {
@@ -726,8 +725,8 @@ export default {
 				cancelButtonColor: '#d33',
 				confirmButtonText: 'Đồng ý',
 				cancelButtonText: 'Không',
-				confirmButtonClass: 'btn primary',
-				cancelButtonClass: 'btn',
+				confirmButtonClass: 'v-btn primary',
+				cancelButtonClass: 'v-btn',
 				buttonsStyling: false,
 				reverseButtons: true
 			}).then((result) => {

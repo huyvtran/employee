@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RegularOrder;
 use App\Models\OrderStatus;
 use App\Models\ActualOrder;
+use App\Models\Coupon;
 use App\Http\Resources\OrderResource;
 use DateTime;
 
@@ -74,20 +75,24 @@ class OrderController extends Controller
 	}
 	//CHANGE STATUS ORDER
 	public function changeStatusOrder(Request $request, $id) {
-
+		$orderId = $request->orderId;
+		$step    = $request->step;
 		if($request->confirm && $request->filled('orderId', 'step')) {
-			$status = OrderStatus::where('number_order', '=', $request->step)->where('number_order', '<=', 5)->where('order_status_name', '!=', 'Hủy')->first();
+			$status = OrderStatus::byStep($step)->incomplete()->dontCancel()->first();
 			if(!is_null($status)) {
-				$order            = RegularOrder::where('id', '=', $request->orderId)->first();
-				$order->status_id = $status->id;
-				$order->save();
-
+				$order = RegularOrder::findorFail($orderId);
+				$order->update([
+					'status_id' => $status->id
+				]);
 				if($request->step == $this->orderCompleted->number_order) {
+					$coupon = Coupon::checkToken($order->secret)->first();
 					foreach($order->products as $item) {
-						$item->count = $item->count + $item->pivot->quantity;
-						$item->save();
+						$item->update([
+							'count' => $item->count + $item->pivot->quantity
+						]);
 					}
-					if(is_null($order->coupon) && is_null($order->secret) && $order->store->verified) {
+					if($coupon) {
+						$coupon->update(['coupon_used' => ++$coupon->coupon_used]);
 						if($order->subtotal_amount >= 50000) {
 							$point               = $this->calculatePoint($order->subtotal_amount);
 							$order->user->points = $order->user->points + $point;

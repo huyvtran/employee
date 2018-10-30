@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegularOrder extends Model
 {
-	protected $table   = 'ec_regular_orders';
+	protected $table    = 'ec_regular_orders';
 	
-	protected $guarded = [];
+	protected $guarded  = [];
 	
-	protected $filled  = [];
+	protected $fillable = ['status_id'];
 	
-	protected $hidden  = [];
+	protected $hidden   = [];
 
 	public function user() {
 		return $this->belongsTo('App\Models\User', 'user_id');

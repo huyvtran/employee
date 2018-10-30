@@ -26,7 +26,7 @@ const mutations = {
 		if(state.editedIndex > -1) {
 			Object.assign(state.coupons[state.editedIndex], payload)
 		} else {
-			state.coupons.push((payload))
+			state.coupons.unshift((payload))
 		}
 	},
 	REMOVE_COUPON(state, payload) {
