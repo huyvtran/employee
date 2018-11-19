@@ -13,7 +13,7 @@ const mutations = {
 	CLEAR_AUTH_USER(state) {
 		state.isAuth      = false
 		state.currentUser = null
-		window.localStorage.removeItem('jwt')
+		window.localStorage.removeItem('jwt_emp')
 	}
 }
 
@@ -29,6 +29,9 @@ const actions = {
 		}).catch(error => {
 			reject(error)
 		})
+	}),
+	logout: ({commit}) => new Promise((resolve, reject) => {
+		commit('CLEAR_AUTH_USER')
 	})
 }
 

@@ -15,7 +15,7 @@ class AuthController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:api')->only('logout');
+        $this->middleware('auth:api', ['except' => ['login']]);
         $this->employee = Role::where('name', 'Employee')->first();
         $this->admin    = Role::where('name', 'Admin')->first();
     }
