@@ -48,12 +48,21 @@
 								<v-list-tile-title>Chỉnh sửa topping</v-list-tile-title>
 							</v-list-tile-content>
 						</v-list-tile>
+						<v-list-tile @click="removeItem(props.item)" avatar>
+							<v-list-tile-avatar>
+								<v-icon class="red white--text">delete</v-icon>
+							</v-list-tile-avatar>
+							<v-list-tile-content>
+								<v-list-tile-title>Xóa topping</v-list-tile-title>
+							</v-list-tile-content>
+						</v-list-tile>
 					</v-list>					
 				</v-menu>
 			</td>
 		</template>
 	</v-data-table>
 	<vue-dialog></vue-dialog>
+	<vue-confirm ref="confirm"></vue-confirm>
 </div>
 </template>
 
@@ -61,9 +70,11 @@
 import Dialog from './dialog'
 import axios from 'axios'
 import {mapState} from 'vuex'
+import ConfirmDialog from '@/components/commons/confirmDialog'
 export default {
 	components: {
-		'vue-dialog': Dialog
+		'vue-dialog': Dialog,
+		'vue-confirm': ConfirmDialog
 	},
 	data() {
 		return {
@@ -98,6 +109,18 @@ export default {
 		},
 		editItem: function(item) {
 			this.$store.commit('EDIT_TOPPING', item)
+		},
+		removeItem: function(item) {
+			var vm = this
+				vm.$refs.confirm.open('Xác nhận xóa', 'xóa <strong>'+item.name +'</strong>').then(response => {
+					if(response) {
+						axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Topping/Delete', item).then(response => {
+							if(response.status == 204) {
+								vm.$store.commit('DELETE_TOPPING', item)
+							}
+						})
+					}
+				})
 		}
 	},
 	computed: {

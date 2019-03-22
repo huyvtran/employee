@@ -15,6 +15,10 @@ const mutations = {
 		state.editedItem    = Object.assign({}, payload)
 		state.toppingDialog = true
 	},
+	DELETE_TOPPING(state, payload) {
+		var toppings = state.toppings
+		toppings.splice(toppings.indexOf(payload), 1)
+	},
 	SHOW_TOPPING_DIALOG(state) {
 		state.toppingDialog = true
 	},

@@ -12,6 +12,10 @@ class Topping extends Model
 
 	protected $hidden = [];
 
+	public function scopeByStoreId($query, $storeId) {
+		return $query->where('store_id', $storeId);
+	}
+
 	public function store() {
 		return $this->belongsTo('App\Models\Store', 'store_id');
 	}

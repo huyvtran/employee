@@ -72,6 +72,8 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('/GetStore/{sid}/Menu/Topping/Add', 'MenuController@addTopping');
 	//EDIT TOPPING
 	Route::post('/GetStore/{sid}/Menu/Topping/Edit', 'MenuController@editTopping');
+	//REMOVE TOPPING
+	Route::post('/GetStore/{sid}/Menu/Topping/Delete', 'ToppingController@destroy');
 	//GET SIZE
 	Route::get('/GetStore/{sid}/Menu/Size', 'MenuController@getSize');
 	//ADD SIZE
@@ -130,5 +132,6 @@ Route::group(['middleware' => ['api']], function () {
 		//UPDATE COUPON STORE
 		Route::post('/{couponId}/UpdateStore', 'CouponController@updateStore');
 	});	
+
 
 });
