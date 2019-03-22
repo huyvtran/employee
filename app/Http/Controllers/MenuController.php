@@ -99,32 +99,6 @@ class MenuController extends Controller
 		return response($res, 200);
 	}
 
-	//EDIT TOPPING
-	public function editTopping(ToppingRequest $request, $id) {
-
-		$find = Topping::where('name', '=', Str::lower($request->name))->where('store_id', '=', $id)->where('id', '!=', $request->id)->first();
-
-		if(!is_null($find)){
-			return response(['Already exists taken'], 422);
-		}
-
-		$topping             = Topping::find($request->id);
-		$topping->name       = Str::lower($request->name);
-		$topping->_name      = Str::lower($request->_name);
-		$topping->price      = (float)$request->price;
-		$topping->store_id   = $id;
-		$topping->updated_at = new DateTime;
-		$topping->save();
-
-		$res                       = [
-			'type'    => 'success',
-			'message' => 'Edit topping successfully',
-			'data'    => new ToppingResource($topping)
-		];
-
-		return response($res, 200);
-	}
-
 	//GET SIZE
 	public function getSize($id) {
 		$sizes = Size::get();

@@ -14,8 +14,18 @@ class Topping extends Model
 
 	protected $hidden = [];
 
+	//LIKE NAME
+    public function scopeLikeName($query, $name) {
+    	return $query->where('name', 'LIKE BINARY', $name);
+    }
+
+    //DIFFERENT ID
+    public function scopeHasNotId($query, $id) {
+    	return $query->where('id', '!=', (int) $id);
+    }
+
 	public function scopeByStoreId($query, $storeId) {
-		return $query->where('store_id', $storeId);
+		return $query->where('store_id', (int) $storeId);
 	}
 
 	public function store() {

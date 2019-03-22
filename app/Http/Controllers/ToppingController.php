@@ -28,13 +28,34 @@ class ToppingController extends Controller
 		// $topping->save();
 
 		$topping = Topping::create([
-				'name'     => Str::lower($request->name),
-				'_name'    => Str::lower($request->_name),
-				'price'    => (float)$request->price,
-				'store_id' => (int) $id
+			'name'     => Str::lower($request->name),
+			'_name'    => Str::lower($request->_name),
+			'price'    => (float)$request->price,
+			'store_id' => (int) $id
         ]);
 
 		return $this->respondSuccess('Add topping', $topping, 'one', 201);
+	}
+
+	//EDIT TOPPING
+	public function edit(Request $request, $id) {
+		$toppingId = (int) $request->id;
+		$find = Topping::byStoreId($id)->likeName(Str::lower($request->name))->hasNotId($toppingId)->first();
+
+		if(!is_null($find)){
+			return response(['Already exists taken'], 422);
+		}
+
+		$topping = Topping::find($toppingId);
+		
+		$topping->update([
+			'name'     => Str::lower($request->name),
+			'_name'    => Str::lower($request->_name),
+			'price'    => (float)$request->price,
+			'store_id' => (int) $id
+        ]);
+
+		return $this->respondSuccess('Edit topping', $topping, 'one', 200);
 	}
 
 	//DELETE TOPPING

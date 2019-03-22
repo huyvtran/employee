@@ -82,6 +82,7 @@ export default {
 					}
 				}).finally(() => {
 					vm.close()
+					vm.process = false 
 				})
 			} else {
 				//ACCEPT SAVE
@@ -91,9 +92,10 @@ export default {
 					}
 				}).finally(() => {
 					vm.close()
+					vm.process = false 
 				})
 			}
-			vm.process = false 
+			
 		},
 	},
 	computed: {

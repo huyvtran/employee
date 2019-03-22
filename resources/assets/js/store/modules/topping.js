@@ -29,7 +29,7 @@ const mutations = {
 	},
 	UPDATE_TOPPING(state, payload) {
 		if(state.editedIndex > -1) {
-			Object.assign(state.toppings[state.editedIndex], payload.data)	
+			Object.assign(state.toppings[state.editedIndex], payload.topping)	
 		} else {
 			state.toppings.unshift(payload.topping)
 		}
