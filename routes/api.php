@@ -67,7 +67,7 @@ Route::group(['middleware' => ['api']], function () {
 	//EDIT CATALOGUE
 	Route::post('/GetStore/{sid}/Menu/Catalogue/Edit', 'MenuController@editCatalogue');
 	//GET TOPPING
-	Route::get('/GetStore/{sid}/Menu/Topping', 'MenuController@getTopping');
+	Route::get('/GetStore/{sid}/Menu/Topping', 'ToppingController@get');
 	//ADD TOPPING
 	Route::post('/GetStore/{sid}/Menu/Topping/Add', 'MenuController@addTopping');
 	//EDIT TOPPING

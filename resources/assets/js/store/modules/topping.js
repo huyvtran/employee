@@ -8,7 +8,7 @@ const state = {
 
 const mutations = {
 	FETCH_TOPPING (state, payload) {
-		state.toppings = payload.data
+		state.toppings = payload.toppings
 	},
 	EDIT_TOPPING(state, payload) {
 		state.editedIndex   = state.toppings.indexOf(payload)

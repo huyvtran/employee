@@ -98,18 +98,18 @@ class MenuController extends Controller
 
 		return response($res, 200);
 	}
-	//GET TOPPING
-	public function getTopping($id) {
-		$toppings = Store::findorFail($id)->toppings()->get();
+	// //GET TOPPING
+	// public function getTopping($id) {
+	// 	$toppings = Store::findorFail($id)->toppings()->get();
 		
-		$res   = [
-			'type'    => 'success',
-			'message' => 'Get topping successfully',
-			'data'    => ToppingResource::collection($toppings)
-		];
+	// 	$res   = [
+	// 		'type'    => 'success',
+	// 		'message' => 'Get topping successfully',
+	// 		'data'    => ToppingResource::collection($toppings)
+	// 	];
 
-		return response($res, 200);
-	}
+	// 	return response($res, 200);
+	// }
 	//ADD TOPPING
 	public function addTopping(ToppingRequest $request, $id) {
 
@@ -154,6 +154,7 @@ class MenuController extends Controller
 
 		return response($res, 200);
 	}
+	
 	//GET SIZE
 	public function getSize($id) {
 		$sizes = Size::get();
