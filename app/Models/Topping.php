@@ -8,6 +8,8 @@ class Topping extends Model
 {
 	protected $table = 'ec_toppings';
 
+	protected $fillable = ['name', '_name', 'price', 'store_id'];
+
 	protected $guarded = [];
 
 	protected $hidden = [];

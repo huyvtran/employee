@@ -31,7 +31,7 @@ const mutations = {
 		if(state.editedIndex > -1) {
 			Object.assign(state.toppings[state.editedIndex], payload.data)	
 		} else {
-			state.toppings.unshift(payload.data)
+			state.toppings.unshift(payload.topping)
 		}
 	}
 }

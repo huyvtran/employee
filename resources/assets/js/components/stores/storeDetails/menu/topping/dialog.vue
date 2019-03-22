@@ -79,16 +79,18 @@ export default {
 				await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Topping/Edit', data).then(response => {
 					if(response.status === 200) {
 						vm.$store.commit('UPDATE_TOPPING', response.data)
-						vm.close()
 					}
+				}).finally(() => {
+					vm.close()
 				})
 			} else {
 				//ACCEPT SAVE
 				await axios.post('/api/GetStore/'+vm.$route.params.storeId+'/Menu/Topping/Add', data).then(response => {
 					if(response.status === 201) {
 						vm.$store.commit('UPDATE_TOPPING', response.data)
-						vm.close()
 					}
+				}).finally(() => {
+					vm.close()
 				})
 			}
 			vm.process = false 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ToppingResource;
 use App\Models\Topping;
 use App\Models\Store;
+use Illuminate\Support\Str;
 class ToppingController extends Controller
 {
 
@@ -13,6 +14,27 @@ class ToppingController extends Controller
 	public function get($id) {
 		$toppings = Store::findorFail($id)->toppings()->get();
 		return $this->respondSuccess('Get topping', $toppings);
+	}
+
+	//ADD TOPPING
+	public function add(Request $request, $id) {
+
+		// $topping             = new Topping;
+		// $topping->name       = Str::lower($request->name);
+		// $topping->_name      = Str::lower($request->_name);
+		// $topping->price      = (float)$request->price;
+		// $topping->store_id   = $id;
+		// $topping->created_at = new DateTime;
+		// $topping->save();
+
+		$topping = Topping::create([
+				'name'     => Str::lower($request->name),
+				'_name'    => Str::lower($request->_name),
+				'price'    => (float)$request->price,
+				'store_id' => (int) $id
+        ]);
+
+		return $this->respondSuccess('Add topping', $topping, 'one', 201);
 	}
 
 	//DELETE TOPPING
