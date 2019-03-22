@@ -99,25 +99,6 @@ class MenuController extends Controller
 		return response($res, 200);
 	}
 
-	//ADD TOPPING
-	public function addTopping(ToppingRequest $request, $id) {
-
-		$topping             = new Topping;
-		$topping->name       = Str::lower($request->name);
-		$topping->_name      = Str::lower($request->_name);
-		$topping->price      = (float)$request->price;
-		$topping->store_id   = $id;
-		$topping->created_at = new DateTime;
-		$topping->save();
-
-		$res                       = [
-			'type'    => 'success',
-			'message' => 'Add topping successfully',
-			'data'    => new ToppingResource($topping)
-		];
-
-		return response($res, 201);
-	}
 	//EDIT TOPPING
 	public function editTopping(ToppingRequest $request, $id) {
 
